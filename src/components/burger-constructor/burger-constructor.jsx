@@ -1,13 +1,21 @@
 import React from "react";
-import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
+import {ConstructorElement, Button, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const BurgerConstructor = (props = []) => {
     return (
-        <IngredientsList>
-            {props.ingredientsData.map((obj) => {
-                return <IngredientCard key={obj.key} obj={obj}/>
-            })}
-        </IngredientsList>
+        <>
+            <IngredientsList>
+                {props.ingredientsData.map((obj) => {
+                    return <IngredientCard key={obj.key} obj={obj}/>
+                })}
+            </IngredientsList>
+            <div className="totalSum">
+                610 <CurrencyIcon type="primary" />
+            </div>
+            <Button type="primary" size="large" htmlType="submit">
+                Оформить заказ
+            </Button>
+        </>
     )
 }
 
@@ -22,12 +30,15 @@ const IngredientsList = (props) => {
 
 const IngredientCard = (props) => {
     return(
-        <ConstructorElement
-            isLocked={false}
-            text={props.obj.name}
-            price={props.obj.price}
-            thumbnail={props.obj.image}
-        />
+        <>
+            <DragIcon type="primary" />
+            <ConstructorElement
+                isLocked={false}
+                text={props.obj.name}
+                price={props.obj.price}
+                thumbnail={props.obj.image}
+            />
+        </>
     )
 }
 

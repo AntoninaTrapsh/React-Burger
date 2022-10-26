@@ -16,17 +16,19 @@ const BurgerIngredients = () => {
 const IngredientsNavigation = () => {
     const [current, setCurrent] = useState('one')
     return (
-        <div style={{ display: 'flex' }}>
-            <Tab value="one" active={current === 'one'} onClick={setCurrent}>
-                Булки
-            </Tab>
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-                Соусы
-            </Tab>
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-                Начинки
-            </Tab>
-        </div>
+        <>
+            <div style={{ display: 'flex' }}>
+                <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+                    Булки
+                </Tab>
+                <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+                    Соусы
+                </Tab>
+                <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+                    Начинки
+                </Tab>
+            </div>
+        </>
     )
 }
 
