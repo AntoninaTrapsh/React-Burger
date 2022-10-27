@@ -9,8 +9,10 @@ function App() {
     return (
         <div className="App">
             <AppHeader/>
-            <BurgerIngredients/>
-            <BurgerConstructor ingredientsData={ingredientsData}/>
+            <main>
+                <BurgerIngredients ingredientsData={ingredientsData}/>
+                <BurgerConstructor ingredientsData={ingredientsData}/>
+            </main>
         </div>
     );
 }
