@@ -41,6 +41,10 @@ const IngredientsList = (props) => {
     )
 }
 
+const IngredientsGroup = () => {
+    return (<div>Булочки</div>)
+}
+
 const IngredientCard = () => {
     return(
         <></>
