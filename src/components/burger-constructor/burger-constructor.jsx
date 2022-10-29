@@ -10,8 +10,8 @@ const BurgerConstructor = (props = []) => {
                     return <IngredientCard key={obj.key} obj={obj}/>
                 })}
             </IngredientsList>
-            <section className={styles.totalSum}>
-                <div className="totalSum">
+            <section className={`${styles.totalSum} mt-10`}>
+                <div className="text text_type_digits-medium mr-10 ">
                     610 <CurrencyIcon type="primary" />
                 </div>
                 <Button type="primary" size="large" htmlType="submit">
@@ -33,7 +33,7 @@ const IngredientsList = (props) => {
 
 const IngredientCard = (props) => {
     return(
-        <>
+        <div className={`${styles['ingredientCard']} mb-4`}>
             <DragIcon type="primary" />
             <ConstructorElement
                 isLocked={false}
@@ -41,7 +41,7 @@ const IngredientCard = (props) => {
                 price={props.obj.price}
                 thumbnail={props.obj.image}
             />
-        </>
+        </div>
     )
 }
 
