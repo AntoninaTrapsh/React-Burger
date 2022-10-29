@@ -6,10 +6,16 @@ const BurgerIngredients = (props) => {
 
     return (
         <section className={styles.burgerIngredientsList}>
-            <h1>Соберите бургер</h1>
+            <HeaderIngredients>Соберите бургер</HeaderIngredients>
             <IngredientsNavigation/>
             <IngredientsList ingredientsData={props.ingredientsData}/>
         </section>
+    )
+}
+
+const HeaderIngredients = (props) => {
+    return (
+        <h1 className="mt-10 mb-5 text text_type_main-large">{props.children}</h1>
     )
 }
 
@@ -75,10 +81,10 @@ const IngredientsGroup = (props) => {
 
 const IngredientCard = (props) => {
     return(
-        <div className={styles.ingredientCardWrapper}>
-            <img src={props.ingredient.image} alt={"Изображение ингредиента"}/>
-            <div>
-                <span>{props.ingredient.price}</span>
+        <div className={`mt-6 ${styles.ingredientCardWrapper}`}>
+            <img className="ml-4 mr-4" src={props.ingredient.image} alt={"Изображение ингредиента"}/>
+            <div className="mt-1 mb-1">
+                <span className="text text_type_digits-default">{props.ingredient.price}</span>
                 <CurrencyIcon type="primary"/>
             </div>
             <p className="text text_type_main-default">{props.ingredient.name}</p>
