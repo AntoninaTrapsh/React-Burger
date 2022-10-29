@@ -23,7 +23,7 @@ const IngredientsNavigation = () => {
     const [selectedIngredientType, setSelectedIngredientType] = useState('Булки')
     return (
         <>
-            <div style={{ display: 'flex' }}>
+            <div className="mb-10" style={{ display: 'flex' }}>
                 <Tab value="Булки" active={selectedIngredientType === 'Булки'} onClick={setSelectedIngredientType}>
                     Булки
                 </Tab>
@@ -69,7 +69,7 @@ const IngredientsGroup = (props) => {
     return (
         <section>
             <div className="text text_type_main-medium">{props.title}</div>
-            <div className={styles.ingredientGroupItems}>
+            <div className={`${styles.ingredientGroupItems} mb-10 mt-6`}>
                 {props.ingredients.map((ingredient) => {
                     return <IngredientCard ingredient={ingredient}/>
                 })}
@@ -83,7 +83,7 @@ const IngredientCard = (props) => {
     return(
         <div className={`mt-6 ${styles.ingredientCardWrapper}`}>
             <img className="ml-4 mr-4" src={props.ingredient.image} alt={"Изображение ингредиента"}/>
-            <div className="mt-1 mb-1">
+            <div className={`${styles['ingredientCardPrice']} mt-1 mb-1`}>
                 <span className="text text_type_digits-default">{props.ingredient.price}</span>
                 <CurrencyIcon type="primary"/>
             </div>

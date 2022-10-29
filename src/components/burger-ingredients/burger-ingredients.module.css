@@ -3,8 +3,8 @@
 }
 
 .ingredientsGroupList {
-    height: 450px;
     overflow-y: auto;
+    height: calc(100vh - 280px);
 }
 
 .ingredientsGroupList::-webkit-scrollbar {
@@ -32,4 +32,11 @@
 .ingredientGroupItems {
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
+    gap: 24px;
+}
+
+.ingredientCardPrice {
+    display: flex;
+    justify-content: center;
 }

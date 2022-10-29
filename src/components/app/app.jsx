@@ -4,7 +4,6 @@ import AppHeader from "../app-header/app-header";
 import {ingredientsData} from "../../utils/data";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import styles from "../app/app.module.css"
 
 function App() {
     return (
