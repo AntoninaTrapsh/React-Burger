@@ -1,0 +1,12 @@
+.BurgerConstructor {
+}
+
+.hello {
+    height: 600px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.totalSum {
+    display: flex;
+}

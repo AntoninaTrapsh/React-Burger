@@ -1,28 +1,31 @@
 import React from "react";
 import {ConstructorElement, Button, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./burger-constructor.module.css"
 
 const BurgerConstructor = (props = []) => {
     return (
-        <>
+        <section className={styles.BurgerConstructor}>
             <IngredientsList>
                 {props.ingredientsData.map((obj) => {
                     return <IngredientCard key={obj.key} obj={obj}/>
                 })}
             </IngredientsList>
-            <div className="totalSum">
-                610 <CurrencyIcon type="primary" />
-            </div>
-            <Button type="primary" size="large" htmlType="submit">
-                Оформить заказ
-            </Button>
-        </>
+            <section className={styles.totalSum}>
+                <div className="totalSum">
+                    610 <CurrencyIcon type="primary" />
+                </div>
+                <Button type="primary" size="large" htmlType="submit">
+                    Оформить заказ
+                </Button>
+            </section>
+        </section>
     )
 }
 
 const IngredientsList = (props) => {
     return(
         <>
-            <div>{props.children}</div>
+            <div className={styles.hello}>{props.children}</div>
         </>
 
     )

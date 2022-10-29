@@ -14,17 +14,17 @@ const BurgerIngredients = (props) => {
 }
 
 const IngredientsNavigation = () => {
-    const [current, setCurrent] = useState('Булки')
+    const [selectedIngredientType, setSelectedIngredientType] = useState('Булки')
     return (
         <>
             <div style={{ display: 'flex' }}>
-                <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
+                <Tab value="Булки" active={selectedIngredientType === 'Булки'} onClick={setSelectedIngredientType}>
                     Булки
                 </Tab>
-                <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>
+                <Tab value="Соусы" active={selectedIngredientType === 'Соусы'} onClick={setSelectedIngredientType}>
                     Соусы
                 </Tab>
-                <Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>
+                <Tab value="Начинки" active={selectedIngredientType === 'Начинки'} onClick={setSelectedIngredientType}>
                     Начинки
                 </Tab>
             </div>
