@@ -5,7 +5,7 @@ import styles from "./burger-ingredients.module.css";
 const BurgerIngredients = (props) => {
 
     return (
-        <section className={styles.burgerIngredientsList}>
+        <section className={`${styles.burgerIngredientsList} mr-10`}>
             <HeaderIngredients>Соберите бургер</HeaderIngredients>
             <IngredientsNavigation/>
             <IngredientsList ingredientsData={props.ingredientsData}/>

@@ -4,7 +4,7 @@ import styles from "./burger-constructor.module.css"
 
 const BurgerConstructor = (props = []) => {
     return (
-        <section className={styles.BurgerConstructor}>
+        <section className={`${styles.BurgerConstructor} mt-25`}>
             <IngredientsList>
                 {props.ingredientsData.map((obj) => {
                     return <IngredientCard key={obj.key} obj={obj}/>
