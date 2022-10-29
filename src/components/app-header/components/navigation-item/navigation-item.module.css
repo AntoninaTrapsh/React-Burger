@@ -1,0 +1,4 @@
+.navigation-item {
+    display: flex;
+    cursor: pointer;
+}

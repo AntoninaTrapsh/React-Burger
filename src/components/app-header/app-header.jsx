@@ -1,21 +1,12 @@
 import React from "react";
-import { Tab, Logo, ProfileIcon, ListIcon, BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import styles from './app-header.module.css';
+import Navigation from "./components/navigation/navigation";
 
 const AppHeader = () => {
-    const [current, setCurrent] = React.useState('one')
     return (
-        <div style={{ display: 'flex' }}>
-            <Tab value="one" active={current === 'one'} onClick={setCurrent}>
-                <BurgerIcon type="secondary" /> Конструктор
-            </Tab>
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-                <ListIcon type="secondary" /> Лента заказов
-            </Tab>
-            <Logo />
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-                <ProfileIcon type="secondary" /> Личный кабинет
-            </Tab>
-        </div>
+        <header className={`${styles['header']} text text_type_main-default`}>
+            <Navigation/>
+        </header>
     )
 }
 
