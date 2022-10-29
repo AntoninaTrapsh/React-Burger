@@ -1,4 +1,30 @@
-.header__navigation {
+header {
     display: flex;
     align-items: center;
+    justify-content: center;
+    background-color: #1C1C21;
+}
+
+.navigation {
+    display: grid;
+    max-width: 1240px;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: repeat(3,minmax(250px,413px));
+    grid-column-gap: 132px;
+}
+
+.navigation__order {
+    display: flex;
+    justify-content: left;
+}
+
+.navigation__logo {
+    display: flex;
+    align-items: center;
+}
+
+.navigation__profile {
+    display: flex;
+    justify-content: right;
 }
