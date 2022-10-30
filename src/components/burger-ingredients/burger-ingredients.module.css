@@ -24,7 +24,6 @@
 
 .ingredientCardWrapper {
     display: flex;
-    /*flex-direction: column;*/
 }
 
 .ingredientCard {

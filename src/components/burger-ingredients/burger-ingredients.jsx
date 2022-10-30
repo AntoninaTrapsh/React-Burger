@@ -57,7 +57,7 @@ const IngredientsList = (props = []) => {
                         }
                         return list;
                     }, [])
-                    return <IngredientsGroup ingredients={groupIngredientsList} title={ingredientTypes[type]}/>
+                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={ingredientTypes[type]}/>
                 })
             }
         </section>
@@ -71,7 +71,7 @@ const IngredientsGroup = (props) => {
             <div className="text text_type_main-medium">{props.title}</div>
             <div className={`${styles.ingredientGroupItems} mb-10 mt-6`}>
                 {props.ingredients.map((ingredient) => {
-                    return <IngredientCard ingredient={ingredient}/>
+                    return <IngredientCard key={ingredient._id} ingredient={ingredient}/>
                 })}
             </div>
         </section>

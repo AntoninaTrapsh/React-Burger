@@ -2,10 +2,26 @@
 }
 
 .hello {
-    height: 600px;
+    height: calc(100vh - 540px);
     overflow: hidden;
     overflow-y: auto;
 }
+
+.hello::-webkit-scrollbar {
+    width: 10px;
+}
+
+.hello::-webkit-scrollbar-thumb {
+    border: 2px solid #2F2F37;
+    border-radius: 6px;
+    background-color: #8585AD;
+
+}
+
+.hello::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+}
+
 
 .totalSum {
     display: flex;
@@ -13,8 +29,9 @@
     align-items: center;
 }
 
-.ingredientCard {
+.ingredientCardsStuffingList {
     display: flex;
-    gap: 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
     align-items: center;
 }
