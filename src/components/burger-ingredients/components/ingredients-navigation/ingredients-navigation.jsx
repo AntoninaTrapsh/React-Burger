@@ -9,7 +9,7 @@ const IngredientsNavigation = () => {
         <>
             <div className="mb-10" style={{ display: 'flex' }}>
                 {ingredientTypeKeys.map((type) => {
-                    return <Tab value={INGREDIENT_TYPES[type]} active={selectedIngredientType === INGREDIENT_TYPES[type]} onClick={setSelectedIngredientType}>
+                    return <Tab value={INGREDIENT_TYPES[type]} key={type} active={selectedIngredientType === INGREDIENT_TYPES[type]} onClick={setSelectedIngredientType}>
                         {INGREDIENT_TYPES[type]}
                     </Tab>
                 })}
