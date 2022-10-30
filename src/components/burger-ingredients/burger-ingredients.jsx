@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Tab, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Tab, CurrencyIcon, Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 
 const BurgerIngredients = (props) => {
@@ -82,12 +82,17 @@ const IngredientsGroup = (props) => {
 const IngredientCard = (props) => {
     return(
         <div className={`mt-6 ${styles.ingredientCardWrapper}`}>
-            <img className="ml-4 mr-4" src={props.ingredient.image} alt={"Изображение ингредиента"}/>
-            <div className={`${styles['ingredientCardPrice']} mt-1 mb-1`}>
-                <span className="text text_type_digits-default">{props.ingredient.price}</span>
-                <CurrencyIcon type="primary"/>
+            <div className={styles['ingredientCard']}>
+                <img className="ml-4 mr-4" src={props.ingredient.image} alt={"Изображение ингредиента"}/>
+                <div className={`${styles['ingredientCardPrice']} mt-1 mb-1`}>
+                    <span className="text text_type_digits-default mr-2">{props.ingredient.price}</span>
+                    <CurrencyIcon type="primary"/>
+                </div>
+                <p className="text text_type_main-default">{props.ingredient.name}</p>
             </div>
-            <p className="text text_type_main-default">{props.ingredient.name}</p>
+            <div className={styles['ingredientCounter']}>
+                <Counter count={1} size="default"/>
+            </div>
         </div>
     )
 }

@@ -24,6 +24,11 @@
 
 .ingredientCardWrapper {
     display: flex;
+    /*flex-direction: column;*/
+}
+
+.ingredientCard {
+    display: flex;
     flex-direction: column;
     width: 272px;
     align-items: center;
@@ -39,4 +44,9 @@
 .ingredientCardPrice {
     display: flex;
     justify-content: center;
+}
+
+.ingredientCounter {
+    display: flex;
+    position: relative;
 }
