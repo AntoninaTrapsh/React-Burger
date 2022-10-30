@@ -1,0 +1,19 @@
+.burger-ingredients__group-list {
+    overflow-y: auto;
+    height: calc(100vh - 325px);
+}
+
+.burger-ingredients__group-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.burger-ingredients__group-list::-webkit-scrollbar-thumb {
+    border: 2px solid #2F2F37;
+    border-radius: 6px;
+    background-color: #8585AD;
+
+}
+
+.burger-ingredients__group-list::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+}

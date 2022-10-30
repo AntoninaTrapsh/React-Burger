@@ -1,4 +1,4 @@
-import styles from "../../burger-ingredients.module.css";
+import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
@@ -7,7 +7,7 @@ const IngredientsList = (props = []) => {
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
 
     return(
-        <section className={styles.ingredientsGroupList}>
+        <section className={styles['burger-ingredients__group-list']}>
             {
                 ingredientTypeKeys.map((type) => {
                     const groupIngredientsList = props.ingredientsData.reduce((list, ingredient) => {

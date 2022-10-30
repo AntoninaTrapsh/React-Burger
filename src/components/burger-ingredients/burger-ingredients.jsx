@@ -7,7 +7,7 @@ import IngredientsList from "./components/ingredients-list/ingredients-list";
 const BurgerIngredients = (props) => {
 
     return (
-        <section className={`${styles.burgerIngredientsList} mr-10`}>
+        <section className={`${styles['burger-ingredients']} mr-10`}>
             <IngredientsHeader>Соберите бургер</IngredientsHeader>
             <IngredientsNavigation/>
             <IngredientsList ingredientsData={props.ingredientsData}/>

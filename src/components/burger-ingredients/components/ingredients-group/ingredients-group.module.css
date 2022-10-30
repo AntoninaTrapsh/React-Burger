@@ -1,0 +1,6 @@
+.ingredients-group__items {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 24px;
+}
