@@ -1,5 +1,5 @@
 import Bun from "../bun/bun";
-import styles from "../../burger-constructor.module.css";
+import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 
@@ -11,7 +11,7 @@ const IngredientsList = (props = []) => {
     return (
         <>
             <Bun position="top" data={bun}></Bun>
-            <div className={styles.hello}>
+            <div className={`${styles['ingredient-list']} pr-2`}>
                 {props.ingredientsData.map((obj) => {
                     return <IngredientCard key={obj._id} obj={obj}/>
                 })}

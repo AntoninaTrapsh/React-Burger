@@ -1,13 +1,12 @@
-import styles from "../../burger-constructor.module.css";
+import styles from "./ingredient-card.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 
 const IngredientCard = (props) => {
     return (
-        <div className={`${styles['ingredientCard']} mb-4`}>
-            <div className={styles['ingredientCardsStuffing']}>
+        <div className="mb-4">
                 {props.obj.type === "bun" ? null :
-                    <div className={styles['ingredientCardsStuffingList']}>
+                    <div className={styles['ingredient-card__stuffing-list']}>
                         <DragIcon type="primary"/>
                         <ConstructorElement
                             isLocked={false}
@@ -17,7 +16,6 @@ const IngredientCard = (props) => {
                         />
                     </div>
                 }
-            </div>
         </div>
     )
 }

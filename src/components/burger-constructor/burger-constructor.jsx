@@ -5,9 +5,9 @@ import IngredientsList from "./components/ingredients-list/ingredients-list";
 
 const BurgerConstructor = (props = []) => {
     return (
-        <section className={`${styles.BurgerConstructor} mt-25`}>
+        <section className="mt-25">
             <IngredientsList ingredientsData={props.ingredientsData}/>
-            <section className={`${styles.totalSum} mt-10`}>
+            <section className={`${styles['burger__total-sum']} mt-10`}>
                 <div className="text text_type_digits-medium mr-10 ">
                     610 <CurrencyIcon type="primary"/>
                 </div>
