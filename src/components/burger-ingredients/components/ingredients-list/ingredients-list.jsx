@@ -2,6 +2,8 @@ import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
+import PropTypes from "prop-types";
+import {ingredientObjectType} from "../../consts/consts";
 
 const IngredientsList = (props = []) => {
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
@@ -22,6 +24,10 @@ const IngredientsList = (props = []) => {
         </section>
 
     )
+}
+
+IngredientsList.propTypes = {
+    ingredientsData: PropTypes.arrayOf(ingredientObjectType).isRequired,
 }
 
 export default IngredientsList;

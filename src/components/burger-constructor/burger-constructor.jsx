@@ -2,6 +2,8 @@ import React from "react";
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css"
 import IngredientsList from "./components/ingredients-list/ingredients-list";
+import {ingredientObjectType} from "./consts/consts";
+import PropTypes from "prop-types";
 
 const BurgerConstructor = (props = []) => {
     return (
@@ -18,5 +20,10 @@ const BurgerConstructor = (props = []) => {
         </section>
     )
 }
+
+
+BurgerConstructor.propTypes = {
+    ingredientsData: PropTypes.arrayOf(ingredientObjectType)
+};
 
 export default BurgerConstructor;

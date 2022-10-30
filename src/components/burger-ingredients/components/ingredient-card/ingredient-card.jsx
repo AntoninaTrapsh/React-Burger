@@ -1,6 +1,7 @@
 import styles from "./ingredient-card.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import {ingredientObjectType} from "../../../burger-constructor/consts/consts";
 
 const IngredientCard = (props) => {
     return(
@@ -19,5 +20,9 @@ const IngredientCard = (props) => {
         </div>
     )
 }
+
+IngredientCard.propTypes = {
+    ingredient: ingredientObjectType.isRequired
+};
 
 export default IngredientCard;

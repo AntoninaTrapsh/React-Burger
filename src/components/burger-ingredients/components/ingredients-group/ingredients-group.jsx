@@ -1,6 +1,8 @@
 import styles from "./ingredients-group.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
+import PropTypes from "prop-types";
+import {ingredientObjectType} from "../../consts/consts";
 
 const IngredientsGroup = (props) => {
     return (
@@ -16,4 +18,8 @@ const IngredientsGroup = (props) => {
     )
 }
 
+IngredientsGroup.propTypes = {
+    title: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(ingredientObjectType).isRequired,
+}
 export default IngredientsGroup;

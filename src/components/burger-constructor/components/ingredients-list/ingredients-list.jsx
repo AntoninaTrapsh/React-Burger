@@ -2,6 +2,8 @@ import Bun from "../bun/bun";
 import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
+import PropTypes from "prop-types";
+import {ingredientObjectType} from "../../consts/consts";
 
 const IngredientsList = (props) => {
     const bun = props.ingredientsData.find((ingredient) => {
@@ -20,6 +22,10 @@ const IngredientsList = (props) => {
         </>
 
     )
+}
+
+IngredientsList.propType = {
+    ingredientsData: PropTypes.arrayOf(ingredientObjectType).isRequired
 }
 
 export default IngredientsList;
