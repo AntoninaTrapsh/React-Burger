@@ -5,14 +5,14 @@ import React from "react";
 const IngredientCard = (props) => {
     return (
         <div className="mb-4">
-                {props.obj.type === "bun" ? null :
+                {props.ingredient.type === "bun" ? null :
                     <div className={styles['ingredient-card__stuffing-list']}>
                         <DragIcon type="primary"/>
                         <ConstructorElement
                             isLocked={false}
-                            text={props.obj.name}
-                            price={props.obj.price}
-                            thumbnail={props.obj.image}
+                            text={props.ingredient.name}
+                            price={props.ingredient.price}
+                            thumbnail={props.ingredient.image}
                         />
                     </div>
                 }
