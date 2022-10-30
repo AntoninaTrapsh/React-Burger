@@ -3,7 +3,7 @@ import React from "react";
 import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
 import PropTypes from "prop-types";
-import {ingredientObjectType} from "../../consts/consts";
+import {INGREDIENTS_OBJECT_TYPE} from "../../consts/consts";
 
 const IngredientsList = (props = []) => {
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
@@ -27,7 +27,7 @@ const IngredientsList = (props = []) => {
 }
 
 IngredientsList.propTypes = {
-    ingredientsData: PropTypes.arrayOf(ingredientObjectType).isRequired,
+    ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
 }
 
 export default IngredientsList;

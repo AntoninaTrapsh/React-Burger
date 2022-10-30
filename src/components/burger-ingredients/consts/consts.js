@@ -6,7 +6,7 @@ export const INGREDIENT_TYPES = {
     main: "Начинки",
 }
 
-export const ingredientObjectType = PropTypes.shape({
+export const INGREDIENTS_OBJECT_TYPE = PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
