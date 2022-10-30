@@ -3,7 +3,7 @@ import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import PropTypes from "prop-types";
-import {ingredientObjectType} from "../../consts/consts";
+import {INGREDIENT_OBJECT_TYPE} from "../../consts/consts";
 
 const IngredientsList = (props) => {
     const bun = props.ingredientsData.find((ingredient) => {
@@ -25,7 +25,7 @@ const IngredientsList = (props) => {
 }
 
 IngredientsList.propType = {
-    ingredientsData: PropTypes.arrayOf(ingredientObjectType).isRequired
+    ingredientsData: PropTypes.arrayOf(INGREDIENT_OBJECT_TYPE).isRequired
 }
 
 export default IngredientsList;

@@ -5,7 +5,7 @@ export const BUN_TYPES = {
     bottom: "низ"
 }
 
-export const ingredientObjectType = PropTypes.shape({
+export const INGREDIENT_OBJECT_TYPE = PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
