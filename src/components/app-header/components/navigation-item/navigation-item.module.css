@@ -1,0 +1,5 @@
+.navigation-item {
+    display: flex;
+    cursor: pointer;
+    white-space: nowrap;
+}
