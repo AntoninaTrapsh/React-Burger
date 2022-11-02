@@ -1,7 +1,7 @@
 import styles from "./ingredient-card.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import {INGREDIENTS_OBJECT_TYPE} from "../../consts/consts";
+import INGREDIENTS_OBJECT_TYPE from "./../../../../utils/consts";
 
 const IngredientCard = (props) => {
     return(

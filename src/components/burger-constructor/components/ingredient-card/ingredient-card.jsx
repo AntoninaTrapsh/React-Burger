@@ -1,7 +1,7 @@
 import styles from "./ingredient-card.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import {INGREDIENT_OBJECT_TYPE} from "../../consts/consts";
+import INGREDIENT_OBJECT_TYPE from "./../../../../utils/consts";
 
 const IngredientCard = (props) => {
     return (

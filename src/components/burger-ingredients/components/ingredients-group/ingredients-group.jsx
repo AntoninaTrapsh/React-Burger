@@ -2,7 +2,7 @@ import styles from "./ingredients-group.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import PropTypes from "prop-types";
-import {INGREDIENTS_OBJECT_TYPE} from "../../consts/consts";
+import INGREDIENTS_OBJECT_TYPE from "./../../../../utils/consts";
 
 const IngredientsGroup = (props) => {
     return (
