@@ -22,13 +22,13 @@ const Modal = ({handleModalClose, ...props}) => {
 
     return ReactDOM.createPortal(
         <>
-            <ModalOverlay handleModalClose={handleModalClose} />
+            <ModalOverlay handleModalClose={handleModalClose}/>
             <div className={`${styles['modal']}`}>
                 <div className={`${styles['modal__container']} pb-15`}>
                     {
                         !!props.title &&
                         (<div className={`${styles['modal__header']} pt-10 ml-10 mr-10`}>
-                            <h2 className={`text text_type_main-large`}>{props.title}</h2>
+                            <h2 className="text text_type_main-large">{props.title}</h2>
                         </div>)
                     }
                     {props.children}
@@ -36,7 +36,7 @@ const Modal = ({handleModalClose, ...props}) => {
                         className={`${styles['modal__button']} mr-10 mt-15`}
                         onClick={() => handleModalClose()}
                     >
-                        <CloseIcon type="primary" />
+                        <CloseIcon type="primary"/>
                     </button>
                 </div>
             </div>

@@ -43,7 +43,7 @@ function App() {
             </main>
             {
                 isOpen &&
-                <Modal title='Детали ингредиента' handleModalClose={handleIngredientCardClose}>
+                <Modal title="Детали ингредиента" handleModalClose={handleIngredientCardClose}>
                     <IngredientDetails ingredient={selectedIngredient}/>
                 </Modal>
             }
