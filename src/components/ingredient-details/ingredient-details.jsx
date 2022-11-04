@@ -3,7 +3,6 @@ import styles from "./ingredient-details.module.css"
 import INGREDIENT_OBJECT_TYPE from "../../utils/types";
 
 const IngredientDetails = (props) => {
-    console.log(props);
     return (
         <div className={`${styles['ingredient-detail']}`}>
             <img src={props.ingredient.image_large} alt={props.ingredient.name} className={`${styles['ingredient-detail__image']}`}/>
