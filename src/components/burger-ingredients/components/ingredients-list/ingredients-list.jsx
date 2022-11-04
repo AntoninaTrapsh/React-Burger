@@ -28,6 +28,7 @@ const IngredientsList = (props = []) => {
 
 IngredientsList.propTypes = {
     ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 }
 
 export default IngredientsList;

@@ -17,7 +17,8 @@ const BurgerIngredients = (props) => {
 }
 
 BurgerIngredients.propTypes = {
-    ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired
+    ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 };
 
 export default BurgerIngredients;

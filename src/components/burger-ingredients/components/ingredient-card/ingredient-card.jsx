@@ -2,6 +2,7 @@ import styles from "./ingredient-card.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
+import PropTypes from "prop-types";
 
 const IngredientCard = (props) => {
     return(
@@ -22,7 +23,8 @@ const IngredientCard = (props) => {
 }
 
 IngredientCard.propTypes = {
-    ingredient: INGREDIENTS_OBJECT_TYPE.isRequired
+    ingredient: INGREDIENTS_OBJECT_TYPE.isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 };
 
 export default IngredientCard;

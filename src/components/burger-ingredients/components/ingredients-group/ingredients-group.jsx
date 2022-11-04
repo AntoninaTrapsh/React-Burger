@@ -21,5 +21,6 @@ const IngredientsGroup = (props) => {
 IngredientsGroup.propTypes = {
     title: PropTypes.string.isRequired,
     ingredients: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 }
 export default IngredientsGroup;
