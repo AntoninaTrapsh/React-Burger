@@ -3,7 +3,7 @@ import styles from "./modal-overlay.module.css"
 
 const ModalOverlay = (props) => {
     return (
-       <div className={styles['modal-overlay']} onClick={() => props.handleIngredientCardClose()}></div>
+       <div className={styles['modal-overlay']} onClick={() => props.handleModalClose()}></div>
     )
 }
 

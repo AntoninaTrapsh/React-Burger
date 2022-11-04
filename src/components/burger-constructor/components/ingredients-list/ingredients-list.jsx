@@ -3,7 +3,7 @@ import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import PropTypes from "prop-types";
-import INGREDIENT_OBJECT_TYPE from "./../../../../utils/consts";
+import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
 
 const IngredientsList = (props) => {
     const bun = props.ingredientsData.find((ingredient) => {

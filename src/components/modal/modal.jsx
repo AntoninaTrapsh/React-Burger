@@ -10,7 +10,7 @@ const Modal = (props) => {
     React.useEffect(() => {
         const handleCloseFromKey = (e) => {
             if (e.key === "Escape") {
-                props.handleIngredientCardClose();
+                props.handleModalClose();
             }
         }
         document.addEventListener('keydown', handleCloseFromKey);
@@ -21,7 +21,7 @@ const Modal = (props) => {
 
     return ReactDOM.createPortal(
         <>
-            <ModalOverlay handleIngredientCardClose={props.handleIngredientCardClose} />
+            <ModalOverlay handleModalClose={props.handleModalClose} />
             <div className={`${styles['modal']}`}>
                 <div className={`${styles['modal__container']} pb-15`}>
                     {
@@ -33,7 +33,7 @@ const Modal = (props) => {
                     {props.children}
                     <button
                         className={`${styles['modal__button']} mr-10 mt-15`}
-                        onClick={() => props.handleIngredientCardClose()}
+                        onClick={() => props.handleModalClose()}
                     >
                         <CloseIcon type="primary" />
                     </button>

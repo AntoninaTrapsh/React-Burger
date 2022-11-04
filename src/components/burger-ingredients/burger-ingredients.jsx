@@ -3,7 +3,7 @@ import styles from "./burger-ingredients.module.css";
 import IngredientsHeader from "./components/ingredients-header/ingredients-header";
 import IngredientsNavigation from "./components/ingredients-navigation/ingredients-navigation";
 import IngredientsList from "./components/ingredients-list/ingredients-list";
-import INGREDIENTS_OBJECT_TYPE from "./../../utils/consts";
+import INGREDIENTS_OBJECT_TYPE from "../../utils/types";
 import PropTypes from "prop-types";
 
 const BurgerIngredients = (props) => {
