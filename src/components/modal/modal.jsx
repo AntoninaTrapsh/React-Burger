@@ -5,24 +5,24 @@ import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import PropTypes from "prop-types";
 
-const Modal = (props) => {
+const Modal = ({handleModalClose, ...props}) => {
     const modalRoot = document.getElementById("modal-root");
 
     React.useEffect(() => {
         const handleCloseFromKey = (e) => {
             if (e.key === "Escape") {
-                props.handleModalClose();
+                handleModalClose();
             }
         }
         document.addEventListener('keydown', handleCloseFromKey);
         return () => {
             document.removeEventListener('keydown', handleCloseFromKey);
         }
-    }, [props]);
+    }, [handleModalClose]);
 
     return ReactDOM.createPortal(
         <>
-            <ModalOverlay handleModalClose={props.handleModalClose} />
+            <ModalOverlay handleModalClose={handleModalClose} />
             <div className={`${styles['modal']}`}>
                 <div className={`${styles['modal__container']} pb-15`}>
                     {
@@ -34,7 +34,7 @@ const Modal = (props) => {
                     {props.children}
                     <button
                         className={`${styles['modal__button']} mr-10 mt-15`}
-                        onClick={() => props.handleModalClose()}
+                        onClick={() => handleModalClose()}
                     >
                         <CloseIcon type="primary" />
                     </button>
@@ -47,7 +47,8 @@ const Modal = (props) => {
 
 Modal.propTypes = {
     children: PropTypes.element.isRequired,
-    handleModalClose: PropTypes.func.isRequired
+    handleModalClose: PropTypes.func.isRequired,
+    title: PropTypes.string
 };
 
 export default Modal;
