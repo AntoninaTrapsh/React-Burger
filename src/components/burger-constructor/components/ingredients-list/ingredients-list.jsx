@@ -12,13 +12,13 @@ const IngredientsList = (props) => {
 
     return (
         <>
-            <Bun position="top" data={bun}></Bun>
+            <Bun position="top" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}></Bun>
             <div className={`${styles['ingredient-list']} pr-2`}>
                 {props.ingredientsData.map((ingredient) => {
-                    return <IngredientCard key={ingredient._id} ingredient={ingredient}/>
+                    return <IngredientCard key={ingredient._id} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
                 })}
             </div>
-            <Bun position="bottom" data={bun}></Bun>
+            <Bun position="bottom" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}></Bun>
         </>
 
     )

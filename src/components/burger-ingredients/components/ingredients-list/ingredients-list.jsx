@@ -18,7 +18,7 @@ const IngredientsList = (props = []) => {
                         }
                         return list;
                     }, [])
-                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={INGREDIENT_TYPES[type]}/>
+                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={INGREDIENT_TYPES[type]} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
                 })
             }
         </section>

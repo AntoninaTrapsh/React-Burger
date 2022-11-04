@@ -7,12 +7,11 @@ import INGREDIENTS_OBJECT_TYPE from "./../../utils/consts";
 import PropTypes from "prop-types";
 
 const BurgerIngredients = (props) => {
-
     return (
         <section className={`${styles['burger-ingredients']} mr-10`}>
             <IngredientsHeader>Соберите бургер</IngredientsHeader>
             <IngredientsNavigation/>
-            <IngredientsList ingredientsData={props.ingredientsData}/>
+            <IngredientsList ingredientsData={props.ingredientsData} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
         </section>
     )
 }

@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const BurgerConstructor = (props = []) => {
     return (
         <section className="mt-25">
-            <IngredientsList ingredientsData={props.ingredientsData}/>
+            <IngredientsList ingredientsData={props.ingredientsData} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
             <section className={`${styles['burger__total-sum']} mt-10`}>
                 <div className="text text_type_digits-medium mr-10 ">
                     610 <CurrencyIcon type="primary"/>

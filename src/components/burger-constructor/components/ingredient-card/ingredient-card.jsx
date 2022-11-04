@@ -5,19 +5,19 @@ import INGREDIENT_OBJECT_TYPE from "./../../../../utils/consts";
 
 const IngredientCard = (props) => {
     return (
-        <div className="mb-4">
-                {props.ingredient.type === "bun" ? null :
-                    <div className={styles['ingredient-card__stuffing-list']}>
-                        <DragIcon type="primary"/>
-                        <ConstructorElement
-                            isLocked={false}
-                            text={props.ingredient.name}
-                            price={props.ingredient.price}
-                            thumbnail={props.ingredient.image}
-                        />
-                    </div>
-                }
-        </div>
+            <div className="mb-4" onClick={() => props.handleIngredientCardOpen(props.ingredient)}>
+                    {props.ingredient.type === "bun" ? null :
+                        <div className={styles['ingredient-card__stuffing-list']}>
+                            <DragIcon type="primary"/>
+                            <ConstructorElement
+                                isLocked={false}
+                                text={props.ingredient.name}
+                                price={props.ingredient.price}
+                                thumbnail={props.ingredient.image}
+                            />
+                        </div>
+                    }
+            </div>
     )
 }
 

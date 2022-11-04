@@ -5,12 +5,25 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from "./app.module.css"
 import IngredientsClient from "../../services/ingredients-client";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function App() {
     const [ingredientsData, setIngredientsData] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedIngredient, setSelectedIngredient] = useState({})
+
+    const handleIngredientCardOpen = (ingredient) => {
+        setIsOpen(true);
+        setSelectedIngredient(ingredient);
+    }
+
+    const handleIngredientCardClose = () => {
+        setIsOpen(false);
+    }
+
     useEffect(() => {
         IngredientsClient.getIngredients('ingredients').then((data) => {
-            console.log(data.data);
             setIngredientsData(data.data);
         }).catch((error) => {
             console.log(error);
@@ -23,11 +36,17 @@ function App() {
                 {
                     !!ingredientsData.length &&
                     <>
-                        <BurgerIngredients ingredientsData={ingredientsData}/>
-                        <BurgerConstructor ingredientsData={ingredientsData}/>
+                        <BurgerIngredients ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen}/>
+                        <BurgerConstructor ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen} />
                     </>
                 }
             </main>
+            {
+                isOpen &&
+                <Modal title='Детали ингредиента' handleIngredientCardClose={handleIngredientCardClose}>
+                    <IngredientDetails ingredient={selectedIngredient}/>
+                </Modal>
+            }
         </div>
     );
 }
