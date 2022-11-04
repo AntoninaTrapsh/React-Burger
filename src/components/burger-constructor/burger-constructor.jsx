@@ -41,7 +41,8 @@ const BurgerConstructor = (props = []) => {
 
 
 BurgerConstructor.propTypes = {
-    ingredientsData: PropTypes.arrayOf(INGREDIENT_OBJECT_TYPE).isRequired
+    ingredientsData: PropTypes.arrayOf(INGREDIENT_OBJECT_TYPE).isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 };
 
 export default BurgerConstructor;
