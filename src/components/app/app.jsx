@@ -4,14 +4,19 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import styles from "./app.module.css"
-import IngredientsClient from "../../services/ingredients-client";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchIngredients} from "../../store/actionCreators/burger-ingredients";
+import {selectIngredients} from "../../store/selectors/burger-ingredients";
 
 function App() {
-    const [ingredientsData, setIngredientsData] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedIngredient, setSelectedIngredient] = useState({})
+    const [selectedIngredient, setSelectedIngredient] = useState({});
+
+    const ingredientsData = useSelector(selectIngredients);
+
+    const dispatch = useDispatch();
 
     const handleIngredientCardOpen = (ingredient) => {
         setIsOpen(true);
@@ -23,11 +28,7 @@ function App() {
     }
 
     useEffect(() => {
-        IngredientsClient.getIngredients('ingredients').then((data) => {
-            setIngredientsData(data.data);
-        }).catch((error) => {
-            console.log(error);
-        })
+        dispatch(fetchIngredients('ingredients'));
     }, [])
     return (
         <div className="App">
