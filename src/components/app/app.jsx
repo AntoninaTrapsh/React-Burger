@@ -9,7 +9,7 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function App() {
-    const [ingredientsData, setIngredientsData] = useState([]);
+    const [ingredientsData, setIngredientsData] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedIngredient, setSelectedIngredient] = useState({})
 
@@ -34,7 +34,7 @@ function App() {
             <AppHeader/>
             <main>
                 {
-                    !!ingredientsData.length &&
+                    ingredientsData &&
                     <>
                         <BurgerIngredients ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen}/>
                         <BurgerConstructor ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen} />

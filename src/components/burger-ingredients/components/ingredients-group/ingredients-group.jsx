@@ -7,7 +7,7 @@ import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
 const IngredientsGroup = (props) => {
     return (
         <section>
-            <div className="text text_type_main-medium">{props.title}</div>
+            <h2 className="text text_type_main-medium">{props.title}</h2>
             <div className={`${styles['ingredients-group__items']} mb-10 mt-6`}>
                 {props.ingredients.map((ingredient) => {
                     return <IngredientCard key={ingredient._id} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
