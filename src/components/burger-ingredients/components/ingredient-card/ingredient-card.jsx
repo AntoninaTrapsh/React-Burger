@@ -1,11 +1,12 @@
 import styles from "./ingredient-card.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import INGREDIENTS_OBJECT_TYPE from "./../../../../utils/consts";
+import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
+import PropTypes from "prop-types";
 
 const IngredientCard = (props) => {
     return(
-        <div className={`mt-6 ${styles['ingredient-card__wrapper']}`}>
+        <div className={`mt-6 ${styles['ingredient-card__wrapper']}`} onClick={() => props.handleIngredientCardOpen(props.ingredient)}>
             <div className={styles['ingredient-card']}>
                 <img className="ml-4 mr-4" src={props.ingredient.image} alt={"Изображение ингредиента"}/>
                 <div className={`${styles['ingredient-card__price']} mt-1 mb-1`}>
@@ -22,7 +23,8 @@ const IngredientCard = (props) => {
 }
 
 IngredientCard.propTypes = {
-    ingredient: INGREDIENTS_OBJECT_TYPE.isRequired
+    ingredient: INGREDIENTS_OBJECT_TYPE.isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 };
 
 export default IngredientCard;

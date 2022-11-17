@@ -1,0 +1,24 @@
+.ingredient-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ingredient-detail__image {
+    width: 480px;
+    height: 240px;
+}
+
+.ingredient-detail__items {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.ingredient-detail__item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

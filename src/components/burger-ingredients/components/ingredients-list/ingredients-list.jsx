@@ -3,7 +3,7 @@ import React from "react";
 import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
 import PropTypes from "prop-types";
-import INGREDIENTS_OBJECT_TYPE from "../../../../utils/consts";
+import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
 
 const IngredientsList = (props = []) => {
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
@@ -18,7 +18,7 @@ const IngredientsList = (props = []) => {
                         }
                         return list;
                     }, [])
-                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={INGREDIENT_TYPES[type]}/>
+                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={INGREDIENT_TYPES[type]} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
                 })
             }
         </section>
@@ -28,6 +28,7 @@ const IngredientsList = (props = []) => {
 
 IngredientsList.propTypes = {
     ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
+    handleIngredientCardOpen: PropTypes.func.isRequired
 }
 
 export default IngredientsList;
