@@ -6,8 +6,15 @@ import PropTypes from "prop-types";
 import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
 import {DND_TYPES} from "../../../../utils/consts";
 import {useDrop} from "react-dnd";
+import {useDispatch, useSelector} from "react-redux";
+import {addIngredientToConstructor} from "../../../../store/actionCreators/burger-constructor";
+import {selectIngredientsList} from "../../../../store/selectors/burger-constructor";
 
 const IngredientsList = (props) => {
+    const dispatch = useDispatch();
+    const ingredients = useSelector(selectIngredientsList);
+    // console.log(ingredients);
+
     const bun = props.ingredientsData.find((ingredient) => {
         return ingredient.type === "bun";
     })
@@ -21,6 +28,7 @@ const IngredientsList = (props) => {
 
     const handleOnDrop = (ingredient) => {
         console.log(ingredient.type);
+        dispatch(addIngredientToConstructor(ingredient))
     }
 
     // const totalPrice = () => {
@@ -33,8 +41,9 @@ const IngredientsList = (props) => {
         <section ref={dropTargetRef}>
             <Bun position="top" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
             <div className={`${styles['ingredient-list']} pr-2`}>
-                {props.ingredientsData.map((ingredient) => {
-                    return <IngredientCard key={ingredient._id} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+                {ingredients.map((ingredient) => {
+                    console.log(ingredient);
+                    return <IngredientCard key={ingredient.uuid} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
                 })}
             </div>
             <Bun position="bottom" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>

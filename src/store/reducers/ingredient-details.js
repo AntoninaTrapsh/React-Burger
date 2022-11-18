@@ -16,6 +16,7 @@ export const ingredientDetailsReducer = (state = initialState, { type, payload }
         }
         case CLOSE_INGREDIENT_DETAILS_MODAL: {
             return {
+                ...state,
                 isOpen: false,
                 ingredient: null,
             }
