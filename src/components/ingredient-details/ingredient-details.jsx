@@ -1,36 +1,36 @@
 import React from "react";
 import styles from "./ingredient-details.module.css"
-import INGREDIENT_OBJECT_TYPE from "../../utils/types";
+import {useSelector} from "react-redux";
+import {selectIngredient} from "../../store/selectors/ingredient-details";
 
-const IngredientDetails = (props) => {
+const IngredientDetails = () => {
+    const ingredient = useSelector(selectIngredient);
+
     return (
+        ingredient &&
         <div className={`${styles['ingredient-detail']}`}>
-            <img src={props.ingredient.image_large} alt={props.ingredient.name} className={`${styles['ingredient-detail__image']}`}/>
-            <h1 className="text text_type_main-medium mb-8 mt-4">{props.ingredient.name}</h1>
+            <img src={ingredient.image_large} alt={ingredient.name} className={`${styles['ingredient-detail__image']}`}/>
+            <h1 className="text text_type_main-medium mb-8 mt-4">{ingredient.name}</h1>
             <div className={`${styles['ingredient-detail__items']} text text_color_inactive text_type_main-default`}>
                 <div className={`${styles['ingredient-detail__item']} mr-5`}>
                     <span>Калории, ккал</span>
-                    <span className="text text_type_digits-default mt-2">{props.ingredient.calories}</span>
+                    <span className="text text_type_digits-default mt-2">{ingredient.calories}</span>
                 </div>
                 <div className={`${styles['ingredient-detail__item']} mr-5`}>
                     <span>Белки, г</span>
-                    <span className="text text_type_digits-default mt-2">{props.ingredient.proteins}</span>
+                    <span className="text text_type_digits-default mt-2">{ingredient.proteins}</span>
                 </div>
                 <div className={`${styles['ingredient-detail__item']} mr-5`}>
                     <span>Жиры, г</span>
-                    <span className="text text_type_digits-default mt-2">{props.ingredient.fat}</span>
+                    <span className="text text_type_digits-default mt-2">{ingredient.fat}</span>
                 </div>
                 <div className={`${styles['ingredient-detail__item']}`}>
                     <span>Углеводы, г</span>
-                    <span className="text text_type_digits-default mt-2">{props.ingredient.carbohydrates}</span>
+                    <span className="text text_type_digits-default mt-2">{ingredient.carbohydrates}</span>
                 </div>
             </div>
         </div>
     )
 }
-
-IngredientDetails.propTypes = {
-    ingredient: INGREDIENT_OBJECT_TYPE.isRequired
-};
 
 export default IngredientDetails;

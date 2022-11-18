@@ -5,7 +5,7 @@ const initialState = {
     ingredient: null,
 };
 
-export const ingredientsDetailReducer = (state = initialState, { type, payload }) => {
+export const ingredientDetailsReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case OPEN_INGREDIENT_DETAILS_MODAL: {
             return {

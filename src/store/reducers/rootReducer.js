@@ -1,11 +1,11 @@
 import {combineReducers} from "redux";
 import {burgerIngredientsReducer} from "./burger-ingredients";
 import {orderDetailsReducer} from "./order-details";
-import {ingredientsDetailReducer} from "./ingredient-details";
+import {ingredientDetailsReducer} from "./ingredient-details";
 
 
 export const rootReducer = combineReducers({
     burgerIngredients: burgerIngredientsReducer,
     orderDetails: orderDetailsReducer,
-    ingredientDetails: ingredientsDetailReducer,
+    ingredientDetails: ingredientDetailsReducer,
 })

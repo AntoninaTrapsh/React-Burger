@@ -1,10 +1,28 @@
-import {GET_ORDER_DATA_FAILED, GET_ORDER_DATA_SUCCESS, SEND_ORDER_REQUEST} from "../actions/order-details";
+import {
+    CLOSE_ORDER_DETAILS_MODAL,
+    GET_ORDER_DATA_FAILED,
+    GET_ORDER_DATA_SUCCESS,
+    OPEN_ORDER_DETAILS_MODAL,
+    SEND_ORDER_REQUEST
+} from "../actions/order-details";
 import IngredientsClient from "../../services/ingredients-client";
 
 export function changeRequestStatus() {
     return {
         type: SEND_ORDER_REQUEST,
     };
+}
+
+export function openOrderDetailsModal(state) {
+    return {
+        type: OPEN_ORDER_DETAILS_MODAL,
+    }
+}
+
+export function closeOrderDetailsModal(state) {
+    return {
+        type: CLOSE_ORDER_DETAILS_MODAL,
+    }
 }
 
 export function fetchOrderDetails(url, ingredients) {

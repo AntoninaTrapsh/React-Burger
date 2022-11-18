@@ -12,7 +12,7 @@ class IngredientsClient {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: {ingredients}
+            body: JSON.stringify({ingredients}),
         }) ;
         return await this.checkResponse(response);
     }

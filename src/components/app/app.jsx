@@ -9,22 +9,20 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchIngredients} from "../../store/actionCreators/burger-ingredients";
 import {selectIngredients} from "../../store/selectors/burger-ingredients";
+import {closeIngredientDetails, openIngredientDetails} from "../../store/actionCreators/ingredient-details";
+import {selectIngredientModalState} from "../../store/selectors/ingredient-details";
 
 function App() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedIngredient, setSelectedIngredient] = useState({});
-
-    const ingredientsData = useSelector(selectIngredients);
-
     const dispatch = useDispatch();
+    const ingredientsData = useSelector(selectIngredients);
+    const isOpen = useSelector(selectIngredientModalState);
 
     const handleIngredientCardOpen = (ingredient) => {
-        setIsOpen(true);
-        setSelectedIngredient(ingredient);
+        dispatch(openIngredientDetails(ingredient))
     }
 
     const handleIngredientCardClose = () => {
-        setIsOpen(false);
+        dispatch(closeIngredientDetails())
     }
 
     useEffect(() => {
@@ -37,7 +35,7 @@ function App() {
                 {
                     ingredientsData &&
                     <>
-                        <BurgerIngredients ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen}/>
+                        <BurgerIngredients handleIngredientCardOpen={handleIngredientCardOpen}/>
                         <BurgerConstructor ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen} />
                     </>
                 }
@@ -45,7 +43,7 @@ function App() {
             {
                 isOpen &&
                 <Modal title="Детали ингредиента" handleModalClose={handleIngredientCardClose}>
-                    <IngredientDetails ingredient={selectedIngredient}/>
+                    <IngredientDetails/>
                 </Modal>
             }
         </div>

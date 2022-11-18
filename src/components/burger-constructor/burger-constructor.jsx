@@ -6,16 +6,26 @@ import INGREDIENT_OBJECT_TYPE from "../../utils/types";
 import PropTypes from "prop-types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import {selectOrderDetailsState, selectOrderId} from "../../store/selectors/order-details";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    closeOrderDetailsModal,
+    fetchOrderDetails,
+    openOrderDetailsModal
+} from "../../store/actionCreators/order-details";
 
 const BurgerConstructor = (props = []) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const isOpen = useSelector(selectOrderDetailsState);
+    const orderId = useSelector(selectOrderId);
 
     const handleOpenOrderModal = () => {
-        setIsOpen(true);
+        dispatch(openOrderDetailsModal());
+        dispatch(fetchOrderDetails('orders', props.ingredientsData));
     }
 
     const handleCloseOrderModal = () => {
-        setIsOpen(false);
+        dispatch(closeOrderDetailsModal());
     }
 
     return (
@@ -32,7 +42,7 @@ const BurgerConstructor = (props = []) => {
             {
                 isOpen &&
                 (<Modal handleModalClose={handleCloseOrderModal}>
-                    <OrderDetails/>
+                    <OrderDetails orderId={orderId}/>
                 </Modal>)
             }
         </section>
