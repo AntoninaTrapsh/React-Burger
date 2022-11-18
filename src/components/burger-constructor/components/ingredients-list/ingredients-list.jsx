@@ -51,6 +51,9 @@ const IngredientsList = (props) => {
                 ingredients.length ?
                     <div className={`${styles['ingredient-list']} pr-2`}>
                         {ingredients.map((ingredient) => {
+                            if (ingredient.type === "bun") {
+                                return
+                            }
                             return <IngredientCard key={ingredient.uuid} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
                         })}
                     </div> :
