@@ -33,10 +33,9 @@ export const orderDetailsReducer = (state = initialState, { type, payload }) => 
             };
         }
         case GET_ORDER_DATA_SUCCESS: {
-            console.log(payload);
             return {
                 ...state,
-                orderId: payload.orderId,
+                orderId: payload.order,
                 orderRequest: false,
                 orderFailed: false,
             };

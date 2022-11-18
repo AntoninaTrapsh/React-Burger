@@ -10,4 +10,4 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 
-export const store = createStore(burgerIngredientsReducer, enhancer);
+export const store = createStore(rootReducer, enhancer);
