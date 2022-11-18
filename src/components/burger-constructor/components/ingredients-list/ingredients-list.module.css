@@ -18,11 +18,3 @@
 .ingredient-list::-webkit-scrollbar-track {
     background-color: #2F2F37;
 }
-
-/*.empty-list {*/
-/*    !*border: dotted #2f2f37 2px;*!*/
-/*    border: dotted #8585AD 2px;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/

@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./default-constructor-element.module.css"
 
 const DefaultConstructorElement = (props) => {
-    const positionClass = props.position === "top" ? "top-element" : props.type === "bottom" ? "bottom-element" : "default-element";
+    const positionClass = props.position === "top" ? "top-element" : props.position === "bottom" ? "bottom-element" : "default-element";
+
+    console.log(props.position);
 
     return (
         <div className={`${styles['constructor-element']} ${styles[positionClass]}`}>
