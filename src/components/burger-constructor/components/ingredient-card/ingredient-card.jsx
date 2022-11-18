@@ -3,10 +3,17 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 import React from "react";
 import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
 import PropTypes from "prop-types";
+import {useDrag} from "react-dnd";
+import {DND_TYPES} from "../../../../utils/consts";
 
 const IngredientCard = (props) => {
+    const [, dragRef] = useDrag({
+        type: DND_TYPES.CARD_FROM_CONSTRUCTOR,
+        item: props.ingredient,
+    });
+
     return (
-        <div className="mb-4" onClick={() => props.handleIngredientCardOpen(props.ingredient)}>
+        <div className="mb-4" onClick={() => props.handleIngredientCardOpen(props.ingredient)} ref={dragRef}>
             {props.ingredient.type === "bun" ? null :
                 <div className={styles['ingredient-card__stuffing-list']}>
                     <DragIcon type="primary"/>

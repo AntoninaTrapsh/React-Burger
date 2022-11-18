@@ -11,6 +11,8 @@ import {fetchIngredients} from "../../store/actionCreators/burger-ingredients";
 import {selectIngredients} from "../../store/selectors/burger-ingredients";
 import {closeIngredientDetails, openIngredientDetails} from "../../store/actionCreators/ingredient-details";
 import {selectIngredientModalState} from "../../store/selectors/ingredient-details";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 function App() {
     const dispatch = useDispatch();
@@ -35,8 +37,10 @@ function App() {
                 {
                     ingredientsData &&
                     <>
+                    <DndProvider backend={HTML5Backend}>
                         <BurgerIngredients handleIngredientCardOpen={handleIngredientCardOpen}/>
                         <BurgerConstructor ingredientsData={ingredientsData} handleIngredientCardOpen={handleIngredientCardOpen} />
+                    </DndProvider>
                     </>
                 }
             </main>

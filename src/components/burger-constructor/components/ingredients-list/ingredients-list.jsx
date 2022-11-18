@@ -4,11 +4,24 @@ import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import PropTypes from "prop-types";
 import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
+import {DND_TYPES} from "../../../../utils/consts";
+import {useDrop} from "react-dnd";
 
 const IngredientsList = (props) => {
     const bun = props.ingredientsData.find((ingredient) => {
         return ingredient.type === "bun";
     })
+
+    const [, dropTargetRef] = useDrop({
+        accept: DND_TYPES.CARD_FROM_INGREDIENTS,
+        drop(ingredient) {
+            handleOnDrop(ingredient);
+        }
+    });
+
+    const handleOnDrop = (ingredient) => {
+        console.log(ingredient.type);
+    }
 
     // const totalPrice = () => {
     //     props.ingredientsData.reduce((sum, ingredient) => {
@@ -17,7 +30,7 @@ const IngredientsList = (props) => {
     // }
 
     return (
-        <>
+        <section ref={dropTargetRef}>
             <Bun position="top" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
             <div className={`${styles['ingredient-list']} pr-2`}>
                 {props.ingredientsData.map((ingredient) => {
@@ -25,7 +38,7 @@ const IngredientsList = (props) => {
                 })}
             </div>
             <Bun position="bottom" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
-        </>
+        </section>
 
     )
 }

@@ -3,10 +3,17 @@ import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-com
 import React from "react";
 import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
 import PropTypes from "prop-types";
+import {useDrag} from "react-dnd";
+import {DND_TYPES} from "../../../../utils/consts";
 
 const IngredientCard = (props) => {
+    const [, dragRef] = useDrag({
+        type: DND_TYPES.CARD_FROM_INGREDIENTS,
+        item: props.ingredient,
+    });
+
     return(
-        <div className={`mt-6 ${styles['ingredient-card__wrapper']}`} onClick={() => props.handleIngredientCardOpen(props.ingredient)}>
+        <div className={`mt-6 ${styles['ingredient-card__wrapper']}`} onClick={() => props.handleIngredientCardOpen(props.ingredient)} ref={dragRef}>
             <div className={styles['ingredient-card']}>
                 <img className="ml-4 mr-4" src={props.ingredient.image} alt={"Изображение ингредиента"}/>
                 <div className={`${styles['ingredient-card__price']} mt-1 mb-1`}>
