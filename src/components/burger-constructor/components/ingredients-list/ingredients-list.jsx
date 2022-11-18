@@ -14,14 +14,7 @@ import DefaultConstructorElement from "../default-constructor-element/default-co
 const IngredientsList = (props) => {
     const dispatch = useDispatch();
     const ingredients = useSelector(selectIngredientsList);
-    console.log(ingredients);
-
-    // const bun = props.ingredientsData.find((ingredient) => {
-    //     return ingredient.type === "bun";
-    // })
-
     const bun = useSelector(selectBuns);
-    // console.log('buns', bun);
 
     const [, dropTargetRef] = useDrop({
         accept: DND_TYPES.CARD_FROM_INGREDIENTS,

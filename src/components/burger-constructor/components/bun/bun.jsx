@@ -6,7 +6,7 @@ import DefaultConstructorElement from "../default-constructor-element/default-co
 
 const Bun = (props) => {
     return (
-        <div className={`${styles['bun__wrapper']} ml-8`} onClick={() => {
+        <div className={`${styles['bun__wrapper']} ml-8 pt-4 pb-4`} onClick={() => {
             if (!props.data) {
                 return
             }
