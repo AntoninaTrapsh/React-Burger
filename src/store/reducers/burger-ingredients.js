@@ -21,17 +21,17 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
         case LOAD_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
+                ingredients: payload.data,
                 ingredientsRequest: false,
                 ingredientsFailed: false,
-                ingredients: payload.data
             };
         }
         case LOAD_INGREDIENTS_FAILED: {
             return {
                 ...state,
+                ingredients: [],
                 ingredientsRequest: false,
                 ingredientsFailed: true,
-                ingredients: [],
             }
         }
         default:

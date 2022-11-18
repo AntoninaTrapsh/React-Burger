@@ -29,7 +29,7 @@ function App() {
 
     useEffect(() => {
         dispatch(fetchIngredients('ingredients'));
-    }, [])
+    }, [dispatch])
     return (
         <div className="App">
             <AppHeader/>
