@@ -15,6 +15,7 @@ const IngredientsList = (props) => {
     const dispatch = useDispatch();
     const ingredients = useSelector(selectIngredientsList);
     const bun = useSelector(selectBuns);
+    const ref = React.useRef(null);
 
     const [, dropTargetRef] = useDrop({
         accept: DND_TYPES.CARD_FROM_INGREDIENTS,
@@ -43,11 +44,11 @@ const IngredientsList = (props) => {
             {
                 ingredients.length ?
                     <div className={`${styles['ingredient-list']} pr-2`}>
-                        {ingredients.map((ingredient) => {
+                        {ingredients.map((ingredient, index) => {
                             if (ingredient.type === "bun") {
-                                return
+                                return null
                             }
-                            return <IngredientCard key={ingredient.uuid} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+                            return <IngredientCard key={ingredient.uuid} index={index} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
                         })}
                     </div> :
                     <div className={`${styles['empty-list']} pl-8 pr-2 mt-4 mb-4`}>

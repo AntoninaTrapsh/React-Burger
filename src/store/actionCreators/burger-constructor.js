@@ -1,4 +1,9 @@
-import {ADD_BUNS, ADD_MAIN_INGREDIENT, DELETE_INGREDIENT} from "../actions/burger-constructor";
+import {
+    ADD_BUNS,
+    ADD_MAIN_INGREDIENT,
+    CHANGE_INGREDIENT_POSITION,
+    DELETE_INGREDIENT
+} from "../actions/burger-constructor";
 import { v4 as uuid } from "uuid";
 
 export function addIngredientToConstructor(ingredient) {
@@ -19,5 +24,13 @@ export function addBunsToConstructor(buns) {
     return {
         type: ADD_BUNS,
         payload: buns,
+    }
+}
+
+export function changeIngredientPosition(indices) {
+    console.log(indices);
+    return {
+        type: CHANGE_INGREDIENT_POSITION,
+        payload: indices,
     }
 }

@@ -4,8 +4,6 @@ import styles from "./default-constructor-element.module.css"
 const DefaultConstructorElement = (props) => {
     const positionClass = props.position === "top" ? "top-element" : props.position === "bottom" ? "bottom-element" : "default-element";
 
-    console.log(props.position);
-
     return (
         <div className={`${styles['constructor-element']} ${styles[positionClass]}`}>
             <p className="text text_type_main-default text_color_inactive">{props.children}</p>
