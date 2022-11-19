@@ -46,7 +46,6 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
             const ingredientIndex = state.ingredients.findIndex((ingredient) => {
                 return ingredient._id === payload.id;
             });
-            console.log(ingredientIndex);
             let ingredients = [...state.ingredients];
             if (ingredientIndex >= 0) {
                 ingredients[ingredientIndex].quantity += payload.quantity;
