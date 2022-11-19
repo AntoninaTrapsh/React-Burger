@@ -1,5 +1,6 @@
 import IngredientsClient from "../../services/ingredients-client";
 import {
+    RESET_PREVIOUS_BUNS,
     DECREASE_INGREDIENT_COUNTER,
     INCREASE_INGREDIENT_COUNTER,
     LOAD_INGREDIENTS_FAILED,
@@ -11,6 +12,12 @@ export function changeRequestStatus() {
     return {
         type: SEND_INGREDIENTS_REQUEST,
     };
+}
+
+export function resetPreviousBuns() {
+    return {
+        type: RESET_PREVIOUS_BUNS,
+    }
 }
 
 export function decreaseIngredientCounter(id) {

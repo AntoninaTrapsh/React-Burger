@@ -1,4 +1,5 @@
 import {
+    RESET_PREVIOUS_BUNS,
     DECREASE_INGREDIENT_COUNTER,
     INCREASE_INGREDIENT_COUNTER,
     LOAD_INGREDIENTS_FAILED,
@@ -62,6 +63,19 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
             let ingredients = [...state.ingredients];
             if (ingredientIndex >= 0) {
                 ingredients[ingredientIndex].quantity--;
+            }
+            return {
+                ...state,
+                ingredients: ingredients,
+            }
+        }
+        case RESET_PREVIOUS_BUNS: {
+            const ingredients = state.ingredients;
+            const bunIndex = state.ingredients.findIndex((ingredient) => {
+                return ingredient.type === "bun" && ingredient.quantity !== 0;
+            })
+            if (bunIndex >= 0) {
+                ingredients[bunIndex].quantity = 0;
             }
             return {
                 ...state,
