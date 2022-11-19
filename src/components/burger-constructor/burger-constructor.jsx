@@ -13,11 +13,13 @@ import {
     fetchOrderDetails,
     openOrderDetailsModal
 } from "../../store/actionCreators/order-details";
+import {selectTotalPrice} from "../../store/selectors/burger-constructor";
 
 const BurgerConstructor = (props = []) => {
     const dispatch = useDispatch();
     const isOpen = useSelector(selectOrderDetailsState);
     const orderId = useSelector(selectOrderId);
+    const totalPrice = useSelector(selectTotalPrice);
 
     const handleOpenOrderModal = () => {
         dispatch(openOrderDetailsModal());
@@ -33,7 +35,7 @@ const BurgerConstructor = (props = []) => {
             <IngredientsList ingredientsData={props.ingredientsData} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
             <section className={`${styles['burger__total-sum']} mt-10`}>
                 <div className="text text_type_digits-medium mr-10 ">
-                    610 <CurrencyIcon type="primary"/>
+                    {totalPrice} <CurrencyIcon type="primary"/>
                 </div>
                 <Button type="primary" size="large" htmlType="submit" onClick={() => handleOpenOrderModal()}>
                     Оформить заказ

@@ -36,12 +36,6 @@ const IngredientsList = (props) => {
         }
     }
 
-    // const totalPrice = () => {
-    //     props.ingredientsData.reduce((sum, ingredient) => {
-    //         return sum + ingredient.price;
-    //     }, 0)
-    // }
-
     return (
         <section ref={dropTargetRef}>
             <Bun position="top" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
