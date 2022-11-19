@@ -29,7 +29,11 @@ export function fetchOrderDetails(url, ingredients) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus());
 
-        IngredientsClient.sendOrderDetails(url, ingredients)
+        const ingredientsIds = ingredients.reduce((arr, ingredient) => {
+            return [...arr, ingredient._id];
+        }, [])
+
+        IngredientsClient.sendOrderDetails(url, ingredientsIds)
             .then((data) => {
                 dispatch({
                     type: GET_ORDER_DATA_SUCCESS,

@@ -7,6 +7,7 @@ class IngredientsClient {
     }
 
     async sendOrderDetails(url, ingredients) {
+        console.log(ingredients);
         const response = await fetch(`${this.api}${url}`, {
             method: "POST",
             headers: {
