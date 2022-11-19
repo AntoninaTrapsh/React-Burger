@@ -4,12 +4,8 @@ import styles from "./burger-constructor.module.css"
 import IngredientsList from "./components/ingredients-list/ingredients-list";
 import INGREDIENT_OBJECT_TYPE from "../../utils/types";
 import PropTypes from "prop-types";
-import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
-import {selectOrderDetailsState, selectOrderId} from "../../store/selectors/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    closeOrderDetailsModal,
     fetchOrderDetails,
     openOrderDetailsModal
 } from "../../store/actionCreators/order-details";
@@ -17,17 +13,11 @@ import {selectTotalPrice} from "../../store/selectors/burger-constructor";
 
 const BurgerConstructor = (props = []) => {
     const dispatch = useDispatch();
-    const isOpen = useSelector(selectOrderDetailsState);
-    const orderId = useSelector(selectOrderId);
     const totalPrice = useSelector(selectTotalPrice);
 
     const handleOpenOrderModal = () => {
         dispatch(openOrderDetailsModal());
         dispatch(fetchOrderDetails('orders', props.ingredientsData));
-    }
-
-    const handleCloseOrderModal = () => {
-        dispatch(closeOrderDetailsModal());
     }
 
     return (
@@ -41,12 +31,6 @@ const BurgerConstructor = (props = []) => {
                     Оформить заказ
                 </Button>
             </section>
-            {
-                isOpen &&
-                (<Modal handleModalClose={handleCloseOrderModal}>
-                    <OrderDetails orderId={orderId}/>
-                </Modal>)
-            }
         </section>
     )
 }

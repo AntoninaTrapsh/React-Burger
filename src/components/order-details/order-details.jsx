@@ -1,8 +1,11 @@
 import React, {useEffect} from "react";
 import orderImage from "../../images/done.svg"
 import styles from "./order-details.module.css"
+import {useSelector} from "react-redux";
+import {selectOrderId} from "../../store/selectors/order-details";
 
-const OrderDetails = ({orderId}) => {
+const OrderDetails = () => {
+    const orderId = useSelector(selectOrderId);
 
     return (
         <div className={`${styles['order-details']} pb-15 pt-30`}>
