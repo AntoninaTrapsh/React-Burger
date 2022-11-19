@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addBunsToConstructor, addIngredientToConstructor} from "../../../../store/actionCreators/burger-constructor";
 import {selectBuns, selectIngredientsList} from "../../../../store/selectors/burger-constructor";
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
+import {increaseIngredientCounter} from "../../../../store/actionCreators/burger-ingredients";
 
 const IngredientsList = (props) => {
     const dispatch = useDispatch();
@@ -26,9 +27,11 @@ const IngredientsList = (props) => {
 
     const handleOnDrop = (ingredient) => {
         if (ingredient.type === "bun") {
-            dispatch(addBunsToConstructor(ingredient))
+            dispatch(addBunsToConstructor(ingredient));
+            dispatch(increaseIngredientCounter(ingredient._id, 2));
         } else {
             dispatch(addIngredientToConstructor(ingredient))
+            dispatch(increaseIngredientCounter(ingredient._id, 1));
         }
     }
 

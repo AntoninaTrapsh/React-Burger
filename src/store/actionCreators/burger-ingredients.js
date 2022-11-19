@@ -1,5 +1,7 @@
 import IngredientsClient from "../../services/ingredients-client";
 import {
+    DECREASE_INGREDIENT_COUNTER,
+    INCREASE_INGREDIENT_COUNTER,
     LOAD_INGREDIENTS_FAILED,
     LOAD_INGREDIENTS_SUCCESS,
     SEND_INGREDIENTS_REQUEST
@@ -8,6 +10,22 @@ import {
 export function changeRequestStatus() {
     return {
         type: SEND_INGREDIENTS_REQUEST,
+    };
+}
+
+export function decreaseIngredientCounter(id) {
+    return {
+        type: DECREASE_INGREDIENT_COUNTER,
+        payload: id,
+    };
+}
+
+export function increaseIngredientCounter(id, quantity) {
+    return {
+        type: INCREASE_INGREDIENT_COUNTER,
+        payload: {
+            id, quantity
+        }
     };
 }
 

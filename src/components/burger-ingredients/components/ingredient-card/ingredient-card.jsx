@@ -22,9 +22,12 @@ const IngredientCard = (props) => {
                 </div>
                 <p className="text text_type_main-default">{props.ingredient.name}</p>
             </div>
-            <div className={styles['ingredient-card__counter']}>
-                <Counter count={1} size="default"/>
-            </div>
+            {
+                !!props.ingredient.quantity &&
+                <div className={styles['ingredient-card__counter']}>
+                    <Counter count={props.ingredient.quantity} size="default"/>
+                </div>
+            }
         </div>
     )
 }

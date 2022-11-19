@@ -10,6 +10,7 @@ import {
     changeIngredientPosition,
     deleteIngredientFromConstructor
 } from "../../../../store/actionCreators/burger-constructor";
+import {decreaseIngredientCounter} from "../../../../store/actionCreators/burger-ingredients";
 
 const IngredientCard = (props) => {
     const ref = React.useRef(null);
@@ -63,9 +64,10 @@ const IngredientCard = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleDeleteIngredient = (e, uuid) => {
+    const handleDeleteIngredient = (e, ingredient) => {
         e.stopPropagation();
-        dispatch(deleteIngredientFromConstructor(uuid));
+        dispatch(deleteIngredientFromConstructor(ingredient.uuid));
+        dispatch(decreaseIngredientCounter(ingredient._id))
     }
 
     return (
@@ -77,7 +79,7 @@ const IngredientCard = (props) => {
                     text={props.ingredient.name}
                     price={props.ingredient.price}
                     thumbnail={props.ingredient.image}
-                    handleClose={(e) => handleDeleteIngredient(e, props.ingredient.uuid)}
+                    handleClose={(e) => handleDeleteIngredient(e, props.ingredient)}
                 />
             </div>
         </div>
