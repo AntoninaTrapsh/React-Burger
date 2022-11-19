@@ -60,9 +60,9 @@ function App() {
             }
             {
                 isOrderDetailsOpen &&
-                (<Modal handleModalClose={handleCloseOrderModal}>
+                <Modal handleModalClose={handleCloseOrderModal}>
                     <OrderDetails/>
-                </Modal>)
+                </Modal>
             }
         </div>
     );
