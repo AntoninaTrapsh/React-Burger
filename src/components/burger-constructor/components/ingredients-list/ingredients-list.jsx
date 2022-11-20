@@ -2,8 +2,6 @@ import Bun from "../bun/bun";
 import styles from "./ingredients-list.module.css";
 import React from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
-import PropTypes from "prop-types";
-import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
 import {DND_TYPES} from "../../../../utils/consts";
 import {useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +10,7 @@ import {selectBuns, selectIngredientsList} from "../../../../services/store/sele
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
 import {resetPreviousBuns, increaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
 
-const IngredientsList = (props) => {
+const IngredientsList = () => {
     const dispatch = useDispatch();
     const ingredients = useSelector(selectIngredientsList);
     const bun = useSelector(selectBuns);
@@ -56,10 +54,6 @@ const IngredientsList = (props) => {
         </section>
 
     )
-}
-
-IngredientsList.propType = {
-    ingredientsData: PropTypes.arrayOf(INGREDIENT_OBJECT_TYPE).isRequired,
 }
 
 export default IngredientsList;

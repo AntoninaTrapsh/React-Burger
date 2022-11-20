@@ -7,17 +7,17 @@ import {
     fetchOrderDetails,
     openOrderDetailsModal
 } from "../../services/store/actionCreators/order-details";
-import {selectTotalPrice} from "../../services/store/selectors/burger-constructor";
-import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
+import {selectBuns, selectIngredientsList, selectTotalPrice} from "../../services/store/selectors/burger-constructor";
 
-const BurgerConstructor = (props = []) => {
+const BurgerConstructor = () => {
     const dispatch = useDispatch();
     const totalPrice = useSelector(selectTotalPrice);
-    const ingredientsData = useSelector(selectIngredients);
+    const ingredientsData = useSelector(selectIngredientsList);
+    const buns = useSelector(selectBuns)
 
     const handleOpenOrderModal = () => {
         dispatch(openOrderDetailsModal());
-        dispatch(fetchOrderDetails('orders', props.ingredientsData));
+        dispatch(fetchOrderDetails('orders', [buns, ...ingredientsData, buns]));
     }
 
     return (

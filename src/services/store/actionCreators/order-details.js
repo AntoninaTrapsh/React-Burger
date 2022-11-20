@@ -13,13 +13,13 @@ export function changeRequestStatus() {
     };
 }
 
-export function openOrderDetailsModal(state) {
+export function openOrderDetailsModal() {
     return {
         type: OPEN_ORDER_DETAILS_MODAL,
     }
 }
 
-export function closeOrderDetailsModal(state) {
+export function closeOrderDetailsModal() {
     return {
         type: CLOSE_ORDER_DETAILS_MODAL,
     }
