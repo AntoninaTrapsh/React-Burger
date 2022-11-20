@@ -22,7 +22,7 @@ const BurgerConstructor = () => {
 
     return (
         <section className="mt-25">
-            <IngredientsList ingredientsData={ingredientsData}/>
+            <IngredientsList/>
             <section className={`${styles['burger__total-sum']} mt-10`}>
                 <div className="text text_type_digits-medium mr-10 ">
                     {totalPrice} <CurrencyIcon type="primary"/>

@@ -51,6 +51,7 @@ const IngredientsList = ({handleChangeActiveTab, ...props}) => {
 
 IngredientsList.propTypes = {
     ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
+    handleChangeActiveTab: PropTypes.func.isRequired,
 }
 
 export default IngredientsList;

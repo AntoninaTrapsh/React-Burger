@@ -5,6 +5,8 @@ import styles from "./bun.module.css"
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
 import {openIngredientDetails} from "../../../../services/store/actionCreators/ingredient-details";
 import {useDispatch} from "react-redux";
+import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
+import PropTypes from "prop-types";
 
 const Bun = (props) => {
     const dispatch = useDispatch();
@@ -33,6 +35,11 @@ const Bun = (props) => {
             }
         </div>
     )
+}
+
+Bun.propTypes = {
+    data: INGREDIENT_OBJECT_TYPE,
+    position: PropTypes.string.isRequired,
 }
 
 export default Bun;

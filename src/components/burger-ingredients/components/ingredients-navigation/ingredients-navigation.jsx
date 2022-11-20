@@ -1,6 +1,7 @@
 import React from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INGREDIENT_TYPES} from "../../consts/consts";
+import PropTypes from "prop-types";
 
 const IngredientsNavigation = (props) => {
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
@@ -15,6 +16,10 @@ const IngredientsNavigation = (props) => {
             </div>
         </>
     )
+}
+
+IngredientsNavigation.propTypes = {
+    activeTab: PropTypes.string.isRequired,
 }
 
 export default IngredientsNavigation;

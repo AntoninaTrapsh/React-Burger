@@ -11,6 +11,7 @@ import {
 } from "../../../../services/store/actionCreators/burger-constructor";
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
 import {openIngredientDetails} from "../../../../services/store/actionCreators/ingredient-details";
+import PropTypes from "prop-types";
 
 const IngredientCard = (props) => {
     const ref = React.useRef(null);
@@ -92,6 +93,7 @@ const IngredientCard = (props) => {
 
 IngredientCard.propTypes = {
     ingredient: INGREDIENT_OBJECT_TYPE.isRequired,
+    index: PropTypes.number.isRequired,
 };
 
 export default IngredientCard;
