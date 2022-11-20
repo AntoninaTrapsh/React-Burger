@@ -1,7 +1,7 @@
 import {
     ADD_BUNS,
     ADD_MAIN_INGREDIENT,
-    CHANGE_INGREDIENT_POSITION,
+    CHANGE_INGREDIENT_POSITION, CLEAR_CONSTRUCTOR,
     DELETE_INGREDIENT
 } from "../actions/burger-constructor";
 import { v4 as uuid } from "uuid";
@@ -31,5 +31,11 @@ export function changeIngredientPosition(indices) {
     return {
         type: CHANGE_INGREDIENT_POSITION,
         payload: indices,
+    }
+}
+
+export function clearConstructor() {
+    return {
+        type: CLEAR_CONSTRUCTOR,
     }
 }

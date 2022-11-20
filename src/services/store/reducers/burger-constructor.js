@@ -1,7 +1,7 @@
 import {
     ADD_BUNS,
     ADD_MAIN_INGREDIENT,
-    CHANGE_INGREDIENT_POSITION,
+    CHANGE_INGREDIENT_POSITION, CLEAR_CONSTRUCTOR,
     DELETE_INGREDIENT
 } from "../actions/burger-constructor";
 
@@ -36,6 +36,12 @@ export const burgerConstructorReducer = (state = initialState, { type, payload }
             return {
                 ...state,
                 ingredients: ingredients,
+            }
+        }
+        case CLEAR_CONSTRUCTOR: {
+            return {
+                ingredients: [],
+                buns: null,
             }
         }
         default:

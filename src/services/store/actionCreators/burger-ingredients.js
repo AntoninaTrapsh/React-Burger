@@ -14,6 +14,19 @@ export function changeRequestStatus() {
     };
 }
 
+export function loadIngredients(data) {
+    return {
+        type: LOAD_INGREDIENTS_SUCCESS,
+        payload: data,
+    }
+}
+
+export function getIngredientsError() {
+    return {
+        type: LOAD_INGREDIENTS_ERROR,
+    }
+}
+
 export function resetPreviousBuns() {
     return {
         type: RESET_PREVIOUS_BUNS,
@@ -42,13 +55,8 @@ export function fetchIngredients(url) {
 
         IngredientsClient.getIngredients(url)
             .then((data) => {
-                dispatch({
-                    type: LOAD_INGREDIENTS_SUCCESS,
-                    payload: data,
-                });
+                dispatch(loadIngredients(data));
             })
-            .catch(() => dispatch({
-                type: LOAD_INGREDIENTS_ERROR
-            }));
+            .catch(() => dispatch(getIngredientsError()));
     };
 }

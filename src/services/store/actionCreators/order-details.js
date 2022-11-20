@@ -6,6 +6,7 @@ import {
     SEND_ORDER_REQUEST
 } from "../actions/order-details";
 import IngredientsClient from "../../clients/ingredients-client";
+import {clearConstructor} from "./burger-constructor";
 
 export function changeRequestStatus() {
     return {
@@ -25,6 +26,19 @@ export function closeOrderDetailsModal() {
     }
 }
 
+export function getOrderData(data) {
+    return {
+        type: GET_ORDER_DATA_SUCCESS,
+        payload: data,
+    }
+}
+
+export function getOrderDataError() {
+    return {
+        type: GET_ORDER_DATA_ERROR
+    }
+}
+
 export function fetchOrderDetails(url, ingredients) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus());
@@ -35,13 +49,9 @@ export function fetchOrderDetails(url, ingredients) {
 
         IngredientsClient.sendOrderDetails(url, ingredientsIds)
             .then((data) => {
-                dispatch({
-                    type: GET_ORDER_DATA_SUCCESS,
-                    payload: data,
-                });
+                dispatch(getOrderData(data));
+                dispatch(clearConstructor());
             })
-            .catch(() => dispatch({
-                type: GET_ORDER_DATA_ERROR
-            }));
+            .catch(() => dispatch(getOrderDataError()));
     };
 }
