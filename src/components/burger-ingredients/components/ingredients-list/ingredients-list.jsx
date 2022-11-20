@@ -5,7 +5,7 @@ import {INGREDIENT_TYPES} from "../../consts/consts";
 import PropTypes from "prop-types";
 import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
 
-const IngredientsList = (props = []) => {
+const IngredientsList = ({handleChangeActiveTab, ...props}) => {
     const [mainSectionHeight, setMainSectionHeight] = useState(0)
 
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
@@ -19,11 +19,11 @@ const IngredientsList = (props = []) => {
             const nextSectionPositionValid = e.target.children[i + 1] ? e.target.children[i + 1].getBoundingClientRect().top > mainSectionHeight : true
 
             if (currElPositionValid && nextSectionPositionValid) {
-                console.log("Категория " , el.dataset.id)
+                handleChangeActiveTab(el.dataset.id);
                 return;
             }
         }
-    }, [mainSectionHeight])
+    }, [mainSectionHeight, handleChangeActiveTab])
 
     const calcSectionHeight = useCallback((mainSection) => {
         if (mainSection) {
@@ -35,7 +35,6 @@ const IngredientsList = (props = []) => {
         <section ref={(el) => calcSectionHeight(el)} className={styles['burger-ingredients__group-list']} onScroll={(e) => handleScroll(e)}>
             {
                 ingredientTypeKeys.map((type) => {
-                    console.log(type);
                     const groupIngredientsList = props.ingredientsData.reduce((list, ingredient) => {
                         if (type === ingredient.type) {
                             list.push(ingredient);

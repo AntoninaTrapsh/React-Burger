@@ -16,7 +16,6 @@ const IngredientsList = (props) => {
     const dispatch = useDispatch();
     const ingredients = useSelector(selectIngredientsList);
     const bun = useSelector(selectBuns);
-    const ref = React.useRef(null);
 
     const [, dropTargetRef] = useDrop({
         accept: DND_TYPES.CARD_FROM_INGREDIENTS,
