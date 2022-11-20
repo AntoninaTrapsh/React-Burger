@@ -24,6 +24,7 @@ export const orderDetailsReducer = (state = initialState, { type, payload }) => 
             return {
                 ...state,
                 isOpen: false,
+                orderId: '',
             }
         }
         case SEND_ORDER_REQUEST: {
