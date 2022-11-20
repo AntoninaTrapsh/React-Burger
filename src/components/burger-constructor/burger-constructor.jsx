@@ -20,6 +20,8 @@ const BurgerConstructor = () => {
         dispatch(fetchOrderDetails('orders', [buns, ...ingredientsData, buns]));
     }
 
+    const disabled = !buns || !ingredientsData.length;
+
     return (
         <section className="mt-25">
             <IngredientsList/>
@@ -27,7 +29,7 @@ const BurgerConstructor = () => {
                 <div className="text text_type_digits-medium mr-10 ">
                     {totalPrice} <CurrencyIcon type="primary"/>
                 </div>
-                <Button type="primary" size="large" htmlType="submit" disabled={!buns} onClick={() => handleOpenOrderModal()}>
+                <Button type="primary" size="large" htmlType="submit" disabled={disabled} onClick={() => handleOpenOrderModal()}>
                     Оформить заказ
                 </Button>
             </section>
