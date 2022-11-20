@@ -3,10 +3,12 @@ import React, {useCallback, useState} from "react";
 import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
 import PropTypes from "prop-types";
-import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
+import {useSelector} from "react-redux";
+import {selectIngredients} from "../../../../services/store/selectors/burger-ingredients";
 
 const IngredientsList = ({handleChangeActiveTab, ...props}) => {
-    const [mainSectionHeight, setMainSectionHeight] = useState(0)
+    const ingredientsData = useSelector(selectIngredients);
+    const [mainSectionHeight, setMainSectionHeight] = useState(0);
 
     const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
 
@@ -35,7 +37,7 @@ const IngredientsList = ({handleChangeActiveTab, ...props}) => {
         <section ref={(el) => calcSectionHeight(el)} className={styles['burger-ingredients__group-list']} onScroll={(e) => handleScroll(e)}>
             {
                 ingredientTypeKeys.map((type) => {
-                    const groupIngredientsList = props.ingredientsData.reduce((list, ingredient) => {
+                    const groupIngredientsList = ingredientsData.reduce((list, ingredient) => {
                         if (type === ingredient.type) {
                             list.push(ingredient);
                         }
@@ -50,7 +52,6 @@ const IngredientsList = ({handleChangeActiveTab, ...props}) => {
 }
 
 IngredientsList.propTypes = {
-    ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
     handleChangeActiveTab: PropTypes.func.isRequired,
 }
 
