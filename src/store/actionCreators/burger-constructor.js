@@ -28,7 +28,6 @@ export function addBunsToConstructor(buns) {
 }
 
 export function changeIngredientPosition(indices) {
-    console.log(indices);
     return {
         type: CHANGE_INGREDIENT_POSITION,
         payload: indices,
