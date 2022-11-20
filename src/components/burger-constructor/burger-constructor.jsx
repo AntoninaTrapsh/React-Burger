@@ -27,7 +27,7 @@ const BurgerConstructor = () => {
                 <div className="text text_type_digits-medium mr-10 ">
                     {totalPrice} <CurrencyIcon type="primary"/>
                 </div>
-                <Button type="primary" size="large" htmlType="submit" onClick={() => handleOpenOrderModal()}>
+                <Button type="primary" size="large" htmlType="submit" disabled={!buns} onClick={() => handleOpenOrderModal()}>
                     Оформить заказ
                 </Button>
             </section>
