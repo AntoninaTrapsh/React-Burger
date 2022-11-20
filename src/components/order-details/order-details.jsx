@@ -2,7 +2,7 @@ import React from "react";
 import orderImage from "../../images/done.svg"
 import styles from "./order-details.module.css"
 import {useSelector} from "react-redux";
-import {selectOrderId} from "../../store/selectors/order-details";
+import {selectOrderId} from "../../services/store/selectors/order-details";
 
 const OrderDetails = () => {
     const orderId = useSelector(selectOrderId);

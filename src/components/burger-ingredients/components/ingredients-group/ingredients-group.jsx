@@ -10,7 +10,7 @@ const IngredientsGroup = (props) => {
             <h2 className="text text_type_main-medium">{props.title}</h2>
             <div className={`${styles['ingredients-group__items']} mb-10 mt-6`}>
                 {props.ingredients.map((ingredient) => {
-                    return <IngredientCard key={ingredient._id} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+                    return <IngredientCard key={ingredient._id} ingredient={ingredient}/>
                 })}
             </div>
         </section>
@@ -21,6 +21,5 @@ const IngredientsGroup = (props) => {
 IngredientsGroup.propTypes = {
     title: PropTypes.string.isRequired,
     ingredients: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
-    handleIngredientCardOpen: PropTypes.func.isRequired
 }
 export default IngredientsGroup;

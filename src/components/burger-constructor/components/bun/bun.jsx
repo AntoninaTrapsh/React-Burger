@@ -3,14 +3,21 @@ import React from "react";
 import {BUN_TYPES} from "../../consts/consts";
 import styles from "./bun.module.css"
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
+import {openIngredientDetails} from "../../../../services/store/actionCreators/ingredient-details";
+import {useDispatch} from "react-redux";
 
 const Bun = (props) => {
+    const dispatch = useDispatch();
+
+    const handleIngredientCardOpen = (ingredient) => {
+        dispatch(openIngredientDetails(ingredient))
+    }
     return (
         <div className={`${styles['bun__wrapper']} ml-8 pt-4 pb-4`} onClick={() => {
             if (!props.data) {
                 return
             }
-            props.handleIngredientCardOpen(props.data)
+            handleIngredientCardOpen(props.data)
         }}>
             {
                 props.data ?

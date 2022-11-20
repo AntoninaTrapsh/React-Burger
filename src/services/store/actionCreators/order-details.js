@@ -5,7 +5,7 @@ import {
     OPEN_ORDER_DETAILS_MODAL,
     SEND_ORDER_REQUEST
 } from "../actions/order-details";
-import IngredientsClient from "../../services/ingredients-client";
+import IngredientsClient from "../../clients/ingredients-client";
 
 export function changeRequestStatus() {
     return {

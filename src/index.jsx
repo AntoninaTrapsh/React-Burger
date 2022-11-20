@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/app/app';
 import '@ya.praktikum/react-developer-burger-ui-components';
 import {Provider} from "react-redux";
-import {store} from "./store/store";
+import {store} from "./services/store/store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root')

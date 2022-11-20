@@ -7,10 +7,10 @@ import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
 import {DND_TYPES} from "../../../../utils/consts";
 import {useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {addBunsToConstructor, addIngredientToConstructor} from "../../../../store/actionCreators/burger-constructor";
-import {selectBuns, selectIngredientsList} from "../../../../store/selectors/burger-constructor";
+import {addBunsToConstructor, addIngredientToConstructor} from "../../../../services/store/actionCreators/burger-constructor";
+import {selectBuns, selectIngredientsList} from "../../../../services/store/selectors/burger-constructor";
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
-import {resetPreviousBuns, increaseIngredientCounter} from "../../../../store/actionCreators/burger-ingredients";
+import {resetPreviousBuns, increaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
 
 const IngredientsList = (props) => {
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const IngredientsList = (props) => {
 
     return (
         <section ref={dropTargetRef}>
-            <Bun position="top" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+            <Bun position="top" data={bun}/>
             {
                 ingredients.length ?
                     <div className={`${styles['ingredient-list']} pr-2`}>
@@ -45,14 +45,14 @@ const IngredientsList = (props) => {
                             if (ingredient.type === "bun") {
                                 return null
                             }
-                            return <IngredientCard key={ingredient.uuid} index={index} ingredient={ingredient} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+                            return <IngredientCard key={ingredient.uuid} index={index} ingredient={ingredient}/>
                         })}
                     </div> :
                     <div className={`${styles['empty-list']} pl-8 pr-2 mt-4 mb-4`}>
                         <DefaultConstructorElement>Выберите основные ингредиенты</DefaultConstructorElement>
                     </div>
             }
-            <Bun position="bottom" data={bun} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+            <Bun position="bottom" data={bun}/>
         </section>
 
     )
@@ -60,7 +60,6 @@ const IngredientsList = (props) => {
 
 IngredientsList.propType = {
     ingredientsData: PropTypes.arrayOf(INGREDIENT_OBJECT_TYPE).isRequired,
-    handleIngredientCardOpen: PropTypes.func.isRequired
 }
 
 export default IngredientsList;

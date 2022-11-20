@@ -41,7 +41,7 @@ const IngredientsList = ({handleChangeActiveTab, ...props}) => {
                         }
                         return list;
                     }, [])
-                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={INGREDIENT_TYPES[type]} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+                    return <IngredientsGroup key={type} ingredients={groupIngredientsList} title={INGREDIENT_TYPES[type]}/>
                 })
             }
         </section>
@@ -51,7 +51,6 @@ const IngredientsList = ({handleChangeActiveTab, ...props}) => {
 
 IngredientsList.propTypes = {
     ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
-    handleIngredientCardOpen: PropTypes.func.isRequired
 }
 
 export default IngredientsList;

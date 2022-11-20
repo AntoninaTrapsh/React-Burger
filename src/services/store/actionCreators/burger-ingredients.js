@@ -1,4 +1,4 @@
-import IngredientsClient from "../../services/ingredients-client";
+import IngredientsClient from "../../clients/ingredients-client";
 import {
     RESET_PREVIOUS_BUNS,
     DECREASE_INGREDIENT_COUNTER,
