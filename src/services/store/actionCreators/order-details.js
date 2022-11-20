@@ -1,6 +1,6 @@
 import {
     CLOSE_ORDER_DETAILS_MODAL,
-    GET_ORDER_DATA_FAILED,
+    GET_ORDER_DATA_ERROR,
     GET_ORDER_DATA_SUCCESS,
     OPEN_ORDER_DETAILS_MODAL,
     SEND_ORDER_REQUEST
@@ -41,7 +41,7 @@ export function fetchOrderDetails(url, ingredients) {
                 });
             })
             .catch(() => dispatch({
-                type: GET_ORDER_DATA_FAILED
+                type: GET_ORDER_DATA_ERROR
             }));
     };
 }

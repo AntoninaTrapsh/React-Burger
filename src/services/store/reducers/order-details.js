@@ -1,6 +1,6 @@
 import {
     CLOSE_ORDER_DETAILS_MODAL,
-    GET_ORDER_DATA_FAILED, GET_ORDER_DATA_SUCCESS,
+    GET_ORDER_DATA_ERROR, GET_ORDER_DATA_SUCCESS,
     OPEN_ORDER_DETAILS_MODAL,
     SEND_ORDER_REQUEST
 } from "../actions/order-details";
@@ -9,7 +9,7 @@ const initialState = {
     isOpen: false,
     orderId: '',
     orderRequest: false,
-    orderFailed: false,
+    orderError: false,
 };
 
 export const orderDetailsReducer = (state = initialState, { type, payload }) => {
@@ -40,7 +40,7 @@ export const orderDetailsReducer = (state = initialState, { type, payload }) => 
                 orderFailed: false,
             };
         }
-        case GET_ORDER_DATA_FAILED: {
+        case GET_ORDER_DATA_ERROR: {
             return {
                 ...state,
                 orderId: '',

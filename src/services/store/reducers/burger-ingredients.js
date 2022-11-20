@@ -2,7 +2,7 @@ import {
     RESET_PREVIOUS_BUNS,
     DECREASE_INGREDIENT_COUNTER,
     INCREASE_INGREDIENT_COUNTER,
-    LOAD_INGREDIENTS_FAILED,
+    LOAD_INGREDIENTS_ERROR,
     LOAD_INGREDIENTS_SUCCESS,
     SEND_INGREDIENTS_REQUEST
 } from "../actions/burger-ingredients";
@@ -10,7 +10,7 @@ import {
 const initialState = {
     ingredients: null,
     ingredientsRequest: false,
-    ingredientsFailed: false,
+    ingredientsError: false,
 };
 
 export const burgerIngredientsReducer = (state = initialState, { type, payload }) => {
@@ -34,7 +34,7 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
                 ingredientsFailed: false,
             };
         }
-        case LOAD_INGREDIENTS_FAILED: {
+        case LOAD_INGREDIENTS_ERROR: {
             return {
                 ...state,
                 ingredients: [],

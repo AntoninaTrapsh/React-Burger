@@ -3,7 +3,7 @@ import {
     RESET_PREVIOUS_BUNS,
     DECREASE_INGREDIENT_COUNTER,
     INCREASE_INGREDIENT_COUNTER,
-    LOAD_INGREDIENTS_FAILED,
+    LOAD_INGREDIENTS_ERROR,
     LOAD_INGREDIENTS_SUCCESS,
     SEND_INGREDIENTS_REQUEST
 } from "../actions/burger-ingredients";
@@ -48,7 +48,7 @@ export function fetchIngredients(url) {
                 });
             })
             .catch(() => dispatch({
-                type: LOAD_INGREDIENTS_FAILED
+                type: LOAD_INGREDIENTS_ERROR
             }));
     };
 }
