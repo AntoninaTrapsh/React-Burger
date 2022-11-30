@@ -1,5 +1,5 @@
 .ingredient-list {
-    height: calc(100vh - 540px);
+    height: calc(100vh - 560px);
     overflow: hidden;
     overflow-y: auto;
 }

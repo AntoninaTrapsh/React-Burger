@@ -6,6 +6,17 @@ class IngredientsClient {
         return await this.checkResponse(response);
     }
 
+    async sendOrderDetails(url, ingredients) {
+        const response = await fetch(`${this.api}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ingredients}),
+        }) ;
+        return await this.checkResponse(response);
+    }
+
     async checkResponse(response) {
         if (response.ok) {
             return await response.json();

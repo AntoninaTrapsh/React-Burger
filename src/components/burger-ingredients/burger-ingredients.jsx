@@ -1,24 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./burger-ingredients.module.css";
 import IngredientsHeader from "./components/ingredients-header/ingredients-header";
 import IngredientsNavigation from "./components/ingredients-navigation/ingredients-navigation";
 import IngredientsList from "./components/ingredients-list/ingredients-list";
-import INGREDIENTS_OBJECT_TYPE from "../../utils/types";
-import PropTypes from "prop-types";
+import {INGREDIENT_TYPES} from "./consts/consts";
 
-const BurgerIngredients = (props) => {
+const BurgerIngredients = () => {
+    const [activeTab, setActiveTab] = useState(INGREDIENT_TYPES.bun);
+
+    const handleChangeActiveTab = (tab) => {
+        setActiveTab(tab);
+    }
+
     return (
         <section className={`${styles['burger-ingredients']} mr-10`}>
             <IngredientsHeader>Соберите бургер</IngredientsHeader>
-            <IngredientsNavigation/>
-            <IngredientsList ingredientsData={props.ingredientsData} handleIngredientCardOpen={props.handleIngredientCardOpen}/>
+            <IngredientsNavigation activeTab={activeTab}/>
+            <IngredientsList handleChangeActiveTab={handleChangeActiveTab}/>
         </section>
     )
 }
-
-BurgerIngredients.propTypes = {
-    ingredientsData: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
-    handleIngredientCardOpen: PropTypes.func.isRequired
-};
 
 export default BurgerIngredients;
