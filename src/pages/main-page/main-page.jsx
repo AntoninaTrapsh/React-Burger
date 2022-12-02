@@ -32,7 +32,7 @@ const MainPage = () => {
         dispatch(fetchIngredients('ingredients'));
     }, [dispatch])
     return (
-        <>
+        <div style={{"display":"flex"}}>
             {
                 ingredientsData &&
                 <DndProvider backend={HTML5Backend}>
@@ -52,7 +52,7 @@ const MainPage = () => {
                     <OrderDetails/>
                 </Modal>
             }
-        </>
+        </div>
     )
 }
 
