@@ -1,10 +1,13 @@
 import {REGISTRATION_ERROR, REGISTRATION_SUCCESS, SEND_REGISTRATION_REQUEST} from "../actions/auth";
 
 const initialState = {
+    isAuth: false,
+
     name: "",
     email: "",
     password: "",
     code: "",
+
     accessToken: "",
     refreshToken: "",
 

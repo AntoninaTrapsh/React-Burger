@@ -1,5 +1,5 @@
 class AuthClient {
-    api = "https://norma.nomoreparties.space/api/auth";
+    api = "https://norma.nomoreparties.space/api/auth/";
 
     async signIn(url) {
         const response = await fetch(`${this.api}${url}`);

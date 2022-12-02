@@ -33,7 +33,7 @@ const Form = ({type, onSubmit, buttonTitle}) => {
     }
 
     return (
-            <form className={styles.form} onSubmit={onSubmit}>
+            <form className={styles.form} onSubmit={(e) => {e.preventDefault(); onSubmit(e, formValue)}}>
                 {
                     INPUT_CONDITIONS.NAME_CONDITIONS &&
                     <div className="mb-6">
