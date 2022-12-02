@@ -6,19 +6,22 @@ import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
 const Form = ({type, onSubmit, buttonTitle}) => {
 
     const INITIAL_FORM_VALUES = {
+        name: '',
         email: '',
         password: '',
-        name: '',
+        code: '',
     }
 
     const INPUT_CONDITIONS = {
         EMAIL_CONDITIONS: type === FORM_TYPES.SIGN_IN || type === FORM_TYPES.REGISTER || type === FORM_TYPES.FORGOT_PASSWORD,
-        PASSWORD_CONDITIONS: type === FORM_TYPES.SIGN_IN || type === FORM_TYPES.REGISTER,
+        PASSWORD_CONDITIONS: type === FORM_TYPES.SIGN_IN || type === FORM_TYPES.REGISTER || type === FORM_TYPES.RESET_PASSWORD,
         NAME_CONDITIONS: type === FORM_TYPES.REGISTER,
         RESTORE_CONDITIONS: type === FORM_TYPES.FORGOT_PASSWORD,
+        RESET_PASSWORD_CONDITIONS: type === FORM_TYPES.RESET_PASSWORD,
     }
 
     const EMAIL_PLACEHOLDER = type === FORM_TYPES.FORGOT_PASSWORD ? INPUT_SETTINGS.PLACEHOLDER.RESTORE : INPUT_SETTINGS.PLACEHOLDER.EMAIL;
+    const PASSWORD_PLACEHOLDER = type === FORM_TYPES.RESET_PASSWORD ? INPUT_SETTINGS.PLACEHOLDER.NEW_PASSWORD : INPUT_SETTINGS.PLACEHOLDER.PASSWORD;
 
     const [formValue, setFormValue] = React.useState(INITIAL_FORM_VALUES);
 
@@ -59,9 +62,22 @@ const Form = ({type, onSubmit, buttonTitle}) => {
                     INPUT_CONDITIONS.PASSWORD_CONDITIONS &&
                     <div className="mb-6">
                         <PasswordInput
-                            value={formValue.password}
+                            placeholder={PASSWORD_PLACEHOLDER}
                             name={INPUT_SETTINGS.NAME.PASSWORD}
                             onChange={onFormChange}
+                            value={formValue.password}
+                        />
+                    </div>
+                }
+                {
+                    INPUT_CONDITIONS.RESET_PASSWORD_CONDITIONS &&
+                    <div className="mb-6">
+                        <Input
+                            type={INPUT_SETTINGS.TYPE.TEXT}
+                            placeholder={INPUT_SETTINGS.PLACEHOLDER.CODE}
+                            name={INPUT_SETTINGS.NAME.CODE}
+                            onChange={onFormChange}
+                            value={formValue.code}
                         />
                     </div>
                 }
