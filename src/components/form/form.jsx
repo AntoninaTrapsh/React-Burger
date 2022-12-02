@@ -12,10 +12,13 @@ const Form = ({type, onSubmit, buttonTitle}) => {
     }
 
     const INPUT_CONDITIONS = {
-        EMAIL_CONDITIONS: type === FORM_TYPES.SIGN_IN || type === FORM_TYPES.REGISTER,
+        EMAIL_CONDITIONS: type === FORM_TYPES.SIGN_IN || type === FORM_TYPES.REGISTER || type === FORM_TYPES.FORGOT_PASSWORD,
         PASSWORD_CONDITIONS: type === FORM_TYPES.SIGN_IN || type === FORM_TYPES.REGISTER,
         NAME_CONDITIONS: type === FORM_TYPES.REGISTER,
+        RESTORE_CONDITIONS: type === FORM_TYPES.FORGOT_PASSWORD,
     }
+
+    const EMAIL_PLACEHOLDER = type === FORM_TYPES.FORGOT_PASSWORD ? INPUT_SETTINGS.PLACEHOLDER.RESTORE : INPUT_SETTINGS.PLACEHOLDER.EMAIL;
 
     const [formValue, setFormValue] = React.useState(INITIAL_FORM_VALUES);
 
@@ -45,7 +48,7 @@ const Form = ({type, onSubmit, buttonTitle}) => {
                     <div className="mb-6">
                         <Input
                             type={INPUT_SETTINGS.TYPE.EMAIL}
-                            placeholder={INPUT_SETTINGS.PLACEHOLDER.EMAIL}
+                            placeholder={EMAIL_PLACEHOLDER}
                             name={INPUT_SETTINGS.NAME.EMAIL}
                             onChange={onFormChange}
                             value={formValue.email}

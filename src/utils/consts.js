@@ -21,7 +21,7 @@ export const INPUT_SETTINGS = {
         PASSWORD: 'Пароль',
         CODE: 'Введите код из письма',
         RESTORE: 'Укажите e-mail',
-        NEW_PASS: 'Введите новый пароль',
+        NEW_PASSWORD: 'Введите новый пароль',
     },
 };
 
