@@ -3,7 +3,7 @@ import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger
 import styles from "./form.module.css";
 import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
 
-const Form = ({type, onSubmit}) => {
+const Form = ({type, onSubmit, buttonTitle}) => {
 
     const INITIAL_FORM_VALUES = {
         email: '',
@@ -62,7 +62,7 @@ const Form = ({type, onSubmit}) => {
                         />
                     </div>
                 }
-                <Button htmlType="submit" type="primary" size="large">Войти</Button>
+                <Button htmlType="submit" type="primary" size="large">{buttonTitle}</Button>
             </form>
     )
 }
