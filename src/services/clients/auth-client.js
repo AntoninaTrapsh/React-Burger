@@ -11,8 +11,15 @@ class AuthClient {
         await this.checkResponse(response);
     }
 
-    async register(url) {
-        const response = await fetch(`${this.api}${url}`);
+    async register(url, userData) {
+        const { email, password, name } = userData;
+        const response = await fetch(`${this.api}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, password, name}),
+        });
         await this.checkResponse(response);
     }
 
@@ -29,3 +36,5 @@ class AuthClient {
         }
     }
 }
+
+export default new AuthClient();

@@ -5,11 +5,11 @@ import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
 
 const Form = ({type, onSubmit, buttonTitle}) => {
 
-    const INITIAL_FORM_VALUES = {
-        name: '',
-        email: '',
-        password: '',
-        code: '',
+    const initialFormValues = {
+        name: "",
+        email: "",
+        password: "",
+        code: "",
     }
 
     const INPUT_CONDITIONS = {
@@ -23,7 +23,7 @@ const Form = ({type, onSubmit, buttonTitle}) => {
     const EMAIL_PLACEHOLDER = type === FORM_TYPES.FORGOT_PASSWORD ? INPUT_SETTINGS.PLACEHOLDER.RESTORE : INPUT_SETTINGS.PLACEHOLDER.EMAIL;
     const PASSWORD_PLACEHOLDER = type === FORM_TYPES.RESET_PASSWORD ? INPUT_SETTINGS.PLACEHOLDER.NEW_PASSWORD : INPUT_SETTINGS.PLACEHOLDER.PASSWORD;
 
-    const [formValue, setFormValue] = React.useState(INITIAL_FORM_VALUES);
+    const [formValue, setFormValue] = React.useState(initialFormValues);
 
     function onFormChange(e) {
         setFormValue({
