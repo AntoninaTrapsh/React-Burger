@@ -3,11 +3,14 @@ import Form from "../../components/form/form";
 import {Link} from "react-router-dom";
 import styles from "./login-page.module.css";
 import {FORM_TYPES} from "../../utils/consts";
+import {useDispatch} from "react-redux";
+import {fetchUserLogin} from "../../services/store/actionCreators/auth";
 
 const LoginPage = () => {
+    const dispatch = useDispatch();
 
-    function onSubmit(e) {
-        e.preventDefault();
+    function onSubmit(e, userData) {
+        dispatch(fetchUserLogin("login", userData))
     }
 
     return (

@@ -11,7 +11,6 @@ const RegisterPage = () => {
 
     function onSubmit(e, data) {
         dispatch(fetchUserRegistration("register", data));
-        console.log(1);
     }
 
     return (

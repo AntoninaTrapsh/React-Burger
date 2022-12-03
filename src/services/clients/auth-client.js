@@ -1,8 +1,15 @@
 class AuthClient {
     api = "https://norma.nomoreparties.space/api/auth/";
 
-    async signIn(url) {
-        const response = await fetch(`${this.api}${url}`);
+    async signIn(url, userData) {
+        const { email, password } = userData;
+        const response = await fetch(`${this.api}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email, password}),
+        });
         await this.checkResponse(response);
     }
 

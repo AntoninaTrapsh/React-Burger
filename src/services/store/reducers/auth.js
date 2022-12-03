@@ -1,11 +1,20 @@
-import {REGISTRATION_ERROR, REGISTRATION_SUCCESS, SEND_REGISTRATION_REQUEST} from "../actions/auth";
+import {
+    LOGIN_ERROR,
+    LOGIN_SUCCESS,
+    REGISTRATION_ERROR,
+    REGISTRATION_SUCCESS,
+    SEND_LOGIN_REQUEST,
+    SEND_REGISTRATION_REQUEST
+} from "../actions/auth";
 
 const initialState = {
     isAuth: false,
 
-    name: "",
-    email: "",
-    password: "",
+    user: {
+        name: "",
+        email: "",
+    },
+
     code: "",
 
     accessToken: "",
@@ -13,6 +22,9 @@ const initialState = {
 
     registrationError: false,
     registrationRequest: false,
+
+    loginRequest: false,
+    loginError: false,
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -30,8 +42,11 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 registrationError: false,
                 registrationRequest: false,
-                name,
-                email,
+                isAuth: true,
+                user: {
+                    name,
+                    email,
+                },
                 accessToken,
                 refreshToken,
             }
@@ -41,6 +56,36 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 registrationError: true,
                 registrationRequest: false,
+            }
+        }
+        case SEND_LOGIN_REQUEST: {
+            return {
+                ...state,
+                loginRequest: true,
+
+            }
+        }
+        case LOGIN_SUCCESS: {
+            const { name, email } = payload.user;
+            const { accessToken, refreshToken } = payload;
+            return {
+                ...state,
+                loginError: false,
+                loginRequest: false,
+                isAuth: true,
+                user: {
+                    name,
+                    email,
+                },
+                accessToken,
+                refreshToken,
+            }
+        }
+        case LOGIN_ERROR: {
+            return {
+                ...state,
+                loginError: true,
+                loginRequest: false,
             }
         }
         default:
