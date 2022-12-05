@@ -15,7 +15,7 @@ const ResetPasswordPage = () => {
             <Form onSumbit={onSubmit} type={FORM_TYPES.RESET_PASSWORD} buttonTitle="Сохранить"/>
             <p className="text text_type_main-default text_color_inactive mt-20">
                 Вспомнили пароль?
-                <Link to="" className={styles['link']}> Войти</Link>
+                <Link to="/login" className={styles['link']}> Войти</Link>
             </p>
         </section>
     )

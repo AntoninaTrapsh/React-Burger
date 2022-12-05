@@ -19,7 +19,7 @@ const RegisterPage = () => {
             <Form onSubmit={onSubmit} type={FORM_TYPES.REGISTER} buttonTitle="Зарегистрироваться"/>
             <p className="text text_type_main-default text_color_inactive mt-20">
                 Уже зарегистрированы?
-                <Link to="" className={styles['link']}> Войти</Link>
+                <Link to="/login" className={styles['link']}> Войти</Link>
             </p>
         </section>
     )
