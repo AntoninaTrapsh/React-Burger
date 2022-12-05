@@ -13,8 +13,14 @@ class AuthClient {
         await this.checkResponse(response);
     }
 
-    async signOut(url) {
-        const response = await fetch(`${this.api}${url}`);
+    async signOut(url, token) {
+        const response = await fetch(`${this.api}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({token}),
+        });
         await this.checkResponse(response);
     }
 

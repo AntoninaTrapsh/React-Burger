@@ -4,7 +4,7 @@ import {
     REGISTRATION_ERROR,
     REGISTRATION_SUCCESS,
     SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST
+    SEND_REGISTRATION_REQUEST, SEND_SIGN_OUT_REQUEST, SIGN_OUT_ERROR, SIGN_OUT_SUCCESS
 } from "../actions/auth";
 
 const initialState = {
@@ -25,6 +25,9 @@ const initialState = {
 
     loginRequest: false,
     loginError: false,
+
+    logoutRequest: false,
+    logoutError: false,
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -86,6 +89,25 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 loginError: true,
                 loginRequest: false,
+            }
+        }
+        case SEND_SIGN_OUT_REQUEST: {
+            return {
+                ...state,
+                logoutRequest: true,
+
+            }
+        }
+        case SIGN_OUT_SUCCESS: {
+            return {
+                ...initialState,
+            }
+        }
+        case SIGN_OUT_ERROR: {
+            return {
+                ...state,
+                logoutError: true,
+                logoutRequest: false,
             }
         }
         default:

@@ -4,7 +4,7 @@ import {
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
     REGISTRATION_SUCCESS, SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST
+    SEND_REGISTRATION_REQUEST, SEND_SIGN_OUT_REQUEST, SIGN_OUT_ERROR, SIGN_OUT_SUCCESS
 } from "../actions/auth";
 import {FORM_TYPES} from "../../../utils/consts";
 
@@ -18,6 +18,11 @@ export function changeRequestStatus(action) {
         case FORM_TYPES.SIGN_IN: {
             return {
                 type: SEND_LOGIN_REQUEST,
+            }
+        }
+        case FORM_TYPES: {
+            return {
+                type: SEND_SIGN_OUT_REQUEST,
             }
         }
     }
@@ -65,10 +70,37 @@ export function fetchUserLogin(url, userData) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(FORM_TYPES.SIGN_IN));
 
-        AuthClient.signIn("url", userData)
+        AuthClient.signIn("login", userData)
             .then((data) => {
                 dispatch(login(data));
             })
             .catch(() => dispatch(getLoginError()))
+    }
+}
+
+export function getSignOutError() {
+    return {
+        type: SIGN_OUT_ERROR,
+    }
+}
+
+export function signOut() {
+    return {
+        type: SIGN_OUT_SUCCESS,
+    }
+}
+
+export function fetchUserSignOut() {
+    return async (dispatch, getState) => {
+        dispatch(changeRequestStatus(FORM_TYPES.SIGN_OUT));
+
+        const state = getState();
+        const refreshToken = state.refreshToken;
+
+        AuthClient.signOut("logout", refreshToken)
+            .then((data) => {
+                dispatch(signOut(data));
+            })
+            .catch(() => dispatch(getSignOutError))
     }
 }
