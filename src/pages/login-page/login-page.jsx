@@ -14,8 +14,6 @@ const LoginPage = () => {
     const isAuth = useSelector(selectAuthInfo);
     const location = useLocation();
 
-    console.log("L", location);
-
     function onSubmit(e, userData) {
         dispatch(fetchUserLogin("login", userData))
     }
@@ -23,7 +21,7 @@ const LoginPage = () => {
     if (isAuth) {
         return (
             <Redirect
-                to={ location.state?.from || '/' }
+                to={ location.state?.from || "/" }
             />
         );
     }

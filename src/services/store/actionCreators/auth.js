@@ -7,6 +7,7 @@ import {
     SEND_REGISTRATION_REQUEST, SEND_SIGN_OUT_REQUEST, SIGN_OUT_ERROR, SIGN_OUT_SUCCESS
 } from "../actions/auth";
 import {FORM_TYPES} from "../../../utils/consts";
+import {addTokensToStorage, removeTokensFromStorage} from "../../../utils/localStorageHelper";
 
 export function changeRequestStatus(action) {
     switch (action) {
@@ -48,6 +49,7 @@ export function fetchUserRegistration(url, userData) {
         AuthClient.register(url, userData)
             .then((data) => {
                 dispatch(register(data));
+                addTokensToStorage(data.accessToken, data.refreshToken);
             })
             .catch(() => dispatch(getRegistrationError()));
     };
@@ -73,6 +75,7 @@ export function fetchUserLogin(url, userData) {
         AuthClient.signIn("login", userData)
             .then((data) => {
                 dispatch(login(data));
+                addTokensToStorage(data.accessToken, data.refreshToken);
             })
             .catch(() => dispatch(getLoginError()))
     }
@@ -100,6 +103,7 @@ export function fetchUserSignOut() {
         AuthClient.signOut("logout", refreshToken)
             .then((data) => {
                 dispatch(signOut(data));
+                removeTokensFromStorage();
             })
             .catch(() => dispatch(getSignOutError))
     }
