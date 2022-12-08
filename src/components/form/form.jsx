@@ -25,7 +25,7 @@ const Form = ({type, onSubmit, buttonTitle}) => {
 
     const [formValue, setFormValue] = React.useState(initialFormValues);
 
-    function onFormChange(e) {
+    const onFormChange = (e) => {
         setFormValue({
             ...formValue,
             [e.target.name]: e.target.value,

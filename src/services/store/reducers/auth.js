@@ -13,6 +13,7 @@ const initialState = {
     user: {
         name: "",
         email: "",
+        password: "",
     },
 
     code: "",
