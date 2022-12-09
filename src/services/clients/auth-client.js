@@ -1,3 +1,5 @@
+import {addTokensToStorage, getTokenFromStorage} from "../../utils/localStorageHelper";
+
 class AuthClient {
     api = "https://norma.nomoreparties.space/api/auth/";
 
@@ -10,7 +12,7 @@ class AuthClient {
             },
             body: JSON.stringify({email, password}),
         });
-        await this.checkResponse(response);
+        return await this.checkResponse(response);
     }
 
     async signOut(url, token) {
@@ -21,7 +23,7 @@ class AuthClient {
             },
             body: JSON.stringify({token}),
         });
-        await this.checkResponse(response);
+        return await this.checkResponse(response);
     }
 
     async register(url, userData) {
@@ -33,19 +35,49 @@ class AuthClient {
             },
             body: JSON.stringify({email, password, name}),
         });
-        await this.checkResponse(response);
+        return await this.checkResponse(response);
     }
 
     async refreshToken(url) {
-        const response = await fetch(`${this.api}${url}`);
-        await this.checkResponse(response);
+        const response = await fetch(`${this.api}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({
+                token: getTokenFromStorage("refreshToken"),
+            })
+        });
+        return await this.checkResponse(response);
+    }
+
+    async fetchWithRefresh(url, options) {
+        try {
+            const response = await fetch(url, options);
+            return await this.checkResponse(response);
+        } catch (err) {
+            if (err.message === "jwt expired") {
+                const refreshData = await this.refreshToken();
+                if (!refreshData.success) {
+                    await Promise.reject(refreshData);
+                }
+                addTokensToStorage(refreshData.accessToken, refreshData.refreshToken);
+                options.headers.authorization = refreshData.accessToken;
+                const response = await fetch(url, options);
+                return await this.checkResponse(response);
+            } else {
+                return Promise.reject(err);
+            }
+        }
     }
 
     async checkResponse(response) {
         if (response.ok) {
             return await response.json();
         } else {
-            throw new Error("There was a problem, try again later");
+            return response.json().then((err) => {
+                Promise.reject(err);
+            })
         }
     }
 }
