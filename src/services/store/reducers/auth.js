@@ -4,9 +4,15 @@ import {
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
-    REGISTRATION_SUCCESS, SEND_GET_USER_REQUEST,
+    REGISTRATION_SUCCESS,
+    SEND_GET_USER_REQUEST,
     SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST, SEND_SIGN_OUT_REQUEST, SIGN_OUT_ERROR, SIGN_OUT_SUCCESS
+    SEND_REGISTRATION_REQUEST,
+    SEND_SIGN_OUT_REQUEST,
+    SEND_UPDATING_USER_REQUEST,
+    SIGN_OUT_ERROR,
+    SIGN_OUT_SUCCESS, USER_UPDATING_ERROR,
+    USER_UPDATING_SUCCESS
 } from "../actions/auth";
 
 const initialState = {
@@ -20,9 +26,6 @@ const initialState = {
 
     code: "",
 
-    accessToken: "",
-    refreshToken: "",
-
     registrationError: false,
     registrationRequest: false,
 
@@ -34,6 +37,9 @@ const initialState = {
 
     userInfoError: false,
     userInfoRequest: false,
+
+    updatingUserInfoError: false,
+    updatingUserRequest: false,
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -45,7 +51,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
             }
         }
         case REGISTRATION_SUCCESS: {
-            const { name, email } = payload.user;
+            const { name, email, password } = payload.user;
             const { accessToken, refreshToken } = payload;
             return {
                 ...state,
@@ -55,6 +61,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 user: {
                     name,
                     email,
+                    password,
                 },
                 accessToken,
                 refreshToken,
@@ -75,7 +82,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
             }
         }
         case LOGIN_SUCCESS: {
-            const { name, email } = payload.user;
+            const { name, email, password } = payload.user;
             const { accessToken, refreshToken } = payload;
             return {
                 ...state,
@@ -85,6 +92,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 user: {
                     name,
                     email,
+                    password,
                 },
                 accessToken,
                 refreshToken,
@@ -140,6 +148,31 @@ export const authReducer = (state = initialState, { type, payload }) => {
             return {
                 ...initialState,
                 userInfoError: true,
+            }
+        }
+        case SEND_UPDATING_USER_REQUEST: {
+            return {
+                ...state,
+                updatingUserRequest: true,
+                updatingUserInfoError: false,
+            }
+        }
+        case USER_UPDATING_SUCCESS: {
+            const { name, email } = payload;
+            return {
+                ...state,
+                updatingUserRequest: false,
+                user: {
+                    name,
+                    email,
+                }
+            }
+        }
+        case USER_UPDATING_ERROR: {
+            return {
+                ...state,
+                updatingUserRequest: false,
+                updatingUserInfoError: true,
             }
         }
         default:

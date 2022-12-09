@@ -5,8 +5,15 @@ import {
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
-    REGISTRATION_SUCCESS, SEND_GET_USER_REQUEST, SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST, SEND_SIGN_OUT_REQUEST, SIGN_OUT_ERROR, SIGN_OUT_SUCCESS
+    REGISTRATION_SUCCESS,
+    SEND_GET_USER_REQUEST,
+    SEND_LOGIN_REQUEST,
+    SEND_REGISTRATION_REQUEST,
+    SEND_SIGN_OUT_REQUEST,
+    SEND_UPDATING_USER_REQUEST,
+    SIGN_OUT_ERROR,
+    SIGN_OUT_SUCCESS, USER_UPDATING_ERROR,
+    USER_UPDATING_SUCCESS
 } from "../actions/auth";
 import {FORM_TYPES, PROFILE_ACTIONS} from "../../../utils/consts";
 import {addTokensToStorage, getTokenFromStorage, removeTokensFromStorage} from "../../../utils/localStorageHelper";
@@ -33,6 +40,11 @@ export function changeRequestStatus(action) {
                 type: SEND_GET_USER_REQUEST,
             }
         }
+        case PROFILE_ACTIONS.CHANGE_USER_INFO: {
+            return {
+                type: SEND_UPDATING_USER_REQUEST,
+            }
+        }
     }
 }
 
@@ -55,6 +67,7 @@ export function fetchUserRegistration(url, userData) {
 
         AuthClient.register(url, userData)
             .then((data) => {
+                data.user.password = userData.password;
                 dispatch(register(data));
                 addTokensToStorage(data.accessToken, data.refreshToken);
             })
@@ -81,6 +94,7 @@ export function fetchUserLogin(url, userData) {
 
         AuthClient.signIn("login", userData)
             .then((data) => {
+                data.user.password = userData.password;
                 dispatch(login(data));
                 addTokensToStorage(data.accessToken, data.refreshToken);
             })
@@ -134,8 +148,6 @@ export function fetchUserInfo() {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(PROFILE_ACTIONS.GET_USER_INFO));
 
-        console.log(1);
-
         const token = getTokenFromStorage("accessToken")
 
         const options = {
@@ -151,5 +163,41 @@ export function fetchUserInfo() {
                 dispatch(getUserInfo(data));
             })
             .catch(() => dispatch(getUserInfoError()));
+    }
+}
+
+export function updateUserInfoError() {
+    return {
+        type: USER_UPDATING_ERROR,
+    }
+}
+
+export function updateUserInfo(data) {
+    return {
+        type: USER_UPDATING_SUCCESS,
+        payload: data.user,
+    }
+}
+
+export function changeUserInfo(data) {
+    return async (dispatch, getState) => {
+        dispatch(changeRequestStatus(PROFILE_ACTIONS.CHANGE_USER_INFO));
+
+        const token = getTokenFromStorage("accessToken")
+
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: token
+            },
+            body: JSON.stringify(data),
+        }
+
+        AuthClient.fetchWithRefresh("user", options)
+            .then((data) => {
+                dispatch(updateUserInfo(data));
+            })
+            .catch(() => dispatch(updateUserInfoError()));
     }
 }

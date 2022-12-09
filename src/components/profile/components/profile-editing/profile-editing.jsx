@@ -4,8 +4,10 @@ import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger
 import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-editing.module.css";
 import {selectUserInfo} from "../../../../services/store/selectors/auth";
+import {changeUserInfo} from "../../../../services/store/actionCreators/auth";
 
 const ProfileEditing = () => {
+    const dispatch = useDispatch();
     const user = useSelector(selectUserInfo);
 
     const initialFormValues = {
@@ -22,8 +24,14 @@ const ProfileEditing = () => {
     const [formValue, setFormValue] = useState(initialFormValues);
     const [focusInputs, setFocusInputs] = useState(initialFocusInputs);
 
+    const isEmptyFormValue = !formValue.name.trim() || !formValue.email || !formValue.password;
+    const isChanged = formValue.name !== user.name || user.email !== initialFormValues.email || user.password !== initialFormValues.password;
+
+    const isValidForm = !isEmptyFormValue && isChanged;
+
     const onSubmit = (e) => {
         e.preventDefault();
+        dispatch(changeUserInfo(formValue));
     }
 
     const onFormChange = (e)  =>{
@@ -96,14 +104,11 @@ const ProfileEditing = () => {
                         icon={focusInputs.password ? "CloseIcon" : "EditIcon"}
                         onChange={onFormChange}
                         value={formValue.password}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        onIconClick={onIconClick}
                     />
                 </div>
                 <div className={styles['control']}>
                     <Button htmlType="reset" type="secondary" size="large" onClick={onCancel}>Отмена</Button>
-                    <Button htmlType="submit" type="primary" size="large">Сохранить</Button>
+                    <Button htmlType="submit" type="primary" size="large" disabled={!isValidForm}>Сохранить</Button>
                 </div>
             </form>
         </section>
