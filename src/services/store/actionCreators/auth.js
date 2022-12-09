@@ -7,7 +7,7 @@ import {
     SEND_REGISTRATION_REQUEST, SEND_SIGN_OUT_REQUEST, SIGN_OUT_ERROR, SIGN_OUT_SUCCESS
 } from "../actions/auth";
 import {FORM_TYPES} from "../../../utils/consts";
-import {addTokensToStorage, removeTokensFromStorage} from "../../../utils/localStorageHelper";
+import {addTokensToStorage, getTokenFromStorage, removeTokensFromStorage} from "../../../utils/localStorageHelper";
 
 export function changeRequestStatus(action) {
     switch (action) {
@@ -21,7 +21,7 @@ export function changeRequestStatus(action) {
                 type: SEND_LOGIN_REQUEST,
             }
         }
-        case FORM_TYPES: {
+        case FORM_TYPES.SIGN_OUT: {
             return {
                 type: SEND_SIGN_OUT_REQUEST,
             }
@@ -77,7 +77,9 @@ export function fetchUserLogin(url, userData) {
                 dispatch(login(data));
                 addTokensToStorage(data.accessToken, data.refreshToken);
             })
-            .catch(() => dispatch(getLoginError()))
+            .catch(() => {
+                dispatch(getLoginError());
+            })
     }
 }
 
@@ -97,8 +99,7 @@ export function fetchUserSignOut() {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(FORM_TYPES.SIGN_OUT));
 
-        const state = getState();
-        const refreshToken = state.refreshToken;
+        const refreshToken = getTokenFromStorage("refreshToken");
 
         AuthClient.signOut("logout", refreshToken)
             .then((data) => {

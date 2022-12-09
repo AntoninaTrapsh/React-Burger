@@ -11,7 +11,7 @@ const ProfileEditing = () => {
     const initialFormValues = {
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: user.password || "",
     }
 
     const initialFocusInputs = Object.keys(initialFormValues).reduce((obj, input) => {
