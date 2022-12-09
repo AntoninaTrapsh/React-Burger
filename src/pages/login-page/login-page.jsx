@@ -29,7 +29,7 @@ const LoginPage = () => {
     return (
         <section className={styles['login-page']}>
             <h2 className="text text_type_main-medium mb-6">Вход</h2>
-            <Form onSumbit={onSubmit} type={FORM_TYPES.SIGN_IN} buttonTitle="Войти"/>
+            <Form onSubmit={onSubmit} type={FORM_TYPES.SIGN_IN} buttonTitle="Войти"/>
             <p className="text text_type_main-default text_color_inactive mt-20">
                 Вы — новый пользователь?
                 <Link to="/register" className={styles['link']}> Зарегистрироваться</Link>
