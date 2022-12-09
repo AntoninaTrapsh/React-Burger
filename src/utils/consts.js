@@ -32,3 +32,8 @@ export const FORM_TYPES = {
     FORGOT_PASSWORD: "FORGOT_PASSWORD",
     RESET_PASSWORD: "RESET_PASSWORD",
 }
+
+export const PROFILE_ACTIONS = {
+    GET_USER_INFO: "",
+    CHANGE_USER_INFO: "",
+}

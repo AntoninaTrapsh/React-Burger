@@ -39,6 +39,7 @@ class AuthClient {
     }
 
     async refreshToken(url) {
+        console.log("refresh");
         const response = await fetch(`${this.api}${url}`, {
             method: "POST",
             headers: {
@@ -53,17 +54,19 @@ class AuthClient {
 
     async fetchWithRefresh(url, options) {
         try {
-            const response = await fetch(url, options);
+            const response = await fetch(`${this.api}${url}`, options);
             return await this.checkResponse(response);
         } catch (err) {
+            console.log('error', err);
             if (err.message === "jwt expired") {
-                const refreshData = await this.refreshToken();
+                const refreshData = await this.refreshToken("token");
                 if (!refreshData.success) {
                     await Promise.reject(refreshData);
                 }
+                console.log("ADD NEW TOKEN");
                 addTokensToStorage(refreshData.accessToken, refreshData.refreshToken);
                 options.headers.authorization = refreshData.accessToken;
-                const response = await fetch(url, options);
+                const response = await fetch(`${this.api}${url}`, options);
                 return await this.checkResponse(response);
             } else {
                 return Promise.reject(err);
@@ -72,12 +75,11 @@ class AuthClient {
     }
 
     async checkResponse(response) {
+        console.log('res', response);
         if (response.ok) {
             return await response.json();
         } else {
-            return response.json().then((err) => {
-                Promise.reject(err);
-            })
+            return response.json().then((err) => Promise.reject(err))
         }
     }
 }
