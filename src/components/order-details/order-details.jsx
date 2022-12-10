@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import orderImage from "../../images/done.svg"
 import styles from "./order-details.module.css"
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {selectOrderId, selectOrderRequestStatus} from "../../services/store/selectors/order-details";
 import Preloader from "../preloader/preloader";
 

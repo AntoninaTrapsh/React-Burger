@@ -10,7 +10,6 @@ import {
 import {selectBuns, selectIngredientsList, selectTotalPrice} from "../../services/store/selectors/burger-constructor";
 import {fetchUserInfo} from "../../services/store/actionCreators/auth";
 import {selectAuthInfo, selectIsUserChecked} from "../../services/store/selectors/auth";
-import {Redirect} from "react-router-dom";
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 
 const BurgerConstructor = () => {
