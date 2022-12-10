@@ -13,7 +13,7 @@ export const INPUT_SETTINGS = {
         NAME: 'name',
         EMAIL: 'email',
         PASSWORD: 'password',
-        CODE: 'token',
+        CODE: 'code',
     },
     PLACEHOLDER: {
         NAME: 'Имя',

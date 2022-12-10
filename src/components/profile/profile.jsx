@@ -12,8 +12,6 @@ const Profile = () => {
     const dispatch = useDispatch();
     const { path } = useRouteMatch();
 
-    console.log(`${path}/orders`);
-
     const signOut = () => {
         dispatch(fetchUserSignOut());
     }

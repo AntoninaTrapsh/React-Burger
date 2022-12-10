@@ -19,20 +19,13 @@ const ResetPasswordPage = () => {
         dispatch(resetPasswordOnSecondStep(data));
     }
 
-    if (!isFirstStepPassed) {
+    if (!isFirstStepPassed || isSecondStepPassed) {
         return (
             <Redirect
                 to="/login"
             />
         )
     }
-    // } else if (isAuth || isSecondStepPassed) {
-    //     return (
-    //         <Redirect
-    //             to="/"
-    //         />
-    //     )
-    // }
 
     return (
         <section className={styles['login-page']}>

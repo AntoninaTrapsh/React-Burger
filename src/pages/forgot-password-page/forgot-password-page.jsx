@@ -4,32 +4,36 @@ import Form from "../../components/form/form";
 import {FORM_TYPES} from "../../utils/consts";
 import {Link, Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {selectResetPasswordOnFirstStepStatus} from "../../services/store/selectors/auth";
+import {
+    selectResetPasswordOnFirstStepStatus,
+    selectResetPasswordOnSecondStepStatus
+} from "../../services/store/selectors/auth";
 import {resetPasswordOnFirstStep} from "../../services/store/actionCreators/auth";
 
 const ForgotPasswordPage = () => {
     const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
+    const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);
     const dispatch = useDispatch();
 
     function onSubmit(e, data) {
         dispatch(resetPasswordOnFirstStep(data));
     }
 
-    if (isFirstStepPassed) {
+    if (isFirstStepPassed && !isSecondStepPassed) {
         return (
             <Redirect
                 to="/reset-password"
             />
         )
     }
-    // else if (isAuth) {
-    //     return (
-    //         <Redirect
-    //             to="/"
-    //         />
-    //     )
-    // }
 
+    if (isSecondStepPassed) {
+        return (
+            <Redirect
+                to="/login"
+            />
+        )
+    }
 
     return (
         <section className={styles['forgot-password-page']}>
