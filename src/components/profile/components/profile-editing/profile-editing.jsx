@@ -23,15 +23,17 @@ const ProfileEditing = () => {
 
     const [formValue, setFormValue] = useState(initialFormValues);
     const [focusInputs, setFocusInputs] = useState(initialFocusInputs);
+    const [isControlSubmitDisplayed, setIsControlSubmitDisplayed] = useState(false);
 
     const isEmptyFormValue = !formValue.name.trim() || !formValue.email || !formValue.password;
-    const isChanged = formValue.name !== user.name || user.email !== initialFormValues.email || user.password !== initialFormValues.password;
+    let isChanged = formValue.name !== user.name || formValue.email !== user.email || formValue.password !== user.password;
 
     const isValidForm = !isEmptyFormValue && isChanged;
 
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(changeUserInfo(formValue));
+        setIsControlSubmitDisplayed(false);
     }
 
     const onFormChange = (e)  =>{
@@ -39,12 +41,14 @@ const ProfileEditing = () => {
             ...formValue,
             [e.target.name]: e.target.value,
         });
+        setIsControlSubmitDisplayed(true);
     }
 
     const onCancel = () => {
         setFormValue({
             ...initialFormValues,
         });
+        setIsControlSubmitDisplayed(false);
     }
 
     const onFocus = (e) => {
@@ -61,14 +65,6 @@ const ProfileEditing = () => {
         });
     }
 
-    const onIconClick = (e) => {
-        if (focusInputs[e.target.name]) {
-            setFormValue({
-                ...initialFormValues,
-            });
-        }
-    }
-
     return (
         <section>
             <form className={styles['profile-editing__form']} onSubmit={onSubmit}>
@@ -82,7 +78,6 @@ const ProfileEditing = () => {
                         value={formValue.name}
                         onFocus={onFocus}
                         onBlur={onBlur}
-                        onIconClick={onIconClick}
                     />
                 </div>
                 <div className="mb-6">
@@ -95,7 +90,6 @@ const ProfileEditing = () => {
                         value={formValue.email}
                         onFocus={onFocus}
                         onBlur={onBlur}
-                        onIconClick={onIconClick}
                     />
                 </div>
                 <div className="mb-6">
@@ -106,10 +100,13 @@ const ProfileEditing = () => {
                         value={formValue.password}
                     />
                 </div>
-                <div className={styles['control']}>
-                    <Button htmlType="reset" type="secondary" size="large" onClick={onCancel}>Отмена</Button>
-                    <Button htmlType="submit" type="primary" size="large" disabled={!isValidForm}>Сохранить</Button>
-                </div>
+                {
+                    isControlSubmitDisplayed &&
+                    <div className={styles['control']}>
+                        <Button htmlType="reset" type="secondary" size="large" onClick={onCancel}>Отмена</Button>
+                        <Button htmlType="submit" type="primary" size="large" disabled={!isValidForm}>Сохранить</Button>
+                    </div>
+                }
             </form>
         </section>
     )
