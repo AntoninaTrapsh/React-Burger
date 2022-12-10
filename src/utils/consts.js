@@ -34,6 +34,6 @@ export const FORM_TYPES = {
 }
 
 export const PROFILE_ACTIONS = {
-    GET_USER_INFO: "",
-    CHANGE_USER_INFO: "",
+    GET_USER_INFO: "GET_USER_INFO",
+    CHANGE_USER_INFO: "CHANGE_USER_INFO",
 }

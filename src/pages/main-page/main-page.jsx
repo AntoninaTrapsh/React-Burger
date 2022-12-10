@@ -17,20 +17,12 @@ import {fetchIngredients} from "../../services/store/actionCreators/burger-ingre
 const MainPage = () => {
     const dispatch = useDispatch();
     const ingredientsData = useSelector(selectIngredients);
-    const isIngredientCardOpen = useSelector(selectIngredientModalState);
     const isOrderDetailsOpen = useSelector(selectOrderDetailsState);
-
-    const handleIngredientCardClose = () => {
-        dispatch(closeIngredientDetails())
-    }
 
     const handleCloseOrderModal = () => {
         dispatch(closeOrderDetailsModal());
     }
 
-    useEffect(() => {
-        dispatch(fetchIngredients('ingredients'));
-    }, [dispatch])
     return (
         <div style={{"display":"flex"}}>
             {
@@ -39,12 +31,6 @@ const MainPage = () => {
                     <BurgerIngredients/>
                     <BurgerConstructor/>
                 </DndProvider>
-            }
-            {
-                isIngredientCardOpen &&
-                <Modal title="Детали ингредиента" handleModalClose={handleIngredientCardClose}>
-                    <IngredientDetails/>
-                </Modal>
             }
             {
                 isOrderDetailsOpen &&

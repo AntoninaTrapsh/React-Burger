@@ -12,9 +12,13 @@ import {
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
 import {openIngredientDetails} from "../../../../services/store/actionCreators/ingredient-details";
 import PropTypes from "prop-types";
+import {useHistory, useLocation} from "react-router-dom/cjs/react-router-dom";
+import {Link} from "react-router-dom";
 
 const IngredientCard = (props) => {
     const ref = React.useRef(null);
+    const history = useHistory();
+    const location = useLocation();
 
     const [, dragRef] = useDrag({
         type: DND_TYPES.CARD_FROM_CONSTRUCTOR,
@@ -68,26 +72,36 @@ const IngredientCard = (props) => {
     const handleDeleteIngredient = (e, ingredient) => {
         e.stopPropagation();
         dispatch(deleteIngredientFromConstructor(ingredient.uuid));
-        dispatch(decreaseIngredientCounter(ingredient._id))
+        dispatch(decreaseIngredientCounter(ingredient._id));
     }
 
     const handleIngredientCardOpen = (ingredient) => {
         dispatch(openIngredientDetails(ingredient))
     }
 
+    const ingredientId = props.ingredient._id
+
     return (
-        <div className="mb-4" onClick={() => handleIngredientCardOpen(props.ingredient)} ref={ref}>
-            <div className={styles['ingredient-card__stuffing-list']}>
-                <DragIcon type="primary"/>
-                <ConstructorElement
-                    isLocked={false}
-                    text={props.ingredient.name}
-                    price={props.ingredient.price}
-                    thumbnail={props.ingredient.image}
-                    handleClose={(e) => handleDeleteIngredient(e, props.ingredient)}
-                />
+        <Link
+            key={ingredientId}
+            to={{
+                pathname: `/ingredients/${ingredientId}`,
+                state: { background: location },
+            }}
+        >
+            <div className="mb-4" onClick={() => handleIngredientCardOpen(props.ingredient)} ref={ref}>
+                <div className={styles['ingredient-card__stuffing-list']}>
+                    <DragIcon type="primary"/>
+                    <ConstructorElement
+                        isLocked={false}
+                        text={props.ingredient.name}
+                        price={props.ingredient.price}
+                        thumbnail={props.ingredient.image}
+                        handleClose={(e) => handleDeleteIngredient(e, props.ingredient)}
+                    />
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
