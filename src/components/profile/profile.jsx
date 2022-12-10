@@ -12,6 +12,8 @@ const Profile = () => {
     const dispatch = useDispatch();
     const { path } = useRouteMatch();
 
+    console.log(`${path}/orders`);
+
     const signOut = () => {
         dispatch(fetchUserSignOut());
     }
@@ -34,7 +36,7 @@ const Profile = () => {
                         <NavLink
                             className={`${styles['link']} text text_type_main-medium text_color_inactive`}
                             activeClassName={styles['active-link']}
-                            to="/orders"
+                            to="/profile/orders"
                         >
                             История заказов
                         </NavLink>
@@ -53,10 +55,10 @@ const Profile = () => {
                 </p>
             </nav>
             <Switch>
-                <Route exact path={path}>
+                <Route path={path} exact={true}>
                     <ProfileEditing/>
                 </Route>
-                <Route exact path={`${path}/orders`}>
+                <Route path={`${path}/orders`} exact={true}>
                     <ProfileOrders/>
                 </Route>
             </Switch>

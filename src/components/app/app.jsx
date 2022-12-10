@@ -55,7 +55,7 @@ function App() {
                             <ResetPasswordPage/>
                         </ProtectedRoute>
 
-                        <ProtectedRoute path="/profile" exact={true}>
+                        <ProtectedRoute path="/profile">
                             <ProfilePage/>
                         </ProtectedRoute>
 
