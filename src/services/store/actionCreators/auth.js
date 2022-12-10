@@ -1,14 +1,15 @@
 import AuthClient from "../../clients/auth-client";
 import {
+    FORGOT_PASSWORD_ERROR, FORGOT_PASSWORD_SUCCESS,
     GET_USER_ERROR,
     GET_USER_SUCCESS,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
-    REGISTRATION_SUCCESS,
+    REGISTRATION_SUCCESS, RESET_PASSWORD_ERROR, RESET_PASSWORD_SUCCESS, SEND_FORGOT_PASSWORD_REQUEST,
     SEND_GET_USER_REQUEST,
     SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST,
+    SEND_REGISTRATION_REQUEST, SEND_RESET_PASSWORD_REQUEST,
     SEND_SIGN_OUT_REQUEST,
     SEND_UPDATING_USER_REQUEST,
     SIGN_OUT_ERROR,
@@ -43,6 +44,16 @@ export function changeRequestStatus(action) {
         case PROFILE_ACTIONS.CHANGE_USER_INFO: {
             return {
                 type: SEND_UPDATING_USER_REQUEST,
+            }
+        }
+        case FORM_TYPES.FORGOT_PASSWORD: {
+            return {
+                type: SEND_FORGOT_PASSWORD_REQUEST,
+            }
+        }
+        case FORM_TYPES.RESET_PASSWORD: {
+            return {
+                type: SEND_RESET_PASSWORD_REQUEST,
             }
         }
     }
@@ -100,6 +111,58 @@ export function fetchUserLogin(url, userData) {
             })
             .catch(() => {
                 dispatch(getLoginError());
+            })
+    }
+}
+
+export function catchResetPasswordOnFirstStepError() {
+    return {
+        type: FORGOT_PASSWORD_ERROR,
+    }
+}
+
+export function catchResetPasswordOnSecondStepError() {
+    return {
+        type: RESET_PASSWORD_ERROR,
+    }
+}
+
+export function getResetPasswordOnFirstStepResponse() {
+    return {
+        type: FORGOT_PASSWORD_SUCCESS,
+    }
+}
+
+export function getResetPasswordOnSecondStepResponse() {
+    return {
+        type: RESET_PASSWORD_SUCCESS,
+    }
+}
+
+export function resetPasswordOnFirstStep(data) {
+    return async (dispatch, getState) => {
+        dispatch(changeRequestStatus(FORM_TYPES.FORGOT_PASSWORD));
+
+        AuthClient.resetPasswordOnFirstStep(data)
+            .then((data) => {
+                dispatch(getResetPasswordOnFirstStepResponse(data));
+            })
+            .catch(() => {
+                dispatch(catchResetPasswordOnFirstStepError());
+            })
+    }
+}
+
+export function resetPasswordOnSecondStep(data) {
+    return async (dispatch, getState) => {
+        dispatch(changeRequestStatus(FORM_TYPES.RESET_PASSWORD));
+
+        AuthClient.resetPasswordOnSecondStep("reset", data)
+            .then((data) => {
+                dispatch(getResetPasswordOnSecondStepResponse(data));
+            })
+            .catch(() => {
+                dispatch(catchResetPasswordOnSecondStepError());
             })
     }
 }

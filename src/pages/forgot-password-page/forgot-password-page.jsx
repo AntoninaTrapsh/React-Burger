@@ -2,17 +2,39 @@ import React from "react";
 import styles from "./forgot-password.module.css";
 import Form from "../../components/form/form";
 import {FORM_TYPES} from "../../utils/consts";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {selectResetPasswordOnFirstStepStatus} from "../../services/store/selectors/auth";
+import {resetPasswordOnFirstStep} from "../../services/store/actionCreators/auth";
 
 const ForgotPasswordPage = () => {
-    function onSubmit(e) {
-        e.preventDefault();
+    const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
+    const dispatch = useDispatch();
+
+    function onSubmit(e, data) {
+        dispatch(resetPasswordOnFirstStep(data));
     }
+
+    if (isFirstStepPassed) {
+        return (
+            <Redirect
+                to="/reset-password"
+            />
+        )
+    }
+    // else if (isAuth) {
+    //     return (
+    //         <Redirect
+    //             to="/"
+    //         />
+    //     )
+    // }
+
 
     return (
         <section className={styles['forgot-password-page']}>
             <h2 className="text text_type_main-medium mb-6">Восстановление пароля</h2>
-            <Form onSumbit={onSubmit} type={FORM_TYPES.FORGOT_PASSWORD} buttonTitle="Восстановить"/>
+            <Form onSubmit={onSubmit} type={FORM_TYPES.FORGOT_PASSWORD} buttonTitle="Восстановить"/>
             <p className="text text_type_main-default text_color_inactive mt-20">
                 Вспомнили пароль?
                 <Link to="/login" className={styles['link']}> Войти</Link>

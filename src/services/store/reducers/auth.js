@@ -1,19 +1,22 @@
 import {
+    FORGOT_PASSWORD_ERROR,
+    FORGOT_PASSWORD_SUCCESS,
     GET_USER_ERROR,
     GET_USER_SUCCESS,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
-    REGISTRATION_SUCCESS,
+    REGISTRATION_SUCCESS, RESET_PASSWORD_ERROR, RESET_PASSWORD_SUCCESS, SEND_FORGOT_PASSWORD_REQUEST,
     SEND_GET_USER_REQUEST,
     SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST,
+    SEND_REGISTRATION_REQUEST, SEND_RESET_PASSWORD_REQUEST,
     SEND_SIGN_OUT_REQUEST,
     SEND_UPDATING_USER_REQUEST,
     SIGN_OUT_ERROR,
     SIGN_OUT_SUCCESS, USER_UPDATING_ERROR,
     USER_UPDATING_SUCCESS
 } from "../actions/auth";
+import {resetPasswordOnSecondStep} from "../actionCreators/auth";
 
 const initialState = {
     isAuth: false,
@@ -40,6 +43,14 @@ const initialState = {
 
     updatingUserInfoError: false,
     updatingUserRequest: false,
+
+    resetPasswordOnFirstStepRequest: false,
+    resetPasswordOnFirstStepError: false,
+    isResetPasswordOnFirstStepPassed: false,
+
+    resetPasswordOnSecondStepRequest: false,
+    resetPasswordOnSecondStepError: false,
+    isResetPasswordOnSecondStepPassed: false,
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -173,6 +184,50 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 updatingUserRequest: false,
                 updatingUserInfoError: true,
+            }
+        }
+        case SEND_FORGOT_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                resetPasswordOnFirstStepRequest: true,
+                resetPasswordOnFirstStepError: false,
+
+            }
+        }
+        case FORGOT_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                resetPasswordOnFirstStepRequest: false,
+                isResetPasswordOnFirstStepPassed: true,
+            }
+        }
+        case FORGOT_PASSWORD_ERROR: {
+            return {
+                ...state,
+                resetPasswordOnFirstStepRequest: false,
+                resetPasswordOnFirstStepError: true,
+            }
+        }
+        case SEND_RESET_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                resetPasswordOnSecondStepRequest: true,
+                resetPasswordOnSecondStepError: false,
+
+            }
+        }
+        case RESET_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                resetPasswordOnSecondStepRequest: false,
+                isResetPasswordOnSecondStepPassed: true,
+            }
+        }
+        case RESET_PASSWORD_ERROR: {
+            return {
+                ...state,
+                resetPasswordOnSecondStepRequest: false,
+                resetPasswordOnSecondStepError: true,
             }
         }
         default:

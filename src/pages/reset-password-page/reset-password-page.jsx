@@ -2,12 +2,37 @@ import React from "react";
 import styles from "../login-page/login-page.module.css";
 import Form from "../../components/form/form";
 import {FORM_TYPES} from "../../utils/consts";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {resetPasswordOnSecondStep} from "../../services/store/actionCreators/auth";
+import {
+    selectResetPasswordOnFirstStepStatus,
+    selectResetPasswordOnSecondStepStatus
+} from "../../services/store/selectors/auth";
 
 const ResetPasswordPage = () => {
-    function onSubmit(e) {
-        e.preventDefault();
+    const dispatch = useDispatch();
+    const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
+    const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);
+
+    function onSubmit(e, data) {
+        dispatch(resetPasswordOnSecondStep(data));
     }
+
+    if (!isFirstStepPassed) {
+        return (
+            <Redirect
+                to="/login"
+            />
+        )
+    }
+    // } else if (isAuth || isSecondStepPassed) {
+    //     return (
+    //         <Redirect
+    //             to="/"
+    //         />
+    //     )
+    // }
 
     return (
         <section className={styles['login-page']}>
