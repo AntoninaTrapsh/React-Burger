@@ -1,3 +1,5 @@
+import {getTokenFromStorage} from "../../utils/localStorageHelper";
+
 class IngredientsClient {
     api = 'https://norma.nomoreparties.space/api/';
 
@@ -7,12 +9,14 @@ class IngredientsClient {
     }
 
     async sendOrderDetails(url, ingredients) {
+        const token = getTokenFromStorage("accessToken");
         const response = await fetch(`${this.api}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ingredients}),
+            authorization: token,
         }) ;
         return await this.checkResponse(response);
     }
