@@ -8,14 +8,32 @@ import {
     openOrderDetailsModal
 } from "../../services/store/actionCreators/order-details";
 import {selectBuns, selectIngredientsList, selectTotalPrice} from "../../services/store/selectors/burger-constructor";
+import {fetchUserInfo} from "../../services/store/actionCreators/auth";
+import {selectAuthInfo, selectIsUserChecked} from "../../services/store/selectors/auth";
+import {Redirect} from "react-router-dom";
+import {useHistory} from "react-router-dom/cjs/react-router-dom";
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const totalPrice = useSelector(selectTotalPrice);
     const ingredientsData = useSelector(selectIngredientsList);
-    const buns = useSelector(selectBuns)
+    const buns = useSelector(selectBuns);
+    const isAuthChecked = useSelector(selectIsUserChecked);
+    const isAuth = useSelector(selectAuthInfo)
 
     const handleOpenOrderModal = () => {
+        dispatch(fetchUserInfo());
+        if (isAuthChecked && isAuth) {
+            showOrderDetails();
+        } else {
+            history.push({
+                pathname: "/login",
+            })
+        }
+    }
+
+    const showOrderDetails = () => {
         dispatch(openOrderDetailsModal());
         dispatch(fetchOrderDetails('orders', [buns, ...ingredientsData, buns]));
     }
