@@ -16,7 +16,6 @@ import {
     SIGN_OUT_SUCCESS, USER_UPDATING_ERROR,
     USER_UPDATING_SUCCESS
 } from "../actions/auth";
-import {resetPasswordOnSecondStep} from "../actionCreators/auth";
 
 const initialState = {
     isAuth: false,

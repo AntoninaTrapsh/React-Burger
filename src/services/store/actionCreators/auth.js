@@ -56,6 +56,9 @@ export function changeRequestStatus(action) {
                 type: SEND_RESET_PASSWORD_REQUEST,
             }
         }
+        default: {
+            return {}
+        }
     }
 }
 

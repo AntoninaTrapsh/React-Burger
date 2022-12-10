@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchUserLogin} from "../../services/store/actionCreators/auth";
 import {selectAuthInfo} from "../../services/store/selectors/auth";
 import { Redirect } from 'react-router-dom';
-import {useHistory, useLocation} from "react-router-dom/cjs/react-router-dom";
+import {useLocation} from "react-router-dom/cjs/react-router-dom";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -17,8 +17,7 @@ const LoginPage = () => {
     function onSubmit(e, userData) {
         dispatch(fetchUserLogin("login", userData))
     }
-    console.log(location)
-    console.log(isAuth)
+
     if (isAuth) {
         return (
             <Redirect

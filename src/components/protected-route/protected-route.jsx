@@ -5,6 +5,7 @@ import {selectAuthInfo, selectIsUserChecked} from "../../services/store/selector
 import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/auth";
 import {useEffect} from "react";
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
+import Preloader from "../preloader/preloader";
 
 export function ProtectedRoute({ children, authPage, ...rest }) {
     const dispatch = useDispatch();
@@ -13,19 +14,16 @@ export function ProtectedRoute({ children, authPage, ...rest }) {
         dispatch(fetchUserInfo());
 
         return () => {
-            console.log("destroy")
             dispatch(isUserChecked(false))
         }
-    }, [])
+    }, [dispatch])
 
     const isAuth = useSelector(selectAuthInfo)
     const isAuthChecked = useSelector(selectIsUserChecked)
     const history = useHistory()
 
     if (!isAuthChecked) {
-        // TODO need loader
-        console.log('LOADER')
-        return <div>LOADER</div>
+        return <Preloader/>
     }
 
     if (authPage && isAuth) {

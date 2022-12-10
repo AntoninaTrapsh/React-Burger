@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 import styles from "./ingredients-page.module.css"
 

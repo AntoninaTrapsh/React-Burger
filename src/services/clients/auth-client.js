@@ -81,13 +81,11 @@ class AuthClient {
             const response = await fetch(`${this.authApi}${url}`, options);
             return await this.checkResponse(response);
         } catch (err) {
-            console.log('error', err);
             if (err.message === "jwt expired") {
                 const refreshData = await this.refreshToken("token");
                 if (!refreshData.success) {
                     await Promise.reject(refreshData);
                 }
-                console.log("ADD NEW TOKEN");
                 addTokensToStorage(refreshData.accessToken, refreshData.refreshToken);
                 options.headers.authorization = refreshData.accessToken;
                 const response = await fetch(`${this.authApi}${url}`, options);
@@ -99,7 +97,6 @@ class AuthClient {
     }
 
     async checkResponse(response) {
-        console.log('res', response);
         if (response.ok) {
             return await response.json();
         } else {
