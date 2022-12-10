@@ -16,16 +16,12 @@ import {closeIngredientDetails} from "../../services/store/actionCreators/ingred
 import {useDispatch} from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
-import {AuthProtectedRoute} from "../protected-route/auth-protected-route";
-import {fetchUserInfo} from "../../services/store/actionCreators/auth";
 
 function App() {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
     const background = location.state && location.state.background;
-
-    dispatch(fetchUserInfo())
 
     useEffect(() => {
         dispatch(fetchIngredients('ingredients'));
@@ -45,22 +41,24 @@ function App() {
                             <MainPage/>
                         </Route>
 
-                        <AuthProtectedRoute path="/login" exact={true}>
+                        <ProtectedRoute authPage path="/login" exact={true}>
                             <LoginPage />
-                        </AuthProtectedRoute>
-                        <AuthProtectedRoute path="/register" exact={true}>
+                        </ProtectedRoute>
+                        <ProtectedRoute authPage path="/register" exact={true}>
                             <RegisterPage/>
-                        </AuthProtectedRoute>
+                        </ProtectedRoute>
 
-                        <Route path="/forgot-password" exact={true}>
+                        <ProtectedRoute authPage path="/forgot-password" exact={true}>
                             <ForgotPasswordPage/>
-                        </Route>
-                        <Route path="/reset-password" exact={true}>
+                        </ProtectedRoute>
+                        <ProtectedRoute authPage path="/reset-password" exact={true}>
                             <ResetPasswordPage/>
-                        </Route>
+                        </ProtectedRoute>
+
                         <ProtectedRoute path="/profile" exact={true}>
                             <ProfilePage/>
                         </ProtectedRoute>
+
                         <Route path="/ingredients/:ingredientId" exact={true}>
                             <IngredientsPage/>
                         </Route>
@@ -76,15 +74,6 @@ function App() {
                             }
                         />
                     )}
-
-                    {/*{background && (*/}
-                    {/*    <Route*/}
-                    {/*        path='/ingredients/:ingredientId'*/}
-                    {/*        children={*/}
-                    {/*            <IngredientsPage/>*/}
-                    {/*        }*/}
-                    {/*    />*/}
-                    {/*)}*/}
 
                 </main>
         </div>

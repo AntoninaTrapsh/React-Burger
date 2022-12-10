@@ -2,7 +2,7 @@ import AuthClient from "../../clients/auth-client";
 import {
     FORGOT_PASSWORD_ERROR, FORGOT_PASSWORD_SUCCESS,
     GET_USER_ERROR,
-    GET_USER_SUCCESS,
+    GET_USER_SUCCESS, IS_USER_CHECKED,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
@@ -200,6 +200,13 @@ export function getUserInfoError() {
     }
 }
 
+export function isUserChecked(payload) {
+    return {
+        type: IS_USER_CHECKED,
+        payload
+    }
+}
+
 export function getUserInfo(data) {
     return {
         type: GET_USER_SUCCESS,
@@ -225,7 +232,10 @@ export function fetchUserInfo() {
             .then((data) => {
                 dispatch(getUserInfo(data));
             })
-            .catch(() => dispatch(getUserInfoError()));
+            .catch(() => dispatch(getUserInfoError()))
+            .finally(() => {
+                dispatch(isUserChecked(true))
+            });
     }
 }
 

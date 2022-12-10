@@ -2,7 +2,7 @@ import {
     FORGOT_PASSWORD_ERROR,
     FORGOT_PASSWORD_SUCCESS,
     GET_USER_ERROR,
-    GET_USER_SUCCESS,
+    GET_USER_SUCCESS, IS_USER_CHECKED,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
@@ -40,6 +40,7 @@ const initialState = {
 
     userInfoError: false,
     userInfoRequest: false,
+    isUserChecked: false,
 
     updatingUserInfoError: false,
     updatingUserRequest: false,
@@ -147,6 +148,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 userInfoRequest: false,
+                isAuth: true,
                 user: {
                    ...state.user,
                     name,
@@ -159,6 +161,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
             return {
                 ...initialState,
                 userInfoError: true,
+            }
+        }
+        case IS_USER_CHECKED: {
+            return {
+                ...state,
+                isUserChecked: payload
             }
         }
         case SEND_UPDATING_USER_REQUEST: {
