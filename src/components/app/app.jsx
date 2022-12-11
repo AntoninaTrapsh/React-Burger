@@ -15,6 +15,7 @@ import Modal from "../modal/modal";
 import {useDispatch} from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
+import NotFoundPage from "../../pages/not-found-page/not-found-page";
 
 function App() {
     const dispatch = useDispatch();
@@ -59,6 +60,9 @@ function App() {
 
                         <Route path="/ingredients/:ingredientId" exact={true}>
                             <IngredientsPage/>
+                        </Route>
+                        <Route>
+                            <NotFoundPage/>
                         </Route>
                     </Switch>
 

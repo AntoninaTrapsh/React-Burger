@@ -3,27 +3,14 @@ import AuthForm from "../../components/auth-form/auth-form";
 import {Link} from "react-router-dom";
 import styles from "./login-page.module.css";
 import {FORM_TYPES} from "../../utils/consts";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {fetchUserLogin} from "../../services/store/actionCreators/auth";
-import {selectAuthInfo} from "../../services/store/selectors/auth";
-import { Redirect } from 'react-router-dom';
-import {useLocation} from "react-router-dom/cjs/react-router-dom";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectAuthInfo);
-    const location = useLocation();
 
     function onSubmit(e, userData) {
         dispatch(fetchUserLogin("login", userData))
-    }
-
-    if (isAuth) {
-        return (
-            <Redirect
-                to={ location.state?.from || "/" }
-            />
-        );
     }
 
     return (
