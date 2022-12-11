@@ -12,7 +12,6 @@ import IngredientsPage from "../../pages/ingredients-page/ingredients-page";
 import {ProtectedRoute} from "../protected-route/protected-route";
 import {useHistory, useLocation} from "react-router-dom/cjs/react-router-dom";
 import Modal from "../modal/modal";
-import {closeIngredientDetails} from "../../services/store/actionCreators/ingredient-details";
 import {useDispatch} from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
@@ -28,7 +27,6 @@ function App() {
     }, [dispatch]);
 
     const handleIngredientCardClose = () => {
-        dispatch(closeIngredientDetails());
         history.goBack();
     }
 
