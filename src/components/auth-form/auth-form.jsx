@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./auth-form.module.css";
 import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
+import PropTypes from "prop-types";
 
 const AuthForm = ({type, onSubmit, buttonTitle}) => {
 
@@ -84,6 +85,12 @@ const AuthForm = ({type, onSubmit, buttonTitle}) => {
                 <Button htmlType="submit" type="primary" size="large">{buttonTitle}</Button>
             </form>
     )
+}
+
+AuthForm.propTypes = {
+    type: PropTypes.string,
+    onSubmit: PropTypes.func,
+    buttonTitle: PropTypes.string,
 }
 
 export default AuthForm;
