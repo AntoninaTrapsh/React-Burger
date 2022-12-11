@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./profile.module.css";
-import {useRouteMatch} from "react-router-dom/cjs/react-router-dom";
+import {useHistory, useRouteMatch} from "react-router-dom/cjs/react-router-dom";
 import {NavLink} from "react-router-dom";
 import { Route, Switch } from 'react-router-dom';
 import ProfileEditing from "./components/profile-editing/profile-editing";
@@ -10,10 +10,12 @@ import {fetchUserSignOut} from "../../services/store/actionCreators/auth";
 
 const Profile = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { path } = useRouteMatch();
 
     const signOut = () => {
         dispatch(fetchUserSignOut());
+        history.push("/login");
     }
 
     return (

@@ -1,9 +1,9 @@
 import React from "react";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./form.module.css";
+import styles from "./auth-form.module.css";
 import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
 
-const Form = ({type, onSubmit, buttonTitle}) => {
+const AuthForm = ({type, onSubmit, buttonTitle}) => {
 
     const initialFormValues = {
         name: "",
@@ -86,4 +86,4 @@ const Form = ({type, onSubmit, buttonTitle}) => {
     )
 }
 
-export default Form;
+export default AuthForm;
