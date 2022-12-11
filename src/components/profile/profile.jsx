@@ -15,7 +15,12 @@ const Profile = () => {
 
     const signOut = () => {
         dispatch(fetchUserSignOut());
-        history.push("/login");
+        history.push({
+            pathname: "/login",
+            state: {
+                from: '/profile'
+            }
+        });
     }
 
     return (

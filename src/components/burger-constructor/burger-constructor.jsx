@@ -36,9 +36,14 @@ const BurgerConstructor = () => {
         if (isAuthChecked && isAuth) {
             showOrderDetails();
         } else {
-            history.push({
-                pathname: "/login",
-            })
+            history.push(
+                {
+                    pathname: '/login',
+                    state: {
+                        from: '/'
+                    }
+                }
+            )
         }
     }
 
