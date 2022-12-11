@@ -27,7 +27,7 @@ const ResetPasswordPage = () => {
         )
     }
 
-    if (!isFirstStepPassed || isSecondStepPassed) {
+    if (isSecondStepPassed) {
         return (
             <Redirect
                 to="/login"

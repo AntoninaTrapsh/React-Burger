@@ -19,6 +19,7 @@ import {
 
 const initialState = {
     isAuth: false,
+    isAuthRequestEnded: false,
 
     user: {
         name: "",
@@ -39,7 +40,6 @@ const initialState = {
 
     userInfoError: false,
     userInfoRequest: false,
-    isUserChecked: false,
 
     updatingUserInfoError: false,
     updatingUserRequest: false,
@@ -126,6 +126,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         case SIGN_OUT_SUCCESS: {
             return {
                 ...initialState,
+                isAuthRequestEnded: true,
             }
         }
         case SIGN_OUT_ERROR: {
@@ -165,7 +166,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         case IS_USER_CHECKED: {
             return {
                 ...state,
-                isUserChecked: payload
+                isAuthRequestEnded: payload
             }
         }
         case SEND_UPDATING_USER_REQUEST: {
@@ -206,6 +207,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 resetPasswordOnFirstStepRequest: false,
                 isResetPasswordOnFirstStepPassed: true,
+                isResetPasswordOnSecondStepPassed: false,
             }
         }
         case FORGOT_PASSWORD_ERROR: {
@@ -228,6 +230,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 resetPasswordOnSecondStepRequest: false,
                 isResetPasswordOnSecondStepPassed: true,
+                isResetPasswordOnFirstStepPassed: false,
             }
         }
         case RESET_PASSWORD_ERROR: {

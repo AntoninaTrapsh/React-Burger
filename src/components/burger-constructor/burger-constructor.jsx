@@ -9,7 +9,7 @@ import {
 } from "../../services/store/actionCreators/order-details";
 import {selectBuns, selectIngredientsList, selectTotalPrice} from "../../services/store/selectors/burger-constructor";
 import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/auth";
-import {selectAuthInfo, selectIsUserChecked} from "../../services/store/selectors/auth";
+import {selectAuthInfo, selectIsAuthRequestEnded} from "../../services/store/selectors/auth";
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import Preloader from "../preloader/preloader";
 
@@ -19,7 +19,7 @@ const BurgerConstructor = () => {
     const totalPrice = useSelector(selectTotalPrice);
     const ingredientsData = useSelector(selectIngredientsList);
     const buns = useSelector(selectBuns);
-    const isAuthChecked = useSelector(selectIsUserChecked);
+    const isAuthChecked = useSelector(selectIsAuthRequestEnded);
     const isAuth = useSelector(selectAuthInfo)
 
     useEffect(() => {

@@ -19,7 +19,7 @@ const ForgotPasswordPage = () => {
         dispatch(resetPasswordOnFirstStep(data));
     }
 
-    if (isFirstStepPassed && !isSecondStepPassed) {
+    if (isFirstStepPassed) {
         return (
             <Redirect
                 to="/reset-password"
