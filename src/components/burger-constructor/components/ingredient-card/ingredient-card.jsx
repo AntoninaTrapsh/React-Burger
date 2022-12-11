@@ -10,14 +10,12 @@ import {
     deleteIngredientFromConstructor
 } from "../../../../services/store/actionCreators/burger-constructor";
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
-import {openIngredientDetails} from "../../../../services/store/actionCreators/ingredient-details";
 import PropTypes from "prop-types";
-import {useHistory, useLocation} from "react-router-dom/cjs/react-router-dom";
+import {useLocation} from "react-router-dom/cjs/react-router-dom";
 import {Link} from "react-router-dom";
 
 const IngredientCard = (props) => {
     const ref = React.useRef(null);
-    const history = useHistory();
     const location = useLocation();
 
     const [, dragRef] = useDrag({
@@ -75,10 +73,6 @@ const IngredientCard = (props) => {
         dispatch(decreaseIngredientCounter(ingredient._id));
     }
 
-    const handleIngredientCardOpen = (ingredient) => {
-        dispatch(openIngredientDetails(ingredient))
-    }
-
     const ingredientId = props.ingredient._id
 
     return (
@@ -89,7 +83,7 @@ const IngredientCard = (props) => {
                 state: { background: location },
             }}
         >
-            <div className="mb-4" onClick={() => handleIngredientCardOpen(props.ingredient)} ref={ref}>
+            <div className="mb-4" ref={ref}>
                 <div className={styles['ingredient-card__stuffing-list']}>
                     <DragIcon type="primary"/>
                     <ConstructorElement
