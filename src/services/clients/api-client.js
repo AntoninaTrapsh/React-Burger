@@ -1,46 +1,46 @@
 import {addTokensToStorage, getTokenFromStorage} from "../../utils/localStorageHelper";
 
-class AuthClient {
-    authApi = "https://norma.nomoreparties.space/api/auth/";
-    resetPasswordApi = "https://norma.nomoreparties.space/api/password-reset/"
+class ApiClient {
+    BASE_URL = "https://norma.nomoreparties.space/api";
+
+    async _request(url, options) {
+        return fetch(url, options).then(this.checkResponse)
+    }
 
     async signIn(url, userData) {
         const { email, password } = userData;
-        const response = await fetch(`${this.authApi}${url}`, {
+        return await this._request(`${this.BASE_URL}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({email, password}),
         });
-        return await this.checkResponse(response);
     }
 
     async signOut(url, token) {
-        const response = await fetch(`${this.authApi}${url}`, {
+        return await this._request(`${this.BASE_URL}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({token}),
         });
-        return await this.checkResponse(response);
     }
 
     async register(url, userData) {
         const { email, password, name } = userData;
-        const response = await fetch(`${this.authApi}${url}`, {
+        return await this._request(`${this.BASE_URL}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({email, password, name}),
         });
-        return await this.checkResponse(response);
     }
 
     async refreshToken(url) {
-        const response = await fetch(`${this.authApi}${url}`, {
+        return await this._request(`${this.BASE_URL}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -49,51 +49,62 @@ class AuthClient {
                 token: getTokenFromStorage("refreshToken"),
             })
         });
-        return await this.checkResponse(response);
     }
 
-    async resetPasswordOnFirstStep(data) {
+    async resetPasswordOnFirstStep(url, data) {
         const { email } = data;
-        const response = await fetch(this.resetPasswordApi, {
+        return await this._request(`${this.BASE_URL}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({email}),
         });
-        return await this.checkResponse(response);
     }
 
     async resetPasswordOnSecondStep(url, data) {
         const { password, code } = data;
-        const response = await fetch(`${this.resetPasswordApi}${url}`, {
+        return await this._request(`${this.BASE_URL}${url}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({password, token: code}),
         });
-        return await this.checkResponse(response);
     }
 
     async fetchWithRefresh(url, options) {
         try {
-            const response = await fetch(`${this.authApi}${url}`, options);
-            return await this.checkResponse(response);
+            return await this._request(`${this.BASE_URL}${url}`, options);
         } catch (err) {
             if (err.message === "jwt expired") {
-                const refreshData = await this.refreshToken("token");
+                const refreshData = await this.refreshToken("/auth/token");
                 if (!refreshData.success) {
                     await Promise.reject(refreshData);
                 }
                 addTokensToStorage(refreshData.accessToken, refreshData.refreshToken);
                 options.headers.authorization = refreshData.accessToken;
-                const response = await fetch(`${this.authApi}${url}`, options);
-                return await this.checkResponse(response);
+                return await this._request(`${this.BASE_URL}${url}`, options);
             } else {
                 return Promise.reject(err);
             }
         }
+    }
+
+    async getIngredients(url) {
+        return await this._request(`${this.BASE_URL}${url}`);
+    }
+
+    async sendOrderDetails(url, ingredients) {
+        const token = getTokenFromStorage("accessToken");
+        return await this._request(`${this.BASE_URL}${url}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ingredients}),
+            authorization: token,
+        }) ;
     }
 
     async checkResponse(response) {
@@ -105,4 +116,4 @@ class AuthClient {
     }
 }
 
-export default new AuthClient();
+export default new ApiClient();

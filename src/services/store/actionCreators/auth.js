@@ -1,4 +1,4 @@
-import AuthClient from "../../clients/auth-client";
+import AuthClient from "../../clients/api-client";
 import {
     FORGOT_PASSWORD_ERROR, FORGOT_PASSWORD_SUCCESS,
     GET_USER_ERROR,
@@ -75,11 +75,11 @@ export function getRegistrationError() {
     }
 }
 
-export function fetchUserRegistration(url, userData) {
+export function fetchUserRegistration(userData) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(FORM_TYPES.REGISTER));
 
-        AuthClient.register(url, userData)
+        AuthClient.register("/auth/register", userData)
             .then((data) => {
                 data.user.password = userData.password;
                 dispatch(register(data));
@@ -106,7 +106,7 @@ export function fetchUserLogin(url, userData) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(FORM_TYPES.SIGN_IN));
 
-        AuthClient.signIn("login", userData)
+        AuthClient.signIn("/auth/login", userData)
             .then((data) => {
                 data.user.password = userData.password;
                 dispatch(login(data));
@@ -146,7 +146,7 @@ export function resetPasswordOnFirstStep(data) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(FORM_TYPES.FORGOT_PASSWORD));
 
-        AuthClient.resetPasswordOnFirstStep(data)
+        AuthClient.resetPasswordOnFirstStep("/password-reset", data)
             .then((data) => {
                 dispatch(getResetPasswordOnFirstStepResponse(data));
             })
@@ -160,7 +160,7 @@ export function resetPasswordOnSecondStep(data) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus(FORM_TYPES.RESET_PASSWORD));
 
-        AuthClient.resetPasswordOnSecondStep("reset", data)
+        AuthClient.resetPasswordOnSecondStep("/password-reset/reset", data)
             .then((data) => {
                 dispatch(getResetPasswordOnSecondStepResponse(data));
             })
@@ -188,7 +188,7 @@ export function fetchUserSignOut() {
 
         const refreshToken = getTokenFromStorage("refreshToken");
 
-        AuthClient.signOut("logout", refreshToken)
+        AuthClient.signOut("/auth/logout", refreshToken)
             .then((data) => {
                 dispatch(signOut(data));
                 removeTokensFromStorage();
@@ -231,7 +231,7 @@ export function fetchUserInfo() {
             },
         }
 
-        AuthClient.fetchWithRefresh("user", options)
+        AuthClient.fetchWithRefresh("/auth/user", options)
             .then((data) => {
                 dispatch(getUserInfo(data));
             })
@@ -270,7 +270,7 @@ export function changeUserInfo(data) {
             body: JSON.stringify(data),
         }
 
-        AuthClient.fetchWithRefresh("user", options)
+        AuthClient.fetchWithRefresh("/auth/user", options)
             .then((data) => {
                 dispatch(updateUserInfo(data));
             })

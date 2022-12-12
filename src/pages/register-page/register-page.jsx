@@ -10,7 +10,7 @@ const RegisterPage = () => {
     const dispatch = useDispatch();
 
     function onSubmit(e, data) {
-        dispatch(fetchUserRegistration("register", data));
+        dispatch(fetchUserRegistration(data));
     }
 
     return (

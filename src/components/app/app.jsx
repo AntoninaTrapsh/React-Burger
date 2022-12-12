@@ -16,6 +16,7 @@ import {useDispatch} from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
+import ProfileOrders from "../profile/components/profile-orders/profile-orders";
 
 function App() {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
     const background = location.state && location.state.background;
 
     useEffect(() => {
-        dispatch(fetchIngredients('ingredients'));
+        dispatch(fetchIngredients('/ingredients'));
     }, [dispatch]);
 
     const handleIngredientCardClose = () => {
@@ -61,6 +62,11 @@ function App() {
                         <Route path="/ingredients/:ingredientId" exact={true}>
                             <IngredientsPage/>
                         </Route>
+
+                        <ProtectedRoute path="/orders">
+                            <ProfileOrders/>
+                        </ProtectedRoute>
+
                         <Route>
                             <NotFoundPage/>
                         </Route>

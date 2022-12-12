@@ -49,7 +49,7 @@ const BurgerConstructor = () => {
 
     const showOrderDetails = () => {
         dispatch(openOrderDetailsModal());
-        dispatch(fetchOrderDetails('orders', [buns, ...ingredientsData, buns]));
+        dispatch(fetchOrderDetails('/orders', [buns, ...ingredientsData, buns]));
     }
 
     const disabled = !buns || !ingredientsData.length;

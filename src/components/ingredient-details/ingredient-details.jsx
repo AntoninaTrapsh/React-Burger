@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom/cjs/react-router-dom";
 
 const IngredientDetails = () => {
     const { ingredientId } = useParams();
-    let ingredient = useSelector(selectIngredients)?.find((ingredient) => ingredient._id === ingredientId);
+    const ingredient = useSelector(selectIngredients)?.find((ingredient) => ingredient._id === ingredientId);
 
     return (
         ingredient &&

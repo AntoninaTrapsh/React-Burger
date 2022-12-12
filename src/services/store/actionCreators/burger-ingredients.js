@@ -1,4 +1,4 @@
-import IngredientsClient from "../../clients/ingredients-client";
+import ApiClient from "../../clients/api-client";
 import {
     RESET_PREVIOUS_BUNS,
     DECREASE_INGREDIENT_COUNTER,
@@ -53,7 +53,7 @@ export function fetchIngredients(url) {
     return async (dispatch, getState) => {
         dispatch(changeRequestStatus());
 
-        IngredientsClient.getIngredients(url)
+        ApiClient.getIngredients(url)
             .then((data) => {
                 dispatch(loadIngredients(data));
             })

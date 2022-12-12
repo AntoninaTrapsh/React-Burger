@@ -3,6 +3,7 @@ import NavigationItem from "../navigation-item/navigation-item";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import {useRouteMatch} from "react-router-dom/cjs/react-router-dom";
+import {Link} from "react-router-dom";
 
 const Navigation = () => {
 
@@ -27,9 +28,9 @@ const Navigation = () => {
                         text="Лента заказов"
                     />
                 </div>
-                <div className={`${styles.navigation__logo}`}>
+                <Link to="/" className={`${styles.navigation__logo}`}>
                     <Logo />
-                </div>
+                </Link>
                 <div className={`${styles['navigation__profile']}`}>
                     <NavigationItem
                         Icon={ProfileIcon}
