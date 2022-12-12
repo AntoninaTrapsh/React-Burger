@@ -1,0 +1,48 @@
+.profile-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 120px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.profile-navigation {
+    list-style: none;
+    margin: 0 60px 0 0;
+    padding: 0;
+}
+
+.profile-navigation__item {
+    display: flex;
+    align-items: center;
+    width: 320px;
+    height: 64px;
+}
+
+.sign-out {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.sign-out:hover {
+    color: white;
+}
+
+.profile-description {
+    max-width: 320px;
+    opacity: 0.4;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    color: white;
+}
+
+.active-link {
+    color: white;
+    text-decoration: none;
+}

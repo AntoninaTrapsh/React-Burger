@@ -1,63 +1,89 @@
 import React, {useEffect} from 'react';
+import { Route, Switch } from 'react-router-dom';
 import AppHeader from "../app-header/app-header";
-
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
 import "./app.module.css"
+import MainPage from "../../pages/main-page/main-page";
+import LoginPage from "../../pages/login-page/login-page";
+import RegisterPage from "../../pages/register-page/register-page";
+import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
+import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
+import ProfilePage from "../../pages/profile-page/profile-page";
+import IngredientsPage from "../../pages/ingredients-page/ingredients-page";
+import {ProtectedRoute} from "../protected-route/protected-route";
+import {useHistory, useLocation} from "react-router-dom/cjs/react-router-dom";
 import Modal from "../modal/modal";
+import {useDispatch} from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import {useDispatch, useSelector} from "react-redux";
-import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
-import {closeIngredientDetails} from "../../services/store/actionCreators/ingredient-details";
-import {selectIngredientModalState} from "../../services/store/selectors/ingredient-details";
-import {DndProvider} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import {selectOrderDetailsState} from "../../services/store/selectors/order-details";
-import OrderDetails from "../order-details/order-details";
-import {closeOrderDetailsModal} from "../../services/store/actionCreators/order-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
+import NotFoundPage from "../../pages/not-found-page/not-found-page";
+import ProfileOrders from "../profile/components/profile-orders/profile-orders";
 
 function App() {
     const dispatch = useDispatch();
-    const ingredientsData = useSelector(selectIngredients);
-    const isIngredientCardOpen = useSelector(selectIngredientModalState);
-    const isOrderDetailsOpen = useSelector(selectOrderDetailsState);
-
-    const handleIngredientCardClose = () => {
-        dispatch(closeIngredientDetails())
-    }
-
-    const handleCloseOrderModal = () => {
-        dispatch(closeOrderDetailsModal());
-    }
+    const history = useHistory();
+    const location = useLocation();
+    const background = location.state && location.state.background;
 
     useEffect(() => {
-        dispatch(fetchIngredients('ingredients'));
-    }, [dispatch])
+        dispatch(fetchIngredients('/ingredients'));
+    }, [dispatch]);
+
+    const handleIngredientCardClose = () => {
+        history.goBack();
+    }
+
     return (
         <div className="App">
-            <AppHeader/>
-            <main>
-                {
-                    ingredientsData &&
-                    <DndProvider backend={HTML5Backend}>
-                        <BurgerIngredients/>
-                        <BurgerConstructor/>
-                    </DndProvider>
-                }
-            </main>
-            {
-                isIngredientCardOpen &&
-                <Modal title="Детали ингредиента" handleModalClose={handleIngredientCardClose}>
-                    <IngredientDetails/>
-                </Modal>
-            }
-            {
-                isOrderDetailsOpen &&
-                <Modal handleModalClose={handleCloseOrderModal}>
-                    <OrderDetails/>
-                </Modal>
-            }
+                <AppHeader/>
+                <main>
+                    <Switch location={background || location}>
+                        <Route path="/" exact={true}>
+                            <MainPage/>
+                        </Route>
+
+                        <ProtectedRoute authPage path="/login" exact={true}>
+                            <LoginPage />
+                        </ProtectedRoute>
+                        <ProtectedRoute authPage path="/register" exact={true}>
+                            <RegisterPage/>
+                        </ProtectedRoute>
+
+                        <ProtectedRoute authPage path="/forgot-password" exact={true}>
+                            <ForgotPasswordPage/>
+                        </ProtectedRoute>
+                        <ProtectedRoute authPage path="/reset-password" exact={true}>
+                            <ResetPasswordPage/>
+                        </ProtectedRoute>
+
+                        <ProtectedRoute path="/profile">
+                            <ProfilePage/>
+                        </ProtectedRoute>
+
+                        <Route path="/ingredients/:ingredientId" exact={true}>
+                            <IngredientsPage/>
+                        </Route>
+
+                        <ProtectedRoute path="/orders">
+                            <ProfileOrders/>
+                        </ProtectedRoute>
+
+                        <Route>
+                            <NotFoundPage/>
+                        </Route>
+                    </Switch>
+
+                    {background && (
+                        <Route
+                            path='/ingredients/:ingredientId'
+                            children={
+                                <Modal title="Детали ингредиента" handleModalClose={handleIngredientCardClose}>
+                                    <IngredientDetails/>
+                                </Modal>
+                            }
+                        />
+                    )}
+
+                </main>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import {
     OPEN_ORDER_DETAILS_MODAL,
     SEND_ORDER_REQUEST
 } from "../actions/order-details";
-import IngredientsClient from "../../clients/ingredients-client";
+import ApiClient from "../../clients/api-client";
 import {clearConstructor} from "./burger-constructor";
 
 export function changeRequestStatus() {
@@ -47,7 +47,7 @@ export function fetchOrderDetails(url, ingredients) {
             return [...arr, ingredient._id];
         }, [])
 
-        IngredientsClient.sendOrderDetails(url, ingredientsIds)
+        ApiClient.sendOrderDetails(url, ingredientsIds)
             .then((data) => {
                 dispatch(getOrderData(data));
                 dispatch(clearConstructor());
