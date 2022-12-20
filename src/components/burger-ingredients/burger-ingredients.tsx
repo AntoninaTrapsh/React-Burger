@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import styles from "./burger-ingredients.module.css";
 import IngredientsHeader from "./components/ingredients-header/ingredients-header";
 import IngredientsNavigation from "./components/ingredients-navigation/ingredients-navigation";
 import IngredientsList from "./components/ingredients-list/ingredients-list";
 import {INGREDIENT_TYPES} from "./consts/consts";
+import {TIngredientTypes} from "../../utils/interfaces";
 
-const BurgerIngredients = () => {
-    const [activeTab, setActiveTab] = useState(INGREDIENT_TYPES.bun);
+const BurgerIngredients: FC = () => {
+    const [activeTab, setActiveTab] = useState<TIngredientTypes>(INGREDIENT_TYPES.bun as TIngredientTypes);
 
-    const handleChangeActiveTab = (tab) => {
+    const handleChangeActiveTab = (tab: TIngredientTypes) => {
         setActiveTab(tab);
     }
 

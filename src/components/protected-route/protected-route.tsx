@@ -1,17 +1,26 @@
-import { Route } from 'react-router-dom';
+import {Route, useLocation} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuthInfo, selectIsAuthRequestEnded} from "../../services/store/selectors/auth";
 import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/auth";
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import Preloader from "../preloader/preloader";
-import {useLocation} from "react-router-dom/cjs/react-router-dom";
+import React from 'react';
+import {TProtectedRouteLocation} from "../../utils/interfaces";
 
-export function ProtectedRoute({ children, authPage, ...rest }) {
+interface IProtectedRouteProps {
+    authPage?: boolean;
+    path: string;
+    exact?: boolean;
+    children: JSX.Element;
+}
+
+export const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, authPage, ...rest }) => {
     const dispatch = useDispatch();
-    const location = useLocation();
+    const location = useLocation<TProtectedRouteLocation>();
 
     useEffect(() => {
+        // @ts-ignore
         dispatch(fetchUserInfo());
 
         return () => {

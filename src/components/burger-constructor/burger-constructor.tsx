@@ -10,8 +10,8 @@ import {
 import {selectBuns, selectIngredientsList, selectTotalPrice} from "../../services/store/selectors/burger-constructor";
 import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/auth";
 import {selectAuthInfo, selectIsAuthRequestEnded} from "../../services/store/selectors/auth";
-import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import Preloader from "../preloader/preloader";
+import {useHistory} from "react-router-dom";
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const BurgerConstructor = () => {
     const isAuth = useSelector(selectAuthInfo)
 
     useEffect(() => {
+        // @ts-ignore
         dispatch(fetchUserInfo());
         return () => {
             dispatch(isUserChecked(false))
@@ -49,6 +50,7 @@ const BurgerConstructor = () => {
 
     const showOrderDetails = () => {
         dispatch(openOrderDetailsModal());
+        // @ts-ignore
         dispatch(fetchOrderDetails('/orders', [buns, ...ingredientsData, buns]));
     }
 

@@ -1,17 +1,20 @@
 import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, {FC} from "react";
 import {BUN_TYPES} from "../../consts/consts";
 import styles from "./bun.module.css"
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
-import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import {useLocation} from "react-router-dom/cjs/react-router-dom";
+import {Link, useLocation} from "react-router-dom";
+import {IIngredient} from "../../../../utils/interfaces";
 
-const Bun = (props) => {
+interface IBunProps {
+    position: 'top' | 'bottom';
+    data?: IIngredient;
+}
+
+const Bun: FC<IBunProps> = ({position, data}) => {
     const location = useLocation();
 
-    const ingredientId = props.data?._id;
+    const ingredientId = data?._id;
 
     return (
         <Link
@@ -23,25 +26,20 @@ const Bun = (props) => {
         >
             <div className={`${styles['bun__wrapper']} ml-8 pt-4 pb-4`}>
                 {
-                    props.data ?
+                    data ?
                         <ConstructorElement
-                            type={props.position}
+                            type={position}
                             isLocked={true}
-                            text={`${props.data.name} (${BUN_TYPES[props.position]})`}
-                            thumbnail={props.data.image}
-                            price={props.data.price}
+                            text={`${data.name} (${BUN_TYPES[position]})`}
+                            thumbnail={data.image}
+                            price={data.price}
                         /> :
-                        <DefaultConstructorElement position={props.position}>Выберите булочку</DefaultConstructorElement>
+                        <DefaultConstructorElement position={position}>Выберите булочку</DefaultConstructorElement>
 
                 }
             </div>
         </Link>
     )
-}
-
-Bun.propTypes = {
-    data: INGREDIENT_OBJECT_TYPE,
-    position: PropTypes.string.isRequired,
 }
 
 export default Bun;

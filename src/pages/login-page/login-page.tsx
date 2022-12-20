@@ -1,15 +1,17 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import AuthForm from "../../components/auth-form/auth-form";
 import {Link} from "react-router-dom";
 import styles from "./login-page.module.css";
 import {FORM_TYPES} from "../../utils/consts";
 import {useDispatch} from "react-redux";
 import {fetchUserLogin} from "../../services/store/actionCreators/auth";
+import {IDefaultFormValues} from "../../utils/interfaces";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
 
-    function onSubmit(e, userData) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, userData: IDefaultFormValues) {
+        // @ts-ignore
         dispatch(fetchUserLogin("login", userData))
     }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import styles from "../login-page/login-page.module.css";
 import AuthForm from "../../components/auth-form/auth-form";
 import {FORM_TYPES} from "../../utils/consts";
@@ -9,13 +9,15 @@ import {
     selectResetPasswordOnFirstStepStatus,
     selectResetPasswordOnSecondStepStatus
 } from "../../services/store/selectors/auth";
+import {IDefaultFormValues} from "../../utils/interfaces";
 
 const ResetPasswordPage = () => {
     const dispatch = useDispatch();
     const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
     const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);
 
-    function onSubmit(e, data) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) {
+        // @ts-ignore
         dispatch(resetPasswordOnSecondStep(data));
     }
 

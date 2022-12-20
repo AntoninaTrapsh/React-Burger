@@ -1,8 +1,12 @@
-import React from "react";
+import React, {FC} from "react";
 import styles from "./default-constructor-element.module.css"
-import PropTypes from "prop-types";
 
-const DefaultConstructorElement = (props) => {
+interface IDefaultConstructorElement {
+    position?: "top" | "bottom";
+    children: string;
+}
+
+const DefaultConstructorElement: FC<IDefaultConstructorElement> = (props) => {
     const positionClass = props.position === "top" ? "top-element" : props.position === "bottom" ? "bottom-element" : "default-element";
 
     return (
@@ -10,11 +14,6 @@ const DefaultConstructorElement = (props) => {
             <p className="text text_type_main-default text_color_inactive">{props.children}</p>
         </div>
     )
-}
-
-DefaultConstructorElement.propTypes = {
-    position: PropTypes.string,
-    children: PropTypes.string.isRequired,
 }
 
 export default DefaultConstructorElement;

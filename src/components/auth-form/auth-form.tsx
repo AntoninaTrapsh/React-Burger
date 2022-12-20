@@ -1,13 +1,19 @@
-import React from "react";
+import React, {FC, FormEvent} from "react";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./auth-form.module.css";
 import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
-import PropTypes from "prop-types";
 import {useForm} from "../../hooks/useForm";
+import {IDefaultFormValues, TInputTypes} from "../../utils/interfaces";
 
-const AuthForm = ({type, onSubmit, buttonTitle}) => {
+interface IAuthFormProps {
+    type: string;
+    onSubmit: (e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) => void;
+    buttonTitle: string;
+}
 
-    const initialFormValues = {
+const AuthForm : FC<IAuthFormProps> = ({type, onSubmit, buttonTitle}) => {
+
+    const initialFormValues: IDefaultFormValues = {
         name: "",
         email: "",
         password: "",
@@ -33,7 +39,7 @@ const AuthForm = ({type, onSubmit, buttonTitle}) => {
                     INPUT_CONDITIONS.NAME_CONDITIONS &&
                     <div className="mb-6">
                         <Input
-                            type={INPUT_SETTINGS.TYPE.TEXT}
+                            type={INPUT_SETTINGS.TYPE.TEXT as TInputTypes}
                             placeholder={INPUT_SETTINGS.PLACEHOLDER.NAME}
                             name={INPUT_SETTINGS.NAME.NAME}
                             onChange={handleChange}
@@ -45,7 +51,7 @@ const AuthForm = ({type, onSubmit, buttonTitle}) => {
                     INPUT_CONDITIONS.EMAIL_CONDITIONS &&
                     <div className="mb-6">
                         <Input
-                            type={INPUT_SETTINGS.TYPE.EMAIL}
+                            type={INPUT_SETTINGS.TYPE.EMAIL as TInputTypes}
                             placeholder={EMAIL_PLACEHOLDER}
                             name={INPUT_SETTINGS.NAME.EMAIL}
                             onChange={handleChange}
@@ -68,23 +74,17 @@ const AuthForm = ({type, onSubmit, buttonTitle}) => {
                     INPUT_CONDITIONS.RESET_PASSWORD_CONDITIONS &&
                     <div className="mb-6">
                         <Input
-                            type={INPUT_SETTINGS.TYPE.TEXT}
+                            type={INPUT_SETTINGS.TYPE.TEXT as TInputTypes}
                             placeholder={INPUT_SETTINGS.PLACEHOLDER.CODE}
                             name={INPUT_SETTINGS.NAME.CODE}
                             onChange={handleChange}
-                            value={values.code}
+                            value={values.code as string}
                         />
                     </div>
                 }
                 <Button htmlType="submit" type="primary" size="large">{buttonTitle}</Button>
             </form>
     )
-}
-
-AuthForm.propTypes = {
-    type: PropTypes.string,
-    onSubmit: PropTypes.func,
-    buttonTitle: PropTypes.string,
 }
 
 export default AuthForm;

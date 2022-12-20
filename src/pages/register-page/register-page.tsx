@@ -1,15 +1,17 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import styles from "./register-page.module.css";
 import AuthForm from "../../components/auth-form/auth-form";
 import {FORM_TYPES} from "../../utils/consts";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {fetchUserRegistration} from "../../services/store/actionCreators/auth";
+import {IDefaultFormValues} from "../../utils/interfaces";
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
 
-    function onSubmit(e, data) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) {
+        // @ts-ignore
         dispatch(fetchUserRegistration(data));
     }
 

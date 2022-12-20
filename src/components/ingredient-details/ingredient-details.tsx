@@ -2,11 +2,16 @@ import React from "react";
 import styles from "./ingredient-details.module.css"
 import {useSelector} from "react-redux";
 import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
-import {useParams} from "react-router-dom/cjs/react-router-dom";
+import {useParams} from "react-router-dom";
+import {IIngredient} from "../../utils/interfaces";
+
+interface IParams {
+    ingredientId: string;
+}
 
 const IngredientDetails = () => {
-    const { ingredientId } = useParams();
-    const ingredient = useSelector(selectIngredients)?.find((ingredient) => ingredient._id === ingredientId);
+    const { ingredientId } = useParams<IParams>();
+    const ingredient = useSelector(selectIngredients)?.find((ingredient: IIngredient) => ingredient._id === ingredientId);
 
     return (
         ingredient &&

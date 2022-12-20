@@ -2,8 +2,7 @@ import styles from "./navigation.module.css";
 import NavigationItem from "../navigation-item/navigation-item";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import {useRouteMatch} from "react-router-dom/cjs/react-router-dom";
-import {Link} from "react-router-dom";
+import {Link, useRouteMatch} from "react-router-dom";
 
 const Navigation = () => {
 

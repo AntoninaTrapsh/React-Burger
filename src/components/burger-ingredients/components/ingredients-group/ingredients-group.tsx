@@ -1,15 +1,19 @@
 import styles from "./ingredients-group.module.css";
-import React from "react";
+import React, {FC} from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
-import PropTypes from "prop-types";
-import INGREDIENTS_OBJECT_TYPE from "../../../../utils/types";
+import {IIngredientsList} from "../../../../utils/interfaces";
 
-const IngredientsGroup = (props) => {
+interface IIngredientGroupProps {
+    title: string;
+    ingredients: IIngredientsList[];
+}
+
+const IngredientsGroup: FC<IIngredientGroupProps> = ({title, ingredients}) => {
     return (
-        <section data-id={props.title}>
-            <h2 className="text text_type_main-medium">{props.title}</h2>
+        <section data-id={title}>
+            <h2 className="text text_type_main-medium">{title}</h2>
             <div className={`${styles['ingredients-group__items']} mb-10 mt-6`}>
-                {props.ingredients.map((ingredient) => {
+                {ingredients.map((ingredient) => {
                     return <IngredientCard key={ingredient._id} ingredient={ingredient}/>
                 })}
             </div>
@@ -18,8 +22,4 @@ const IngredientsGroup = (props) => {
     )
 }
 
-IngredientsGroup.propTypes = {
-    title: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(INGREDIENTS_OBJECT_TYPE).isRequired,
-}
 export default IngredientsGroup;

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./profile.module.css";
-import {useHistory, useRouteMatch} from "react-router-dom/cjs/react-router-dom";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory, useRouteMatch} from "react-router-dom";
 import { Route, Switch } from 'react-router-dom';
 import ProfileEditing from "./components/profile-editing/profile-editing";
 import ProfileOrders from "./components/profile-orders/profile-orders";
@@ -14,6 +13,7 @@ const Profile = () => {
     const { path } = useRouteMatch();
 
     const signOut = () => {
+        // @ts-ignore
         dispatch(fetchUserSignOut());
         history.push({
             pathname: "/login",

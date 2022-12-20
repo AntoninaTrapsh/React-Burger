@@ -1,8 +1,7 @@
 import styles from "./ingredient-card.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
-import INGREDIENT_OBJECT_TYPE from "../../../../utils/types";
-import {useDrag, useDrop} from "react-dnd";
+import React, {FC} from "react";
+import {useDrag, useDrop, XYCoord} from "react-dnd";
 import {DND_TYPES} from "../../../../utils/consts";
 import {useDispatch} from "react-redux";
 import {
@@ -10,13 +9,15 @@ import {
     deleteIngredientFromConstructor
 } from "../../../../services/store/actionCreators/burger-constructor";
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
-import PropTypes from "prop-types";
-import {useLocation} from "react-router-dom/cjs/react-router-dom";
-import {Link} from "react-router-dom";
+import {IConstructorIngredient} from "../../../../utils/interfaces";
 
-const IngredientCard = (props) => {
-    const ref = React.useRef(null);
-    const location = useLocation();
+interface IIngredientCard {
+    index: number;
+    ingredient: IConstructorIngredient;
+}
+
+const IngredientCard: FC<IIngredientCard> = (props) => {
+    const ref = React.useRef<HTMLDivElement>(null);
 
     const [, dragRef] = useDrag({
         type: DND_TYPES.CARD_FROM_CONSTRUCTOR,
@@ -30,7 +31,7 @@ const IngredientCard = (props) => {
 
     const [, dropRef ] = useDrop({
         accept: DND_TYPES.CARD_FROM_CONSTRUCTOR,
-        hover: (item, monitor) => {
+        hover: (item: IConstructorIngredient, monitor) => {
             if (!ref.current) {
                 return
             }
@@ -43,7 +44,7 @@ const IngredientCard = (props) => {
             const hoverBoundingRect = ref.current.getBoundingClientRect();
             const clientOffset = monitor.getClientOffset();
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+            const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return
@@ -67,41 +68,25 @@ const IngredientCard = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleDeleteIngredient = (e, ingredient) => {
-        e.stopPropagation();
+    const handleDeleteIngredient = (ingredient: IConstructorIngredient) => {
         dispatch(deleteIngredientFromConstructor(ingredient.uuid));
         dispatch(decreaseIngredientCounter(ingredient._id));
     }
 
-    const ingredientId = props.ingredient._id
-
     return (
-        <Link
-            key={ingredientId}
-            to={{
-                pathname: `/ingredients/${ingredientId}`,
-                state: { background: location },
-            }}
-        >
-            <div className="mb-4" ref={ref}>
-                <div className={styles['ingredient-card__stuffing-list']}>
-                    <DragIcon type="primary"/>
-                    <ConstructorElement
-                        isLocked={false}
-                        text={props.ingredient.name}
-                        price={props.ingredient.price}
-                        thumbnail={props.ingredient.image}
-                        handleClose={(e) => handleDeleteIngredient(e, props.ingredient)}
-                    />
-                </div>
+        <div className="mb-4" ref={ref}>
+            <div className={styles['ingredient-card__stuffing-list']}>
+                <DragIcon type="primary"/>
+                <ConstructorElement
+                    isLocked={false}
+                    text={props.ingredient.name}
+                    price={props.ingredient.price}
+                    thumbnail={props.ingredient.image}
+                    handleClose={() => handleDeleteIngredient(props.ingredient)}
+                />
             </div>
-        </Link>
+        </div>
     )
 }
-
-IngredientCard.propTypes = {
-    ingredient: INGREDIENT_OBJECT_TYPE.isRequired,
-    index: PropTypes.number.isRequired,
-};
 
 export default IngredientCard;

@@ -1,43 +1,48 @@
 import styles from "./ingredients-list.module.css";
-import React, {useCallback, useState} from "react";
+import React, {FC, useCallback, useState} from "react";
 import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
 import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
 import {selectIngredients} from "../../../../services/store/selectors/burger-ingredients";
+import {IIngredient, TIngredientTypes} from "../../../../utils/interfaces";
 
-const IngredientsList = ({handleChangeActiveTab, ...props}) => {
+interface IIngredientsListProps {
+    handleChangeActiveTab: (tab: TIngredientTypes) => void;
+}
+
+const IngredientsList: FC<IIngredientsListProps> = ({handleChangeActiveTab}) => {
     const ingredientsData = useSelector(selectIngredients);
     const [mainSectionHeight, setMainSectionHeight] = useState(0);
 
-    const ingredientTypeKeys = Object.keys(INGREDIENT_TYPES);
+    const ingredientTypeKeys: TIngredientTypes[] = Object.keys(INGREDIENT_TYPES) as TIngredientTypes[];
 
-    const handleScroll = useCallback((e) => {
-        for (let i = 0; i < e.target.children.length; i++) {
-            const el = e.target.children[i]
+    const handleScroll = useCallback((e: React.UIEvent<HTMLElement, UIEvent>) => {
+        for (let i = 0; i < (e.target as HTMLElement).children.length; i++) {
+            const el = (e.target as HTMLElement).children[i]
             const elRect = el.getBoundingClientRect()
 
             const currElPositionValid = elRect.top >= 0 && elRect.top <= mainSectionHeight
-            const nextSectionPositionValid = e.target.children[i + 1] ? e.target.children[i + 1].getBoundingClientRect().top > mainSectionHeight : true
+            const nextSectionPositionValid = (e.target as HTMLElement).children[i + 1] ? (e.target as HTMLElement).children[i + 1].getBoundingClientRect().top > mainSectionHeight : true
 
             if (currElPositionValid && nextSectionPositionValid) {
-                handleChangeActiveTab(el.dataset.id);
+                handleChangeActiveTab((el as HTMLElement).dataset.id as TIngredientTypes);
                 return;
             }
         }
     }, [mainSectionHeight, handleChangeActiveTab])
 
-    const calcSectionHeight = useCallback((mainSection) => {
+    const calcSectionHeight = useCallback((mainSection: HTMLElement) => {
         if (mainSection) {
             setMainSectionHeight(mainSection.getBoundingClientRect().top + 50)
         }
     }, [])
 
     return(
-        <section ref={(el) => calcSectionHeight(el)} className={styles['burger-ingredients__group-list']} onScroll={(e) => handleScroll(e)}>
+        <section ref={(el) => calcSectionHeight(el as HTMLElement)} className={styles['burger-ingredients__group-list']} onScroll={(e) => handleScroll(e)}>
             {
                 ingredientTypeKeys.map((type) => {
-                    const groupIngredientsList = ingredientsData.reduce((list, ingredient) => {
+                    const groupIngredientsList = ingredientsData.reduce((list: IIngredient[], ingredient: IIngredient) => {
                         if (type === ingredient.type) {
                             list.push(ingredient);
                         }
@@ -49,10 +54,6 @@ const IngredientsList = ({handleChangeActiveTab, ...props}) => {
         </section>
 
     )
-}
-
-IngredientsList.propTypes = {
-    handleChangeActiveTab: PropTypes.func.isRequired,
 }
 
 export default IngredientsList;

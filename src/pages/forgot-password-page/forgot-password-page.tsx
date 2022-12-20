@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import styles from "./forgot-password.module.css";
 import AuthForm from "../../components/auth-form/auth-form";
 import {FORM_TYPES} from "../../utils/consts";
@@ -9,13 +9,15 @@ import {
     selectResetPasswordOnSecondStepStatus
 } from "../../services/store/selectors/auth";
 import {resetPasswordOnFirstStep} from "../../services/store/actionCreators/auth";
+import {IDefaultFormValues} from "../../utils/interfaces";
 
 const ForgotPasswordPage = () => {
     const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
     const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);
     const dispatch = useDispatch();
 
-    function onSubmit(e, data) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) {
+        // @ts-ignore
         dispatch(resetPasswordOnFirstStep(data));
     }
 

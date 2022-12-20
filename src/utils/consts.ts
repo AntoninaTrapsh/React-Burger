@@ -1,9 +1,11 @@
+import {IInputSettings} from "./interfaces";
+
 export const DND_TYPES = {
     CARD_FROM_INGREDIENTS: "CARD_FROM_INGREDIENTS",
     CARD_FROM_CONSTRUCTOR: "CARD_FROM_CONSTRUCTOR",
 };
 
-export const INPUT_SETTINGS = {
+export const INPUT_SETTINGS: IInputSettings = {
     TYPE: {
         TEXT: 'text',
         EMAIL: 'email',

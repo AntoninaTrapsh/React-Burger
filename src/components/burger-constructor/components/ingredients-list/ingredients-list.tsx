@@ -9,6 +9,7 @@ import {addBunsToConstructor, addIngredientToConstructor} from "../../../../serv
 import {selectBuns, selectIngredientsList} from "../../../../services/store/selectors/burger-constructor";
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
 import {resetPreviousBuns, increaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
+import {IConstructorIngredient, IIngredient} from "../../../../utils/interfaces";
 
 const IngredientsList = () => {
     const dispatch = useDispatch();
@@ -18,11 +19,12 @@ const IngredientsList = () => {
     const [, dropTargetRef] = useDrop({
         accept: DND_TYPES.CARD_FROM_INGREDIENTS,
         drop(ingredient) {
+            // @ts-ignore
             handleOnDrop(ingredient);
         }
     });
 
-    const handleOnDrop = (ingredient) => {
+    const handleOnDrop = (ingredient: IIngredient) => {
         if (ingredient.type === "bun") {
             dispatch(resetPreviousBuns());
             dispatch(addBunsToConstructor(ingredient));
@@ -39,7 +41,7 @@ const IngredientsList = () => {
             {
                 ingredients.length ?
                     <div className={`${styles['ingredient-list']} pr-2`}>
-                        {ingredients.map((ingredient, index) => {
+                        {ingredients.map((ingredient: IConstructorIngredient, index: number) => {
                             if (ingredient.type === "bun") {
                                 return null
                             }

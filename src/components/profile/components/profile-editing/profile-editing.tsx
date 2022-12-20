@@ -1,28 +1,30 @@
-import React, {useState} from "react";
+import React, {FC, FormEvent, useState} from "react";
 import {INPUT_SETTINGS} from "../../../../utils/consts";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-editing.module.css";
 import {selectUserInfo} from "../../../../services/store/selectors/auth";
 import {changeUserInfo} from "../../../../services/store/actionCreators/auth";
+import {IDefaultFormValues, IFocusFormValues, TInputTypes} from "../../../../utils/interfaces";
 
-const ProfileEditing = () => {
+const ProfileEditing: FC = () => {
     const dispatch = useDispatch();
     const user = useSelector(selectUserInfo);
 
-    const initialFormValues = {
+    const initialFormValues: IDefaultFormValues = {
         name: user.name,
         email: user.email,
         password: user.password || "",
     }
 
-    const initialFocusInputs = Object.keys(initialFormValues).reduce((obj, input) => {
-        obj[input] = false;
-        return obj;
-    }, {})
+    const initialFocusInputs: IFocusFormValues = {
+        name: false,
+        email: false,
+        password: false,
+    }
 
     const [formValue, setFormValue] = useState(initialFormValues);
-    const [focusInputs, setFocusInputs] = useState(initialFocusInputs);
+    const [focusInputs, setFocusInputs] = useState<IFocusFormValues>(initialFocusInputs);
     const [isControlSubmitDisplayed, setIsControlSubmitDisplayed] = useState(false);
 
     const isEmptyFormValue = !formValue.name.trim() || !formValue.email || !formValue.password;
@@ -30,13 +32,14 @@ const ProfileEditing = () => {
 
     const isValidForm = !isEmptyFormValue && isChanged;
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
+        // @ts-ignore
         dispatch(changeUserInfo(formValue));
         setIsControlSubmitDisplayed(false);
     }
 
-    const onFormChange = (e)  =>{
+    const onFormChange = (e: React.ChangeEvent<HTMLInputElement>): void  =>{
         setFormValue({
             ...formValue,
             [e.target.name]: e.target.value,
@@ -44,21 +47,21 @@ const ProfileEditing = () => {
         setIsControlSubmitDisplayed(true);
     }
 
-    const onCancel = () => {
+    const onCancel = (): void => {
         setFormValue({
             ...initialFormValues,
         });
         setIsControlSubmitDisplayed(false);
     }
 
-    const onFocus = (e) => {
+    const onFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
         setFocusInputs({
             ...focusInputs,
-            [e.target.name]: true
+            [(e.target.name)]: true
         });
     }
 
-    const onBlur = (e) => {
+    const onBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
         setFocusInputs({
             ...focusInputs,
             [e.target.name]: false
@@ -70,10 +73,10 @@ const ProfileEditing = () => {
             <form className={styles['profile-editing__form']} onSubmit={onSubmit}>
                 <div className="mb-6">
                     <Input
-                        type={INPUT_SETTINGS.TYPE.TEXT}
+                        type={INPUT_SETTINGS.TYPE.TEXT as TInputTypes}
                         placeholder={INPUT_SETTINGS.PLACEHOLDER.NAME}
                         name={INPUT_SETTINGS.NAME.NAME}
-                        icon={focusInputs.name ? "CloseIcon" : "EditIcon"}
+                        icon={focusInputs.name ? "HideIcon" : "EditIcon"}
                         onChange={onFormChange}
                         value={formValue.name}
                         onFocus={onFocus}
@@ -82,10 +85,10 @@ const ProfileEditing = () => {
                 </div>
                 <div className="mb-6">
                     <Input
-                        type={INPUT_SETTINGS.TYPE.EMAIL}
+                        type={INPUT_SETTINGS.TYPE.EMAIL as TInputTypes}
                         placeholder={INPUT_SETTINGS.PLACEHOLDER.EMAIL}
                         name={INPUT_SETTINGS.NAME.EMAIL}
-                        icon={focusInputs.email ? "CloseIcon" : "EditIcon"}
+                        icon={focusInputs.email ? "HideIcon" : "EditIcon"}
                         onChange={onFormChange}
                         value={formValue.email}
                         onFocus={onFocus}
@@ -95,7 +98,7 @@ const ProfileEditing = () => {
                 <div className="mb-6">
                     <PasswordInput
                         name={INPUT_SETTINGS.NAME.PASSWORD}
-                        icon={focusInputs.password ? "CloseIcon" : "EditIcon"}
+                        icon={focusInputs.password ? "HideIcon" : "EditIcon"}
                         onChange={onFormChange}
                         value={formValue.password}
                     />

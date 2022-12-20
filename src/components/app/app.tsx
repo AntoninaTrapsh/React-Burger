@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch, useHistory, useLocation} from 'react-router-dom';
 import AppHeader from "../app-header/app-header";
 import "./app.module.css"
 import MainPage from "../../pages/main-page/main-page";
@@ -10,21 +10,22 @@ import ResetPasswordPage from "../../pages/reset-password-page/reset-password-pa
 import ProfilePage from "../../pages/profile-page/profile-page";
 import IngredientsPage from "../../pages/ingredients-page/ingredients-page";
 import {ProtectedRoute} from "../protected-route/protected-route";
-import {useHistory, useLocation} from "react-router-dom/cjs/react-router-dom";
 import Modal from "../modal/modal";
 import {useDispatch} from "react-redux";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfileOrders from "../profile/components/profile-orders/profile-orders";
+import {TModalState} from "../../utils/interfaces";
 
 function App() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const location = useLocation();
+    const location = useLocation<TModalState>();
     const background = location.state && location.state.background;
 
     useEffect(() => {
+        // @ts-ignore
         dispatch(fetchIngredients('/ingredients'));
     }, [dispatch]);
 
