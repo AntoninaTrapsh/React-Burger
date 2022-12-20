@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {FC, ReactElement, useEffect} from "react";
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css"
 import IngredientsList from "./components/ingredients-list/ingredients-list";
@@ -12,15 +12,16 @@ import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/
 import {selectAuthInfo, selectIsAuthRequestEnded} from "../../services/store/selectors/auth";
 import Preloader from "../preloader/preloader";
 import {useHistory} from "react-router-dom";
+import {IIngredient} from "../../utils/interfaces";
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const totalPrice = useSelector(selectTotalPrice);
-    const ingredientsData = useSelector(selectIngredientsList);
-    const buns = useSelector(selectBuns);
-    const isAuthChecked = useSelector(selectIsAuthRequestEnded);
-    const isAuth = useSelector(selectAuthInfo)
+    const totalPrice: number = useSelector(selectTotalPrice);
+    const ingredientsData: IIngredient[] = useSelector(selectIngredientsList);
+    const buns: IIngredient | null = useSelector(selectBuns);
+    const isAuthChecked: boolean = useSelector(selectIsAuthRequestEnded);
+    const isAuth: boolean = useSelector(selectAuthInfo)
 
     useEffect(() => {
         // @ts-ignore
@@ -30,7 +31,7 @@ const BurgerConstructor = () => {
         }
     }, [dispatch])
 
-    const handleOpenOrderModal = () => {
+    const handleOpenOrderModal = (): ReactElement | void => {
         if (!isAuthChecked) {
             return <Preloader/>
         }
@@ -48,13 +49,13 @@ const BurgerConstructor = () => {
         }
     }
 
-    const showOrderDetails = () => {
+    const showOrderDetails = (): void => {
         dispatch(openOrderDetailsModal());
         // @ts-ignore
         dispatch(fetchOrderDetails('/orders', [buns, ...ingredientsData, buns]));
     }
 
-    const disabled = !buns || !ingredientsData.length;
+    const disabled: boolean = !buns || !ingredientsData.length;
 
     return (
         <section className="mt-25">

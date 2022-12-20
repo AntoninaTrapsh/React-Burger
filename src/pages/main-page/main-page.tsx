@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
@@ -10,12 +10,12 @@ import {selectIngredients} from "../../services/store/selectors/burger-ingredien
 import {selectOrderDetailsState} from "../../services/store/selectors/order-details";
 import {closeOrderDetailsModal} from "../../services/store/actionCreators/order-details";
 
-const MainPage = () => {
+const MainPage: FC = () => {
     const dispatch = useDispatch();
     const ingredientsData = useSelector(selectIngredients);
     const isOrderDetailsOpen = useSelector(selectOrderDetailsState);
 
-    const handleCloseOrderModal = () => {
+    const handleCloseOrderModal = (): void => {
         dispatch(closeOrderDetailsModal());
     }
 

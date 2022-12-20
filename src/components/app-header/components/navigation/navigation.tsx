@@ -1,14 +1,14 @@
 import styles from "./navigation.module.css";
 import NavigationItem from "../navigation-item/navigation-item";
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, {FC} from "react";
 import {Link, useRouteMatch} from "react-router-dom";
 
-const Navigation = () => {
+const Navigation: FC = () => {
 
-    const isConstructor = !!useRouteMatch({ path: '/', exact: true});
-    const isFeed = !!useRouteMatch('/feed');
-    const isProfile = !!useRouteMatch('/profile');
+    const isConstructor: boolean = !!useRouteMatch({ path: '/', exact: true});
+    const isFeed: boolean = !!useRouteMatch('/feed');
+    const isProfile: boolean = !!useRouteMatch('/profile');
 
     return (
         <nav>

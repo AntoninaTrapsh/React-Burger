@@ -18,7 +18,7 @@ import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfileOrders from "../profile/components/profile-orders/profile-orders";
 import {TModalState} from "../../utils/interfaces";
 
-function App() {
+function App(): JSX.Element {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation<TModalState>();

@@ -1,6 +1,6 @@
 import Bun from "../bun/bun";
 import styles from "./ingredients-list.module.css";
-import React from "react";
+import React, {FC} from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import {DND_TYPES} from "../../../../utils/consts";
 import {useDrop} from "react-dnd";
@@ -11,20 +11,20 @@ import DefaultConstructorElement from "../default-constructor-element/default-co
 import {resetPreviousBuns, increaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
 import {IConstructorIngredient, IIngredient} from "../../../../utils/interfaces";
 
-const IngredientsList = () => {
+const IngredientsList: FC = () => {
     const dispatch = useDispatch();
-    const ingredients = useSelector(selectIngredientsList);
-    const bun = useSelector(selectBuns);
+    const ingredients: IConstructorIngredient[] = useSelector(selectIngredientsList);
+    const bun: IIngredient | null = useSelector(selectBuns);
 
     const [, dropTargetRef] = useDrop({
         accept: DND_TYPES.CARD_FROM_INGREDIENTS,
-        drop(ingredient) {
+        drop(ingredient: IIngredient) {
             // @ts-ignore
             handleOnDrop(ingredient);
         }
     });
 
-    const handleOnDrop = (ingredient: IIngredient) => {
+    const handleOnDrop = (ingredient: IIngredient): void => {
         if (ingredient.type === "bun") {
             dispatch(resetPreviousBuns());
             dispatch(addBunsToConstructor(ingredient));

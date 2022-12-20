@@ -1,4 +1,4 @@
-import React, {FormEvent} from "react";
+import React, {FC, FormEvent} from "react";
 import styles from "../login-page/login-page.module.css";
 import AuthForm from "../../components/auth-form/auth-form";
 import {FORM_TYPES} from "../../utils/consts";
@@ -11,7 +11,7 @@ import {
 } from "../../services/store/selectors/auth";
 import {IDefaultFormValues} from "../../utils/interfaces";
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage: FC = () => {
     const dispatch = useDispatch();
     const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
     const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);

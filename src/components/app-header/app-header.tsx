@@ -1,7 +1,7 @@
-import React from "react";
+import React, {FC} from "react";
 import Navigation from "./components/navigation/navigation";
 
-const AppHeader = () => {
+const AppHeader: FC = () => {
     return (
         <header className="text text_type_main-default">
             <Navigation/>

@@ -1,11 +1,11 @@
-import React from "react";
+import React, {FC} from "react";
 import orderImage from "../../images/done.svg"
 import styles from "./order-details.module.css"
 import { useSelector} from "react-redux";
 import {selectOrderId, selectOrderRequestStatus} from "../../services/store/selectors/order-details";
 import Preloader from "../preloader/preloader";
 
-const OrderDetails = () => {
+const OrderDetails: FC = () => {
     const orderId = useSelector(selectOrderId);
     const requestStatus = useSelector(selectOrderRequestStatus);
 

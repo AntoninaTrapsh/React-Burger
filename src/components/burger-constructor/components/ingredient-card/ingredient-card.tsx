@@ -1,7 +1,7 @@
 import styles from "./ingredient-card.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {FC} from "react";
-import {useDrag, useDrop, XYCoord} from "react-dnd";
+import {DropTargetMonitor, useDrag, useDrop, XYCoord} from "react-dnd";
 import {DND_TYPES} from "../../../../utils/consts";
 import {useDispatch} from "react-redux";
 import {
@@ -14,6 +14,11 @@ import {IConstructorIngredient} from "../../../../utils/interfaces";
 interface IIngredientCard {
     index: number;
     ingredient: IConstructorIngredient;
+}
+
+interface IIndices {
+    toIndex: number;
+    fromIndex: number;
 }
 
 const IngredientCard: FC<IIngredientCard> = (props) => {
@@ -31,20 +36,20 @@ const IngredientCard: FC<IIngredientCard> = (props) => {
 
     const [, dropRef ] = useDrop({
         accept: DND_TYPES.CARD_FROM_CONSTRUCTOR,
-        hover: (item: IConstructorIngredient, monitor) => {
+        hover: (item: IConstructorIngredient, monitor: DropTargetMonitor<IConstructorIngredient, IConstructorIngredient>) => {
             if (!ref.current) {
                 return
             }
-            const dragIndex = item.index;
-            const hoverIndex = props.index;
+            const dragIndex: number = item.index;
+            const hoverIndex: number = props.index;
             if (dragIndex === hoverIndex) {
                 return
             }
 
-            const hoverBoundingRect = ref.current.getBoundingClientRect();
-            const clientOffset = monitor.getClientOffset();
-            const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-            const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+            const hoverBoundingRect: DOMRect = ref.current.getBoundingClientRect();
+            const clientOffset: XYCoord | null = monitor.getClientOffset();
+            const hoverMiddleY: number = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+            const hoverClientY: number = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return
@@ -53,7 +58,7 @@ const IngredientCard: FC<IIngredientCard> = (props) => {
                 return
             }
 
-            const indices = {
+            const indices: IIndices = {
                 toIndex: dragIndex,
                 fromIndex: hoverIndex
             }
@@ -68,7 +73,7 @@ const IngredientCard: FC<IIngredientCard> = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleDeleteIngredient = (ingredient: IConstructorIngredient) => {
+    const handleDeleteIngredient = (ingredient: IConstructorIngredient): void => {
         dispatch(deleteIngredientFromConstructor(ingredient.uuid));
         dispatch(decreaseIngredientCounter(ingredient._id));
     }

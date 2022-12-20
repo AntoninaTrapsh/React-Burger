@@ -19,7 +19,7 @@ const IngredientCard: FC<IIngredientCard> = ({ingredient}) => {
         item: ingredient,
     });
 
-    const ingredientId = ingredient._id;
+    const ingredientId: string = ingredient._id;
 
     return (
         <Link<TModalState>

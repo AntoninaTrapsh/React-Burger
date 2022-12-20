@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import styles from "./ingredient-details.module.css"
 import {useSelector} from "react-redux";
 import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
@@ -9,9 +9,9 @@ interface IParams {
     ingredientId: string;
 }
 
-const IngredientDetails = () => {
+const IngredientDetails: FC = () => {
     const { ingredientId } = useParams<IParams>();
-    const ingredient = useSelector(selectIngredients)?.find((ingredient: IIngredient) => ingredient._id === ingredientId);
+    const ingredient: IIngredient = useSelector(selectIngredients)?.find((ingredient: IIngredient) => ingredient._id === ingredientId);
 
     return (
         ingredient &&

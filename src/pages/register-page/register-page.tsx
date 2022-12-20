@@ -1,4 +1,4 @@
-import React, {FormEvent} from "react";
+import React, {FC, FormEvent} from "react";
 import styles from "./register-page.module.css";
 import AuthForm from "../../components/auth-form/auth-form";
 import {FORM_TYPES} from "../../utils/consts";
@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {fetchUserRegistration} from "../../services/store/actionCreators/auth";
 import {IDefaultFormValues} from "../../utils/interfaces";
 
-const RegisterPage = () => {
+const RegisterPage: FC = () => {
     const dispatch = useDispatch();
 
     function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) {

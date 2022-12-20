@@ -8,7 +8,7 @@ import {IIngredient} from "../../../../utils/interfaces";
 
 interface IBunProps {
     position: 'top' | 'bottom';
-    data?: IIngredient;
+    data: IIngredient | null;
 }
 
 const Bun: FC<IBunProps> = ({position, data}) => {

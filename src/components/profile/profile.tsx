@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import styles from "./profile.module.css";
 import {NavLink, useHistory, useRouteMatch} from "react-router-dom";
 import { Route, Switch } from 'react-router-dom';
@@ -7,12 +7,12 @@ import ProfileOrders from "./components/profile-orders/profile-orders";
 import {useDispatch} from "react-redux";
 import {fetchUserSignOut} from "../../services/store/actionCreators/auth";
 
-const Profile = () => {
+const Profile: FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { path } = useRouteMatch();
 
-    const signOut = () => {
+    const signOut = (): void => {
         // @ts-ignore
         dispatch(fetchUserSignOut());
         history.push({
