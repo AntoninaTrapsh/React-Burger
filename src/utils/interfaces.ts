@@ -81,3 +81,30 @@ export type TProtectedRouteLocation = {
     from: H.Location
 }
 
+export interface IResponseStatus {
+    success: boolean
+}
+
+export interface IRefreshData extends IResponseStatus{
+    accessToken: string;
+    refreshToken: string;
+}
+
+export interface IResponseMessage extends IResponseStatus {
+    message: string;
+}
+
+export interface IAuthResponse extends IRefreshData {
+    user: {
+        email: string,
+        name: string
+    },
+}
+
+export interface IOrderDetails extends IResponseStatus {
+    name: string;
+    order: {
+        number: number,
+    }
+}
+
