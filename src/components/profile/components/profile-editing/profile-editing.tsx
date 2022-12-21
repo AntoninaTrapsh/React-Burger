@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-editing.module.css";
 import {selectUserInfo} from "../../../../services/store/selectors/auth";
 import {changeUserInfo} from "../../../../services/store/actionCreators/auth";
-import {IDefaultFormValues, IFocusFormValues, IUserInfo, TInputTypes} from "../../../../utils/types";
+import {IDefaultFormValues, IFocusedFormValues, IUserInfo, TInputTypes} from "../../../../utils/types";
 
 const ProfileEditing: FC = () => {
     const dispatch = useDispatch();
@@ -17,14 +17,14 @@ const ProfileEditing: FC = () => {
         password: user.password || "",
     }
 
-    const initialFocusInputs: IFocusFormValues = {
+    const initialFocusInputs: IFocusedFormValues = {
         name: false,
         email: false,
         password: false,
     }
 
     const [formValue, setFormValue] = useState(initialFormValues);
-    const [focusInputs, setFocusInputs] = useState<IFocusFormValues>(initialFocusInputs);
+    const [focusInputs, setFocusInputs] = useState<IFocusedFormValues>(initialFocusInputs);
     const [isControlSubmitDisplayed, setIsControlSubmitDisplayed] = useState(false);
 
     const isEmptyFormValue = !formValue.name.trim() || !formValue.email || !formValue.password;

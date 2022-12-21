@@ -10,7 +10,7 @@ export interface IDefaultFormValues extends IUserInfo{
     code?: string,
 }
 
-export interface IFocusFormValues {
+export interface IFocusedFormValues {
     name: boolean;
     email: boolean;
     password: boolean;

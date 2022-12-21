@@ -11,14 +11,10 @@ interface IRequestOptions extends RequestInit{
     authorization?: string | null;
 }
 
-type TRequestError =  {
-    message: string,
-}
-
 class ApiClient {
-    BASE_URL = "https://norma.nomoreparties.space/api";
+    BASE_URL: string = "https://norma.nomoreparties.space/api";
 
-    async _request<T>(url: string, options?: IRequestOptions) {
+    async _request<T>(url: string, options?: IRequestOptions): Promise<T> {
         return fetch(url, options).then(res => this.checkResponse<T>(res))
     }
 
@@ -92,7 +88,7 @@ class ApiClient {
         try {
             return await this._request<T>(`${this.BASE_URL}${url}`, options);
         } catch (err) {
-            if (!(err instanceof Error)) {
+            if (!this.checkRequestErrorType(err)) {
                 return Promise.reject(err);
             }
             if (err.message === "jwt expired") {
@@ -130,8 +126,12 @@ class ApiClient {
         if (response.ok) {
             return await response.json();
         } else {
-            return response.json().then((err: TRequestError) => Promise.reject(err))
+            return response.json().then((err: IResponseMessage) => Promise.reject(err))
         }
+    }
+
+    checkRequestErrorType(err: unknown): err is IResponseMessage {
+        return !!(err as IResponseMessage).message
     }
 }
 
