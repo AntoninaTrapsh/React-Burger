@@ -10,7 +10,7 @@ import {IDefaultFormValues} from "../../utils/interfaces";
 const LoginPage: FC = () => {
     const dispatch = useDispatch();
 
-    function onSubmit(e: FormEvent<HTMLFormElement>, userData: IDefaultFormValues) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, userData: IDefaultFormValues): void {
         // @ts-ignore
         dispatch(fetchUserLogin("login", userData))
     }

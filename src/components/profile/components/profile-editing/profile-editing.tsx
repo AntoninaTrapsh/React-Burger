@@ -5,11 +5,11 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-editing.module.css";
 import {selectUserInfo} from "../../../../services/store/selectors/auth";
 import {changeUserInfo} from "../../../../services/store/actionCreators/auth";
-import {IDefaultFormValues, IFocusFormValues, TInputTypes} from "../../../../utils/interfaces";
+import {IDefaultFormValues, IFocusFormValues, IUserInfo, TInputTypes} from "../../../../utils/interfaces";
 
 const ProfileEditing: FC = () => {
     const dispatch = useDispatch();
-    const user = useSelector(selectUserInfo);
+    const user: IUserInfo = useSelector(selectUserInfo);
 
     const initialFormValues: IDefaultFormValues = {
         name: user.name,

@@ -13,10 +13,10 @@ import {IDefaultFormValues} from "../../utils/interfaces";
 
 const ResetPasswordPage: FC = () => {
     const dispatch = useDispatch();
-    const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
-    const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);
+    const isFirstStepPassed: boolean = useSelector(selectResetPasswordOnFirstStepStatus);
+    const isSecondStepPassed: boolean = useSelector(selectResetPasswordOnSecondStepStatus);
 
-    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues): void {
         // @ts-ignore
         dispatch(resetPasswordOnSecondStep(data));
     }

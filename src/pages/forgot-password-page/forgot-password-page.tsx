@@ -12,11 +12,11 @@ import {resetPasswordOnFirstStep} from "../../services/store/actionCreators/auth
 import {IDefaultFormValues} from "../../utils/interfaces";
 
 const ForgotPasswordPage: FC = () => {
-    const isFirstStepPassed = useSelector(selectResetPasswordOnFirstStepStatus);
-    const isSecondStepPassed = useSelector(selectResetPasswordOnSecondStepStatus);
+    const isFirstStepPassed: boolean = useSelector(selectResetPasswordOnFirstStepStatus);
+    const isSecondStepPassed: boolean = useSelector(selectResetPasswordOnSecondStepStatus);
     const dispatch = useDispatch();
 
-    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues) {
+    function onSubmit(e: FormEvent<HTMLFormElement>, data: IDefaultFormValues): void {
         // @ts-ignore
         dispatch(resetPasswordOnFirstStep(data));
     }

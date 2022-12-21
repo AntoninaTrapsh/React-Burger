@@ -4,14 +4,14 @@ import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
 import {useSelector} from "react-redux";
 import {selectIngredients} from "../../../../services/store/selectors/burger-ingredients";
-import {IIngredient, TIngredientTypes} from "../../../../utils/interfaces";
+import {IIngredient, IIngredientsList, TIngredientTypes} from "../../../../utils/interfaces";
 
 interface IIngredientsListProps {
     handleChangeActiveTab: (tab: TIngredientTypes) => void;
 }
 
 const IngredientsList: FC<IIngredientsListProps> = ({handleChangeActiveTab}) => {
-    const ingredientsData = useSelector(selectIngredients);
+    const ingredientsData: IIngredientsList[] = useSelector(selectIngredients);
     const [mainSectionHeight, setMainSectionHeight] = useState(0);
 
     const ingredientTypeKeys: TIngredientTypes[] = Object.keys(INGREDIENT_TYPES) as TIngredientTypes[];
@@ -41,7 +41,7 @@ const IngredientsList: FC<IIngredientsListProps> = ({handleChangeActiveTab}) => 
         <section ref={(el) => calcSectionHeight(el as HTMLElement)} className={styles['burger-ingredients__group-list']} onScroll={(e) => handleScroll(e)}>
             {
                 ingredientTypeKeys.map((type: TIngredientTypes) => {
-                    const groupIngredientsList = ingredientsData.reduce((list: IIngredient[], ingredient: IIngredient) => {
+                    const groupIngredientsList = ingredientsData.reduce((list: IIngredientsList[], ingredient: IIngredientsList) => {
                         if (type === ingredient.type) {
                             list.push(ingredient);
                         }

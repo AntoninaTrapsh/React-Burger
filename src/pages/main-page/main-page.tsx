@@ -9,11 +9,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
 import {selectOrderDetailsState} from "../../services/store/selectors/order-details";
 import {closeOrderDetailsModal} from "../../services/store/actionCreators/order-details";
+import {IIngredient, IIngredientsList} from "../../utils/interfaces";
 
 const MainPage: FC = () => {
     const dispatch = useDispatch();
-    const ingredientsData = useSelector(selectIngredients);
-    const isOrderDetailsOpen = useSelector(selectOrderDetailsState);
+    const ingredientsData: IIngredientsList[] = useSelector(selectIngredients);
+    const isOrderDetailsOpen: boolean = useSelector(selectOrderDetailsState);
 
     const handleCloseOrderModal = (): void => {
         dispatch(closeOrderDetailsModal());

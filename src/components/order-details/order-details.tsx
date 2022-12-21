@@ -6,8 +6,8 @@ import {selectOrderId, selectOrderRequestStatus} from "../../services/store/sele
 import Preloader from "../preloader/preloader";
 
 const OrderDetails: FC = () => {
-    const orderId = useSelector(selectOrderId);
-    const requestStatus = useSelector(selectOrderRequestStatus);
+    const orderId: string = useSelector(selectOrderId);
+    const requestStatus: boolean = useSelector(selectOrderRequestStatus);
 
     return (
         <div className={`${styles['order-details']} pb-15 pt-30`}>

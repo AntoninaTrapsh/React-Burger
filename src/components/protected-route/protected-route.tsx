@@ -28,8 +28,8 @@ export const ProtectedRoute: FC<IProtectedRouteProps> = ({ children, authPage, .
         }
     }, [dispatch])
 
-    const isAuth = useSelector(selectAuthInfo)
-    const isAuthRequestEnded = useSelector(selectIsAuthRequestEnded)
+    const isAuth: boolean = useSelector(selectAuthInfo)
+    const isAuthRequestEnded: boolean = useSelector(selectIsAuthRequestEnded)
 
     if (!isAuthRequestEnded) {
         return <Preloader/>

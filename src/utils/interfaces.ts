@@ -1,9 +1,12 @@
 import * as H from "history";
 
-export interface IDefaultFormValues {
+export interface IUserInfo {
     name: string,
     email: string,
     password: string,
+}
+
+export interface IDefaultFormValues extends IUserInfo{
     code?: string,
 }
 
