@@ -6,7 +6,7 @@ import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/
 import {FC, useEffect} from "react";
 import Preloader from "../preloader/preloader";
 import React from 'react';
-import {TProtectedRouteLocation} from "../../utils/interfaces";
+import {TProtectedRouteLocation} from "../../utils/types";
 
 interface IProtectedRouteProps {
     authPage?: boolean;

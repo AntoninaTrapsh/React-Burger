@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {INGREDIENT_TYPES} from "../../consts/consts";
-import {TIngredientTypes} from "../../../../utils/interfaces";
+import {TIngredientTypes} from "../../../../utils/types";
 
 interface IIngredientsNavigationProps {
     activeTab: TIngredientTypes;

@@ -3,7 +3,7 @@ import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger
 import styles from "./auth-form.module.css";
 import {FORM_TYPES, INPUT_SETTINGS} from "../../utils/consts";
 import {useForm} from "../../hooks/useForm";
-import {IDefaultFormValues, TInputTypes} from "../../utils/interfaces";
+import {IDefaultFormValues, TInputTypes} from "../../utils/types";
 
 interface IAuthFormProps {
     type: string;

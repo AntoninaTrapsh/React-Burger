@@ -4,7 +4,7 @@ import React, {FC} from "react";
 import {useDrag} from "react-dnd";
 import {DND_TYPES} from "../../../../utils/consts";
 import {Link, useLocation} from "react-router-dom";
-import {IIngredientsList, TModalState} from "../../../../utils/interfaces";
+import {IIngredientsList, TModalState} from "../../../../utils/types";
 
 interface IIngredientCard {
     ingredient: IIngredientsList;

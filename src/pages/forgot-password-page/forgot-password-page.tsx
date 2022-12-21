@@ -9,7 +9,7 @@ import {
     selectResetPasswordOnSecondStepStatus
 } from "../../services/store/selectors/auth";
 import {resetPasswordOnFirstStep} from "../../services/store/actionCreators/auth";
-import {IDefaultFormValues} from "../../utils/interfaces";
+import {IDefaultFormValues} from "../../utils/types";
 
 const ForgotPasswordPage: FC = () => {
     const isFirstStepPassed: boolean = useSelector(selectResetPasswordOnFirstStepStatus);

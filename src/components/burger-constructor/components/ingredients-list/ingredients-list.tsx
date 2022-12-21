@@ -9,7 +9,7 @@ import {addBunsToConstructor, addIngredientToConstructor} from "../../../../serv
 import {selectBuns, selectIngredientsList} from "../../../../services/store/selectors/burger-constructor";
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
 import {resetPreviousBuns, increaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
-import {IConstructorIngredient, IIngredient} from "../../../../utils/interfaces";
+import {IConstructorIngredient, IIngredient} from "../../../../utils/types";
 
 const IngredientsList: FC = () => {
     const dispatch = useDispatch();

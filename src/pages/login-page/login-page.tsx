@@ -5,7 +5,7 @@ import styles from "./login-page.module.css";
 import {FORM_TYPES} from "../../utils/consts";
 import {useDispatch} from "react-redux";
 import {fetchUserLogin} from "../../services/store/actionCreators/auth";
-import {IDefaultFormValues} from "../../utils/interfaces";
+import {IDefaultFormValues} from "../../utils/types";
 
 const LoginPage: FC = () => {
     const dispatch = useDispatch();

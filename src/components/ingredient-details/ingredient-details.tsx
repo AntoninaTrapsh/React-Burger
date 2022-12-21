@@ -3,7 +3,7 @@ import styles from "./ingredient-details.module.css"
 import {useSelector} from "react-redux";
 import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
 import {useParams} from "react-router-dom";
-import {IIngredient} from "../../utils/interfaces";
+import {IIngredient} from "../../utils/types";
 
 interface IParams {
     ingredientId: string;

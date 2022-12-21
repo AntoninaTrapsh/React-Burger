@@ -1,7 +1,7 @@
 import styles from "./ingredients-group.module.css";
 import React, {FC} from "react";
 import IngredientCard from "../ingredient-card/ingredient-card";
-import {IIngredientsList} from "../../../../utils/interfaces";
+import {IIngredientsList} from "../../../../utils/types";
 
 interface IIngredientGroupProps {
     title: string;

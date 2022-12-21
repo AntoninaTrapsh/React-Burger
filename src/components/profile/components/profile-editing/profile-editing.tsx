@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "./profile-editing.module.css";
 import {selectUserInfo} from "../../../../services/store/selectors/auth";
 import {changeUserInfo} from "../../../../services/store/actionCreators/auth";
-import {IDefaultFormValues, IFocusFormValues, IUserInfo, TInputTypes} from "../../../../utils/interfaces";
+import {IDefaultFormValues, IFocusFormValues, IUserInfo, TInputTypes} from "../../../../utils/types";
 
 const ProfileEditing: FC = () => {
     const dispatch = useDispatch();

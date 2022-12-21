@@ -12,7 +12,7 @@ import {fetchUserInfo, isUserChecked} from "../../services/store/actionCreators/
 import {selectAuthInfo, selectIsAuthRequestEnded} from "../../services/store/selectors/auth";
 import Preloader from "../preloader/preloader";
 import {useHistory} from "react-router-dom";
-import {IIngredient} from "../../utils/interfaces";
+import {IIngredient} from "../../utils/types";
 
 const BurgerConstructor: FC = () => {
     const dispatch = useDispatch();

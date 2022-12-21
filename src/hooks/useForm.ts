@@ -1,5 +1,5 @@
 import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
-import {IDefaultFormValues} from "../utils/interfaces";
+import {IDefaultFormValues} from "../utils/types";
 
 interface IUseFormReturnValues {
     values: IDefaultFormValues;

@@ -9,7 +9,7 @@ import {
     selectResetPasswordOnFirstStepStatus,
     selectResetPasswordOnSecondStepStatus
 } from "../../services/store/selectors/auth";
-import {IDefaultFormValues} from "../../utils/interfaces";
+import {IDefaultFormValues} from "../../utils/types";
 
 const ResetPasswordPage: FC = () => {
     const dispatch = useDispatch();

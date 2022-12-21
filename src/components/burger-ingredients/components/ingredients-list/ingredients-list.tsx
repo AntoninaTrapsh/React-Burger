@@ -4,7 +4,7 @@ import IngredientsGroup from "../ingredients-group/ingredients-group";
 import {INGREDIENT_TYPES} from "../../consts/consts";
 import {useSelector} from "react-redux";
 import {selectIngredients} from "../../../../services/store/selectors/burger-ingredients";
-import {IIngredient, IIngredientsList, TIngredientTypes} from "../../../../utils/interfaces";
+import {IIngredientsList, TIngredientTypes} from "../../../../utils/types";
 
 interface IIngredientsListProps {
     handleChangeActiveTab: (tab: TIngredientTypes) => void;

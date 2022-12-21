@@ -4,7 +4,7 @@ import {BUN_TYPES} from "../../consts/consts";
 import styles from "./bun.module.css"
 import DefaultConstructorElement from "../default-constructor-element/default-constructor-element";
 import {Link, useLocation} from "react-router-dom";
-import {IIngredient} from "../../../../utils/interfaces";
+import {IIngredient} from "../../../../utils/types";
 
 interface IBunProps {
     position: 'top' | 'bottom';

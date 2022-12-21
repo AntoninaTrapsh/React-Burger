@@ -9,7 +9,7 @@ import {
     deleteIngredientFromConstructor
 } from "../../../../services/store/actionCreators/burger-constructor";
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
-import {IConstructorIngredient} from "../../../../utils/interfaces";
+import {IConstructorIngredient} from "../../../../utils/types";
 
 interface IIngredientCard {
     index: number;

@@ -16,7 +16,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import {fetchIngredients} from "../../services/store/actionCreators/burger-ingredients";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfileOrders from "../profile/components/profile-orders/profile-orders";
-import {TModalState} from "../../utils/interfaces";
+import {TModalState} from "../../utils/types";
 
 function App(): JSX.Element {
     const dispatch = useDispatch();

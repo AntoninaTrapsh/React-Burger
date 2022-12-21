@@ -5,7 +5,7 @@ import {FORM_TYPES} from "../../utils/consts";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {fetchUserRegistration} from "../../services/store/actionCreators/auth";
-import {IDefaultFormValues} from "../../utils/interfaces";
+import {IDefaultFormValues} from "../../utils/types";
 
 const RegisterPage: FC = () => {
     const dispatch = useDispatch();

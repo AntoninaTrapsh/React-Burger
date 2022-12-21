@@ -4,7 +4,7 @@ import IngredientsHeader from "./components/ingredients-header/ingredients-heade
 import IngredientsNavigation from "./components/ingredients-navigation/ingredients-navigation";
 import IngredientsList from "./components/ingredients-list/ingredients-list";
 import {INGREDIENT_TYPES} from "./consts/consts";
-import {TIngredientTypes} from "../../utils/interfaces";
+import {TIngredientTypes} from "../../utils/types";
 
 const BurgerIngredients: FC = () => {
     const [activeTab, setActiveTab] = useState<TIngredientTypes>(INGREDIENT_TYPES.bun as TIngredientTypes);

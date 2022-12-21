@@ -5,7 +5,7 @@ import {
     IIngredient, IOrderDetails,
     IRefreshData,
     IResponseMessage
-} from "../../utils/interfaces";
+} from "../../utils/types";
 
 interface IRequestOptions extends RequestInit{
     authorization?: string | null;

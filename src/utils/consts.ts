@@ -1,9 +1,9 @@
-import {IInputSettings} from "./interfaces";
+import {IInputSettings} from "./types";
 
-export const DND_TYPES = {
-    CARD_FROM_INGREDIENTS: "CARD_FROM_INGREDIENTS",
-    CARD_FROM_CONSTRUCTOR: "CARD_FROM_CONSTRUCTOR",
-};
+export enum DND_TYPES {
+    CARD_FROM_INGREDIENTS = "CARD_FROM_INGREDIENTS",
+    CARD_FROM_CONSTRUCTOR = "CARD_FROM_CONSTRUCTOR",
+}
 
 export const INPUT_SETTINGS: IInputSettings = {
     TYPE: {
@@ -27,15 +27,15 @@ export const INPUT_SETTINGS: IInputSettings = {
     },
 };
 
-export const FORM_TYPES = {
-    SIGN_IN: "SIGN_IN",
-    SIGN_OUT: "SIGN_OUT",
-    REGISTER: "REGISTER",
-    FORGOT_PASSWORD: "FORGOT_PASSWORD",
-    RESET_PASSWORD: "RESET_PASSWORD",
+export enum FORM_TYPES {
+    SIGN_IN = "SIGN_IN",
+    SIGN_OUT = "SIGN_OUT",
+    REGISTER = "REGISTER",
+    FORGOT_PASSWORD = "FORGOT_PASSWORD",
+    RESET_PASSWORD = "RESET_PASSWORD",
 }
 
-export const PROFILE_ACTIONS = {
-    GET_USER_INFO: "GET_USER_INFO",
-    CHANGE_USER_INFO: "CHANGE_USER_INFO",
+export enum PROFILE_ACTIONS {
+    GET_USER_INFO = "GET_USER_INFO",
+    CHANGE_USER_INFO = "CHANGE_USER_INFO",
 }

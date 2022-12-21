@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectIngredients} from "../../services/store/selectors/burger-ingredients";
 import {selectOrderDetailsState} from "../../services/store/selectors/order-details";
 import {closeOrderDetailsModal} from "../../services/store/actionCreators/order-details";
-import {IIngredient, IIngredientsList} from "../../utils/interfaces";
+import {IIngredientsList} from "../../utils/types";
 
 const MainPage: FC = () => {
     const dispatch = useDispatch();
