@@ -29,7 +29,7 @@ function App(): JSX.Element {
         dispatch(fetchIngredients('/ingredients'));
     }, [dispatch]);
 
-    const handleIngredientCardClose = () => {
+    const handleIngredientCardClose = (): void => {
         history.goBack();
     }
 

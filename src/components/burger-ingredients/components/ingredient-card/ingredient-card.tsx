@@ -10,7 +10,6 @@ interface IIngredientCard {
     ingredient: IIngredientsList;
 }
 
-
 const IngredientCard: FC<IIngredientCard> = ({ingredient}) => {
     const location = useLocation();
 

@@ -18,13 +18,13 @@ const IngredientsList: FC = () => {
 
     const [, dropTargetRef] = useDrop({
         accept: DND_TYPES.CARD_FROM_INGREDIENTS,
-        drop(ingredient: IIngredient) {
+        drop(ingredient: IConstructorIngredient) {
             // @ts-ignore
             handleOnDrop(ingredient);
         }
     });
 
-    const handleOnDrop = (ingredient: IIngredient): void => {
+    const handleOnDrop = (ingredient: IConstructorIngredient): void => {
         if (ingredient.type === "bun") {
             dispatch(resetPreviousBuns());
             dispatch(addBunsToConstructor(ingredient));

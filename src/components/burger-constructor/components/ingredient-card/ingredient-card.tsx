@@ -11,7 +11,7 @@ import {
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
 import {IConstructorIngredient} from "../../../../utils/types";
 
-interface IIngredientCard {
+interface IIngredientCardProps {
     index: number;
     ingredient: IConstructorIngredient;
 }
@@ -21,7 +21,7 @@ interface IIndices {
     fromIndex: number;
 }
 
-const IngredientCard: FC<IIngredientCard> = (props) => {
+const IngredientCard: FC<IIngredientCardProps> = (props) => {
     const ref = React.useRef<HTMLDivElement>(null);
 
     const [, dragRef] = useDrag({
