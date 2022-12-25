@@ -10,6 +10,11 @@ export interface IDefaultFormValues extends IUserInfo{
     code?: string,
 }
 
+export interface IIndices {
+    toIndex: number;
+    fromIndex: number;
+}
+
 export interface IIngredient {
     _id: string;
     name: string;
@@ -30,7 +35,7 @@ export interface IIngredientsList extends IIngredient {
 }
 
 export interface IConstructorIngredient extends IIngredient{
-    uuid: number;
+    uuid: string;
     index: number;
 
 }
@@ -89,6 +94,13 @@ export interface IResponseMessage extends IResponseStatus {
 }
 
 export interface IAuthResponse extends IRefreshData {
+    user: {
+        email: string,
+        name: string
+    },
+}
+
+export interface IUserData {
     user: {
         email: string,
         name: string

@@ -9,16 +9,11 @@ import {
     deleteIngredientFromConstructor
 } from "../../../../services/store/actionCreators/burger-constructor";
 import {decreaseIngredientCounter} from "../../../../services/store/actionCreators/burger-ingredients";
-import {IConstructorIngredient} from "../../../../utils/types";
+import {IConstructorIngredient, IIndices} from "../../../../utils/types";
 
 interface IIngredientCardProps {
     index: number;
     ingredient: IConstructorIngredient;
-}
-
-interface IIndices {
-    toIndex: number;
-    fromIndex: number;
 }
 
 const IngredientCard: FC<IIngredientCardProps> = (props) => {

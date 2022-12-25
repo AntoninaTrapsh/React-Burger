@@ -110,7 +110,7 @@ class ApiClient {
         return await this._request<IIngredient[]>(`${this.BASE_URL}${url}`);
     }
 
-    async sendOrderDetails(url: string, ingredients: IIngredient[]): Promise<IOrderDetails> {
+    async sendOrderDetails(url: string, ingredients: Array<string>): Promise<IOrderDetails> {
         const token = getTokenFromStorage("accessToken");
         return await this._request<IOrderDetails>(`${this.BASE_URL}${url}`, {
             method: "POST",

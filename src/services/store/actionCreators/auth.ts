@@ -1,25 +1,111 @@
 import AuthClient from "../../clients/api-client";
 import {
-    FORGOT_PASSWORD_ERROR, FORGOT_PASSWORD_SUCCESS,
+    FORGOT_PASSWORD_ERROR,
+    FORGOT_PASSWORD_SUCCESS,
     GET_USER_ERROR,
-    GET_USER_SUCCESS, IS_USER_CHECKED,
+    GET_USER_SUCCESS,
+    IS_USER_CHECKED,
     LOGIN_ERROR,
     LOGIN_SUCCESS,
     REGISTRATION_ERROR,
-    REGISTRATION_SUCCESS, RESET_PASSWORD_ERROR, RESET_PASSWORD_SUCCESS, SEND_FORGOT_PASSWORD_REQUEST,
+    REGISTRATION_SUCCESS,
+    RESET_PASSWORD_ERROR,
+    RESET_PASSWORD_SUCCESS,
+    SEND_FORGOT_PASSWORD_REQUEST,
     SEND_GET_USER_REQUEST,
     SEND_LOGIN_REQUEST,
-    SEND_REGISTRATION_REQUEST, SEND_RESET_PASSWORD_REQUEST,
+    SEND_REGISTRATION_REQUEST,
+    SEND_RESET_PASSWORD_REQUEST,
     SEND_SIGN_OUT_REQUEST,
     SEND_UPDATING_USER_REQUEST,
     SIGN_OUT_ERROR,
-    SIGN_OUT_SUCCESS, USER_UPDATING_ERROR,
+    SIGN_OUT_SUCCESS,
+    USER_UPDATING_ERROR,
     USER_UPDATING_SUCCESS
 } from "../actions/auth";
 import {FORM_TYPES, PROFILE_ACTIONS} from "../../../utils/consts";
 import {addTokensToStorage, getTokenFromStorage, removeTokensFromStorage} from "../../../utils/localStorageHelper";
+import {IAuthResponse, IUserData, IUserInfo} from "../../../utils/types";
 
-export function changeRequestStatus(action) {
+export interface IRegister {
+    readonly type: typeof REGISTRATION_SUCCESS;
+    readonly payload: IAuthResponse;
+}
+
+export interface IGetRegistrationError {
+    readonly type: typeof REGISTRATION_ERROR;
+}
+
+export type TChangeRequestStatus =
+    typeof SEND_REGISTRATION_REQUEST
+    | typeof SEND_LOGIN_REQUEST
+    | typeof SEND_SIGN_OUT_REQUEST
+    | typeof SEND_GET_USER_REQUEST
+    | typeof SEND_UPDATING_USER_REQUEST
+    | typeof SEND_FORGOT_PASSWORD_REQUEST
+    | typeof SEND_RESET_PASSWORD_REQUEST
+
+export interface IChangeRequestStatus {
+    readonly type?: TChangeRequestStatus;
+}
+
+export interface IGetLoginError {
+    readonly type: typeof LOGIN_ERROR;
+}
+
+export interface ILogin {
+    readonly type: typeof LOGIN_SUCCESS;
+    readonly payload: IAuthResponse;
+}
+
+export interface ICatchResetPasswordOnFirstStepError {
+    readonly type: typeof FORGOT_PASSWORD_ERROR;
+}
+
+export interface ICatchResetPasswordOnSecondStepError {
+    readonly type: typeof RESET_PASSWORD_ERROR;
+}
+
+export interface IGetResetPasswordOnFirstStepResponse {
+    readonly type: typeof FORGOT_PASSWORD_SUCCESS;
+}
+
+export interface IGetResetPasswordOnSecondStepResponse {
+    readonly type: typeof RESET_PASSWORD_SUCCESS,
+}
+
+export interface IGetSignOutError {
+    readonly type: typeof SIGN_OUT_ERROR,
+}
+
+export interface ISignOut {
+    readonly type: typeof SIGN_OUT_SUCCESS,
+}
+
+export interface IGetUserInfoError {
+    readonly type: typeof GET_USER_ERROR,
+}
+
+export interface IIsUserChecked {
+    readonly type: typeof IS_USER_CHECKED,
+    readonly payload: boolean,
+}
+
+export interface IGetUserInfo {
+    readonly type: typeof GET_USER_SUCCESS,
+    readonly payload: IUserData,
+}
+
+export interface IUpdateUserInfoError {
+    readonly type: typeof USER_UPDATING_ERROR,
+}
+
+export interface IUpdateUserInfo {
+     readonly type: typeof USER_UPDATING_SUCCESS,
+     readonly payload: IUserData,
+}
+
+export function changeRequestStatus(action: string): IChangeRequestStatus {
     switch (action) {
         case FORM_TYPES.REGISTER: {
             return {
@@ -62,14 +148,14 @@ export function changeRequestStatus(action) {
     }
 }
 
-export function register(data) {
+export function register(data: IAuthResponse): IRegister {
     return {
         type: REGISTRATION_SUCCESS,
         payload: data,
     }
 }
 
-export function getRegistrationError() {
+export function getRegistrationError(): IGetRegistrationError {
     return {
         type: REGISTRATION_ERROR,
     }
@@ -89,14 +175,14 @@ export function fetchUserRegistration(userData) {
     };
 }
 
-export function login(data) {
+export function login(data: IAuthResponse): ILogin {
     return {
         type: LOGIN_SUCCESS,
         payload: data,
     }
 }
 
-export function getLoginError() {
+export function getLoginError(): IGetLoginError {
     return {
         type: LOGIN_ERROR,
     }
@@ -118,25 +204,25 @@ export function fetchUserLogin(url, userData) {
     }
 }
 
-export function catchResetPasswordOnFirstStepError() {
+export function catchResetPasswordOnFirstStepError(): ICatchResetPasswordOnFirstStepError {
     return {
         type: FORGOT_PASSWORD_ERROR,
     }
 }
 
-export function catchResetPasswordOnSecondStepError() {
+export function catchResetPasswordOnSecondStepError(): ICatchResetPasswordOnSecondStepError {
     return {
         type: RESET_PASSWORD_ERROR,
     }
 }
 
-export function getResetPasswordOnFirstStepResponse() {
+export function getResetPasswordOnFirstStepResponse(): IGetResetPasswordOnFirstStepResponse {
     return {
         type: FORGOT_PASSWORD_SUCCESS,
     }
 }
 
-export function getResetPasswordOnSecondStepResponse() {
+export function getResetPasswordOnSecondStepResponse(): IGetResetPasswordOnSecondStepResponse {
     return {
         type: RESET_PASSWORD_SUCCESS,
     }
@@ -170,13 +256,13 @@ export function resetPasswordOnSecondStep(data) {
     }
 }
 
-export function getSignOutError() {
+export function getSignOutError(): IGetSignOutError {
     return {
         type: SIGN_OUT_ERROR,
     }
 }
 
-export function signOut() {
+export function signOut(): ISignOut {
     return {
         type: SIGN_OUT_SUCCESS,
     }
@@ -197,20 +283,20 @@ export function fetchUserSignOut() {
     }
 }
 
-export function getUserInfoError() {
+export function getUserInfoError(): IGetUserInfoError {
     return {
         type: GET_USER_ERROR,
     }
 }
 
-export function isUserChecked(payload) {
+export function isUserChecked(payload: boolean): IIsUserChecked {
     return {
         type: IS_USER_CHECKED,
         payload
     }
 }
 
-export function getUserInfo(data) {
+export function getUserInfo(data: IUserData): IGetUserInfo {
     return {
         type: GET_USER_SUCCESS,
         payload: data.user,
@@ -242,13 +328,13 @@ export function fetchUserInfo() {
     }
 }
 
-export function updateUserInfoError() {
+export function updateUserInfoError(): IUpdateUserInfoError {
     return {
         type: USER_UPDATING_ERROR,
     }
 }
 
-export function updateUserInfo(data) {
+export function updateUserInfo(data): IUpdateUserInfo {
     return {
         type: USER_UPDATING_SUCCESS,
         payload: data.user,
