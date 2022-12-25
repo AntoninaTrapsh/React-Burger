@@ -36,6 +36,10 @@ import {
     IUpdateUserInfo,
     IUpdateUserInfoError
 } from "../actionCreators/auth";
+import {Action, ActionCreator} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {store} from "../store";
+import {Dispatch} from "react";
 
 export type TBurgerConstructorActions =
     IAddIngredientToConstructor
@@ -76,3 +80,13 @@ export type TAuthActions =
     | IGetUserInfo
     | IUpdateUserInfoError
     | IUpdateUserInfo;
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type TApplicationActions = TBurgerIngredientsActions & TBurgerConstructorActions & TOrderDetailsActions & TAuthActions;
+
+export type AppDispatch = Dispatch<TApplicationActions>;
+
+export type AppThunk<TReturn = void> = ActionCreator<
+    ThunkAction<TReturn, Action, RootState, TApplicationActions>
+    >;
