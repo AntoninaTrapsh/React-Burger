@@ -8,6 +8,7 @@ import {
 import ApiClient from "../../clients/api-client";
 import {clearConstructor} from "./burger-constructor";
 import {IConstructorIngredient, IOrderDetails} from "../../../utils/types";
+import {AppDispatch, RootState} from "../types";
 
 export interface IGetOrderData {
     readonly type: typeof GET_ORDER_DATA_SUCCESS;
@@ -18,7 +19,7 @@ export interface IOpenOrderDetailsModal {
     readonly type: typeof OPEN_ORDER_DETAILS_MODAL;
 }
 
-export interface IChangeRequestStatus {
+export interface IChangeOrderDetailsStatus {
     readonly type: typeof SEND_ORDER_REQUEST;
 }
 
@@ -30,7 +31,7 @@ export interface IGetOrderDataError {
     readonly type: typeof GET_ORDER_DATA_ERROR;
 }
 
-export function changeRequestStatus(): IChangeRequestStatus {
+export function changeRequestStatus(): IChangeOrderDetailsStatus {
     return {
         type: SEND_ORDER_REQUEST,
     };
@@ -61,8 +62,8 @@ export function getOrderDataError(): IGetOrderDataError {
     }
 }
 
-export function fetchOrderDetails(url: string, ingredients: IConstructorIngredient[]): Promise<void> {
-    return async (dispatch, getState) => {
+export function fetchOrderDetails(url: string, ingredients: IConstructorIngredient[]) {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus());
 
         const ingredientsIds = ingredients.reduce((arr: Array<string>, ingredient: IConstructorIngredient) => {

@@ -6,6 +6,14 @@ import {
     LOAD_INGREDIENTS_SUCCESS,
     SEND_INGREDIENTS_REQUEST
 } from "../actions/burger-ingredients";
+import {IIngredient} from "../../../utils/types";
+import {TBurgerIngredientsActions} from "../types";
+
+type TInitialBurgerIngredientsState = {
+    ingredients: Array<IIngredient> | null,
+    ingredientsRequest: boolean,
+    ingredientsError: boolean,
+}
 
 const initialState = {
     ingredients: null,
@@ -13,7 +21,7 @@ const initialState = {
     ingredientsError: false,
 };
 
-export const burgerIngredientsReducer = (state = initialState, { type, payload }) => {
+export const burgerIngredientsReducer = (state = initialState, { type, payload }: TBurgerIngredientsActions): TInitialBurgerIngredientsState => {
     switch (type) {
         case SEND_INGREDIENTS_REQUEST: {
             return {
@@ -31,7 +39,7 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
                     };
                 }),
                 ingredientsRequest: false,
-                ingredientsFailed: false,
+                ingredientsError: false,
             };
         }
         case LOAD_INGREDIENTS_ERROR: {
@@ -39,7 +47,7 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
                 ...state,
                 ingredients: [],
                 ingredientsRequest: false,
-                ingredientsFailed: true,
+                ingredientsError: true,
             }
         }
         case INCREASE_INGREDIENT_COUNTER: {

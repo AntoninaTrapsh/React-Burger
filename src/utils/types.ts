@@ -110,7 +110,7 @@ export interface IUserData {
 export interface IOrderDetails extends IResponseStatus {
     name: string;
     order: {
-        number: number,
+        number: string,
     }
 }
 

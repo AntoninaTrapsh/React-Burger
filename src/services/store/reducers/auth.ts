@@ -16,8 +16,45 @@ import {
     SIGN_OUT_SUCCESS, USER_UPDATING_ERROR,
     USER_UPDATING_SUCCESS
 } from "../actions/auth";
+import {TAuthActions} from "../types";
 
-const initialState = {
+type TAuthInitialState = {
+    isAuth: boolean,
+    isAuthRequestEnded: boolean,
+
+    user: {
+        name: string,
+        email: string,
+        password: string,
+    },
+
+    code: string,
+
+    registrationError: boolean,
+    registrationRequest: boolean,
+
+    loginRequest: boolean,
+    loginError: boolean,
+
+    logoutRequest: boolean,
+    logoutError: boolean,
+
+    userInfoError: boolean,
+    userInfoRequest: boolean,
+
+    updatingUserInfoError: boolean,
+    updatingUserRequest: boolean,
+
+    resetPasswordOnFirstStepRequest: boolean,
+    resetPasswordOnFirstStepError: boolean,
+    isResetPasswordOnFirstStepPassed: boolean,
+
+    resetPasswordOnSecondStepRequest: boolean,
+    resetPasswordOnSecondStepError: boolean,
+    isResetPasswordOnSecondStepPassed: boolean,
+}
+
+const initialState: TAuthInitialState  = {
     isAuth: false,
     isAuthRequestEnded: false,
 
@@ -53,7 +90,7 @@ const initialState = {
     isResetPasswordOnSecondStepPassed: false,
 }
 
-export const authReducer = (state = initialState, { type, payload }) => {
+export const authReducer = (state = initialState, { type, payload }: TAuthActions): TAuthInitialState  => {
     switch (type) {
         case SEND_REGISTRATION_REQUEST: {
             return {

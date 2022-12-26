@@ -45,7 +45,7 @@ export type TChangeRequestStatus =
     | typeof SEND_FORGOT_PASSWORD_REQUEST
     | typeof SEND_RESET_PASSWORD_REQUEST
 
-export interface IChangeRequestStatus {
+export interface IChangeAuthRequestStatus {
     readonly type?: TChangeRequestStatus;
 }
 
@@ -105,7 +105,7 @@ export interface IUpdateUserInfo {
      readonly payload: IUserData,
 }
 
-export function changeRequestStatus(action: string): IChangeRequestStatus {
+export function changeRequestStatus(action: string): IChangeAuthRequestStatus {
     switch (action) {
         case FORM_TYPES.REGISTER: {
             return {

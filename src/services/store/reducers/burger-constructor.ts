@@ -4,13 +4,20 @@ import {
     CHANGE_INGREDIENT_POSITION, CLEAR_CONSTRUCTOR,
     DELETE_INGREDIENT
 } from "../actions/burger-constructor";
+import {IConstructorIngredient} from "../../../utils/types";
+import {TBurgerConstructorActions} from "../types";
+
+type TBurgerConstructorInitialState = {
+    ingredients: Array<IConstructorIngredient>,
+    buns: IConstructorIngredient | null,
+}
 
 const initialState = {
     ingredients: [],
     buns: null,
 };
 
-export const burgerConstructorReducer = (state = initialState, { type, payload }) => {
+export const burgerConstructorReducer = (state = initialState, { type, payload }: TBurgerConstructorActions): TBurgerConstructorInitialState => {
     switch (type) {
         case ADD_MAIN_INGREDIENT: {
             return {

@@ -4,15 +4,23 @@ import {
     OPEN_ORDER_DETAILS_MODAL,
     SEND_ORDER_REQUEST
 } from "../actions/order-details";
+import {TOrderDetailsActions} from "../types";
 
-const initialState = {
+type TOrderDetailsInitialState = {
+    isOpen: boolean,
+    orderId: string,
+    orderRequest: boolean,
+    orderError: boolean,
+}
+
+const initialState: TOrderDetailsInitialState = {
     isOpen: false,
     orderId: '',
     orderRequest: false,
     orderError: false,
 };
 
-export const orderDetailsReducer = (state = initialState, { type, payload }) => {
+export const orderDetailsReducer = (state = initialState, { type, payload }: TOrderDetailsActions): TOrderDetailsInitialState => {
     switch (type) {
         case OPEN_ORDER_DETAILS_MODAL: {
             return {
@@ -38,7 +46,7 @@ export const orderDetailsReducer = (state = initialState, { type, payload }) => 
                 ...state,
                 orderId: payload.order.number,
                 orderRequest: false,
-                orderFailed: false,
+                orderError: false,
             };
         }
         case GET_ORDER_DATA_ERROR: {
@@ -46,7 +54,7 @@ export const orderDetailsReducer = (state = initialState, { type, payload }) => 
                 ...state,
                 orderId: '',
                 orderRequest: false,
-                orderFailed: true,
+                orderError: true,
             }
         }
         default:

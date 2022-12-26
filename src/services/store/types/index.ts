@@ -15,13 +15,14 @@ import {
 } from "../actionCreators/burger-ingredients";
 import {
     ICloseOrderDetailsModal,
+    IChangeOrderDetailsStatus,
     IGetOrderData,
     IGetOrderDataError,
     IOpenOrderDetailsModal
 } from "../actionCreators/order-details";
 import {
     ICatchResetPasswordOnFirstStepError,
-    ICatchResetPasswordOnSecondStepError,
+    ICatchResetPasswordOnSecondStepError, IChangeAuthRequestStatus,
     IGetLoginError,
     IGetRegistrationError,
     IGetResetPasswordOnFirstStepResponse,
@@ -39,7 +40,6 @@ import {
 import {Action, ActionCreator} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {store} from "../store";
-import {Dispatch} from "react";
 
 export type TBurgerConstructorActions =
     IAddIngredientToConstructor
@@ -60,7 +60,7 @@ export type TBurgerIngredientsActions =
 export type TOrderDetailsActions =
     IGetOrderData
     | IOpenOrderDetailsModal
-    | IChangeRequestStatus
+    | IChangeOrderDetailsStatus
     | ICloseOrderDetailsModal
     | IGetOrderDataError;
 
@@ -79,13 +79,14 @@ export type TAuthActions =
     | IIsUserChecked
     | IGetUserInfo
     | IUpdateUserInfoError
-    | IUpdateUserInfo;
+    | IUpdateUserInfo
+    | IChangeAuthRequestStatus;
 
 export type RootState = ReturnType<typeof store.getState>;
 
-export type TApplicationActions = TBurgerIngredientsActions & TBurgerConstructorActions & TOrderDetailsActions & TAuthActions;
+export type TApplicationActions = TBurgerIngredientsActions | TBurgerConstructorActions | TOrderDetailsActions | TAuthActions;
 
-export type AppDispatch = Dispatch<TApplicationActions>;
+export type AppDispatch = typeof store.dispatch;
 
 export type AppThunk<TReturn = void> = ActionCreator<
     ThunkAction<TReturn, Action, RootState, TApplicationActions>
