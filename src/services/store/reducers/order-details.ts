@@ -20,8 +20,8 @@ const initialState: TOrderDetailsInitialState = {
     orderError: false,
 };
 
-export const orderDetailsReducer = (state = initialState, { type, payload }: TOrderDetailsActions): TOrderDetailsInitialState => {
-    switch (type) {
+export const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions): TOrderDetailsInitialState => {
+    switch (action.type) {
         case OPEN_ORDER_DETAILS_MODAL: {
             return {
                 ...state,
@@ -44,7 +44,7 @@ export const orderDetailsReducer = (state = initialState, { type, payload }: TOr
         case GET_ORDER_DATA_SUCCESS: {
             return {
                 ...state,
-                orderId: payload.order.number,
+                orderId: action.payload.order.number,
                 orderRequest: false,
                 orderError: false,
             };

@@ -88,6 +88,6 @@ export type TApplicationActions = TBurgerIngredientsActions | TBurgerConstructor
 
 export type AppDispatch = typeof store.dispatch;
 
-export type AppThunk<TReturn = void> = ActionCreator<
-    ThunkAction<TReturn, Action, RootState, TApplicationActions>
-    >;
+// export type AppThunk<TReturn = void> = ActionCreator<
+//     ThunkAction<TReturn, Action, RootState, TApplicationActions>
+//     >;

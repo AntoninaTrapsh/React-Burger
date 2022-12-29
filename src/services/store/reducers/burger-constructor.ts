@@ -12,34 +12,34 @@ type TBurgerConstructorInitialState = {
     buns: IConstructorIngredient | null,
 }
 
-const initialState = {
+const initialState: TBurgerConstructorInitialState = {
     ingredients: [],
     buns: null,
 };
 
-export const burgerConstructorReducer = (state = initialState, { type, payload }: TBurgerConstructorActions): TBurgerConstructorInitialState => {
-    switch (type) {
+export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions): TBurgerConstructorInitialState => {
+    switch (action.type) {
         case ADD_MAIN_INGREDIENT: {
             return {
                 ...state,
-                ingredients: [...state.ingredients, payload],
+                ingredients: [...state.ingredients, action.payload],
             };
         }
         case DELETE_INGREDIENT: {
             return {
                 ...state,
-                ingredients: state.ingredients.filter((ingredient) => ingredient.uuid !== payload),
+                ingredients: state.ingredients.filter((ingredient) => ingredient.uuid !== action.payload),
             }
         }
         case ADD_BUNS: {
             return {
                 ...state,
-                buns: payload
+                buns: action.payload
             }
         }
         case CHANGE_INGREDIENT_POSITION: {
             const ingredients = [...state.ingredients];
-            ingredients.splice(payload.toIndex, 0, ingredients.splice(payload.fromIndex, 1)[0]);
+            ingredients.splice(action.payload.toIndex, 0, ingredients.splice(action.payload.fromIndex, 1)[0]);
             return {
                 ...state,
                 ingredients: ingredients,

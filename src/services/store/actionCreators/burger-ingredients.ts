@@ -7,7 +7,7 @@ import {
     LOAD_INGREDIENTS_SUCCESS,
     SEND_INGREDIENTS_REQUEST
 } from "../actions/burger-ingredients";
-import {IIngredient} from "../../../utils/types";
+import {IIngredient, IIngredientResponse} from "../../../utils/types";
 
 export interface IIncreaseIngredientCounter {
     readonly type: typeof INCREASE_INGREDIENT_COUNTER;
@@ -24,7 +24,7 @@ export interface IDecreaseIngredientCounter {
 
 export interface ILoadIngredients {
     readonly type: typeof LOAD_INGREDIENTS_SUCCESS;
-    readonly payload: IIngredient[];
+    readonly payload: IIngredientResponse;
 }
 
 export interface IChangeRequestStatus {

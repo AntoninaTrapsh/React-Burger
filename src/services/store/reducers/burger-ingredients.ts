@@ -21,8 +21,8 @@ const initialState = {
     ingredientsError: false,
 };
 
-export const burgerIngredientsReducer = (state = initialState, { type, payload }: TBurgerIngredientsActions): TInitialBurgerIngredientsState => {
-    switch (type) {
+export const burgerIngredientsReducer = (state = initialState, action: TBurgerIngredientsActions): TInitialBurgerIngredientsState => {
+    switch (action.type) {
         case SEND_INGREDIENTS_REQUEST: {
             return {
                 ...state,
@@ -32,7 +32,7 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
         case LOAD_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
-                ingredients: payload.data.map((ingredient) => {
+                ingredients: action.payload.data.map((ingredient) => {
                     return {
                         ...ingredient,
                         quantity: 0,
@@ -52,11 +52,11 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
         }
         case INCREASE_INGREDIENT_COUNTER: {
             const ingredientIndex = state.ingredients.findIndex((ingredient) => {
-                return ingredient._id === payload.id;
+                return ingredient._id === action.payload.id;
             });
             let ingredients = [...state.ingredients];
             if (ingredientIndex >= 0) {
-                ingredients[ingredientIndex].quantity += payload.quantity;
+                ingredients[ingredientIndex].quantity += action.payload.quantity;
             }
             return {
                 ...state,
@@ -65,7 +65,7 @@ export const burgerIngredientsReducer = (state = initialState, { type, payload }
         }
         case DECREASE_INGREDIENT_COUNTER: {
             const ingredientIndex = state.ingredients.findIndex((ingredient) => {
-                return ingredient._id === payload;
+                return ingredient._id === action.payload;
             });
             let ingredients = [...state.ingredients];
             if (ingredientIndex >= 0) {

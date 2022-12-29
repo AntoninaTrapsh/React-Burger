@@ -4,12 +4,9 @@ import {
     IDefaultFormValues,
     IIngredient, IOrderDetails,
     IRefreshData,
-    IResponseMessage
+    IResponseMessage,
+    IRequestOptions
 } from "../../utils/types";
-
-interface IRequestOptions extends RequestInit{
-    authorization?: string | null;
-}
 
 class ApiClient {
     BASE_URL: string = "https://norma.nomoreparties.space/api";
@@ -84,7 +81,7 @@ class ApiClient {
         });
     }
 
-    async fetchWithRefresh<T>(url: string, options: RequestInit): Promise<T> {
+    async fetchWithRefresh<T>(url: string, options: IRequestOptions): Promise<T> {
         try {
             return await this._request<T>(`${this.BASE_URL}${url}`, options);
         } catch (err) {

@@ -25,11 +25,17 @@ import {
 } from "../actions/auth";
 import {FORM_TYPES, PROFILE_ACTIONS} from "../../../utils/consts";
 import {addTokensToStorage, getTokenFromStorage, removeTokensFromStorage} from "../../../utils/localStorageHelper";
-import {IAuthResponse, IUserData, IUserInfo} from "../../../utils/types";
+import {
+    IAuthResponse,
+    IDefaultFormValues,
+    IRequestOptions,
+    IUserData, IUserInfo,
+} from "../../../utils/types";
+import {AppDispatch, RootState} from "../types";
 
 export interface IRegister {
     readonly type: typeof REGISTRATION_SUCCESS;
-    readonly payload: IAuthResponse;
+    readonly payload: IUserInfo;
 }
 
 export interface IGetRegistrationError {
@@ -55,7 +61,7 @@ export interface IGetLoginError {
 
 export interface ILogin {
     readonly type: typeof LOGIN_SUCCESS;
-    readonly payload: IAuthResponse;
+    readonly payload: IUserData;
 }
 
 export interface ICatchResetPasswordOnFirstStepError {
@@ -162,7 +168,7 @@ export function getRegistrationError(): IGetRegistrationError {
 }
 
 export function fetchUserRegistration(userData) {
-    return async (dispatch, getState) => {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.REGISTER));
 
         AuthClient.register("/auth/register", userData)
@@ -188,8 +194,8 @@ export function getLoginError(): IGetLoginError {
     }
 }
 
-export function fetchUserLogin(url, userData) {
-    return async (dispatch, getState) => {
+export function fetchUserLogin(url: string, userData) {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.SIGN_IN));
 
         AuthClient.signIn("/auth/login", userData)
@@ -228,13 +234,13 @@ export function getResetPasswordOnSecondStepResponse(): IGetResetPasswordOnSecon
     }
 }
 
-export function resetPasswordOnFirstStep(data) {
-    return async (dispatch, getState) => {
+export function resetPasswordOnFirstStep(data: IDefaultFormValues) {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.FORGOT_PASSWORD));
 
         AuthClient.resetPasswordOnFirstStep("/password-reset", data)
             .then((data) => {
-                dispatch(getResetPasswordOnFirstStepResponse(data));
+                dispatch(getResetPasswordOnFirstStepResponse());
             })
             .catch(() => {
                 dispatch(catchResetPasswordOnFirstStepError());
@@ -242,13 +248,13 @@ export function resetPasswordOnFirstStep(data) {
     }
 }
 
-export function resetPasswordOnSecondStep(data) {
-    return async (dispatch, getState) => {
+export function resetPasswordOnSecondStep(data: IDefaultFormValues) {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.RESET_PASSWORD));
 
         AuthClient.resetPasswordOnSecondStep("/password-reset/reset", data)
             .then((data) => {
-                dispatch(getResetPasswordOnSecondStepResponse(data));
+                dispatch(getResetPasswordOnSecondStepResponse());
             })
             .catch(() => {
                 dispatch(catchResetPasswordOnSecondStepError());
@@ -269,14 +275,14 @@ export function signOut(): ISignOut {
 }
 
 export function fetchUserSignOut() {
-    return async (dispatch, getState) => {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.SIGN_OUT));
 
         const refreshToken = getTokenFromStorage("refreshToken");
 
-        AuthClient.signOut("/auth/logout", refreshToken)
+        AuthClient.signOut("/auth/logout", refreshToken!)
             .then((data) => {
-                dispatch(signOut(data));
+                dispatch(signOut());
                 removeTokensFromStorage();
             })
             .catch(() => dispatch(getSignOutError))
@@ -304,12 +310,12 @@ export function getUserInfo(data: IUserData): IGetUserInfo {
 }
 
 export function fetchUserInfo() {
-    return async (dispatch, getState) => {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(PROFILE_ACTIONS.GET_USER_INFO));
 
         const token = getTokenFromStorage("accessToken")
 
-        const options = {
+        const options: IRequestOptions = {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -342,7 +348,7 @@ export function updateUserInfo(data): IUpdateUserInfo {
 }
 
 export function changeUserInfo(data) {
-    return async (dispatch, getState) => {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(PROFILE_ACTIONS.CHANGE_USER_INFO));
 
         const token = getTokenFromStorage("accessToken")

@@ -1,5 +1,9 @@
 import * as H from "history";
 
+export interface IRequestOptions extends RequestInit{
+    authorization?: string | null;
+}
+
 export interface IUserInfo {
     name: string,
     email: string,
@@ -28,6 +32,10 @@ export interface IIngredient {
     image_mobile: string;
     image_large: string;
     __v: number;
+}
+
+export interface IIngredientResponse {
+    data: Array<IIngredient>
 }
 
 export interface IIngredientsList extends IIngredient {
@@ -96,14 +104,15 @@ export interface IResponseMessage extends IResponseStatus {
 export interface IAuthResponse extends IRefreshData {
     user: {
         email: string,
-        name: string
+        name: string,
     },
 }
 
 export interface IUserData {
     user: {
         email: string,
-        name: string
+        name: string,
+        password: string,
     },
 }
 

@@ -90,8 +90,8 @@ const initialState: TAuthInitialState  = {
     isResetPasswordOnSecondStepPassed: false,
 }
 
-export const authReducer = (state = initialState, { type, payload }: TAuthActions): TAuthInitialState  => {
-    switch (type) {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthInitialState  => {
+    switch (action.type) {
         case SEND_REGISTRATION_REQUEST: {
             return {
                 ...state,
@@ -99,8 +99,7 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
             }
         }
         case REGISTRATION_SUCCESS: {
-            const { name, email, password } = payload.user;
-            const { accessToken, refreshToken } = payload;
+            const { name, email, password } = action.payload;
             return {
                 ...state,
                 registrationError: false,
@@ -111,8 +110,6 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
                     email,
                     password,
                 },
-                accessToken,
-                refreshToken,
             }
         }
         case REGISTRATION_ERROR: {
@@ -130,8 +127,7 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
             }
         }
         case LOGIN_SUCCESS: {
-            const { name, email, password } = payload.user;
-            const { accessToken, refreshToken } = payload;
+            const { name, email, password } = action.payload.user;
             return {
                 ...state,
                 loginError: false,
@@ -142,8 +138,6 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
                     email,
                     password,
                 },
-                accessToken,
-                refreshToken,
             }
         }
         case LOGIN_ERROR: {
@@ -181,7 +175,7 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
             }
         }
         case GET_USER_SUCCESS: {
-            const { name, email } = payload;
+            const { name, email } = action.payload.user;
             return {
                 ...state,
                 userInfoRequest: false,
@@ -203,7 +197,7 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
         case IS_USER_CHECKED: {
             return {
                 ...state,
-                isAuthRequestEnded: payload
+                isAuthRequestEnded: action.payload
             }
         }
         case SEND_UPDATING_USER_REQUEST: {
@@ -214,11 +208,12 @@ export const authReducer = (state = initialState, { type, payload }: TAuthAction
             }
         }
         case USER_UPDATING_SUCCESS: {
-            const { name, email } = payload;
+            const { name, email } = action.payload.user;
             return {
                 ...state,
                 updatingUserRequest: false,
                 user: {
+                    ...state.user,
                     name,
                     email,
                 }
