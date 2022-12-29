@@ -9,10 +9,7 @@ import {IConstructorIngredient, IIndices} from "../../../utils/types";
 
 export interface IAddIngredientToConstructor {
     readonly type: typeof ADD_MAIN_INGREDIENT;
-    payload: {
-        readonly ingredient: IConstructorIngredient;
-        readonly uuid: string;
-    }
+    readonly payload: IConstructorIngredient;
 }
 
 export interface IDeleteIngredientFromConstructor {
@@ -38,7 +35,7 @@ export interface IClearConstructor {
 export function addIngredientToConstructor(ingredient: IConstructorIngredient): IAddIngredientToConstructor {
     return {
         type: ADD_MAIN_INGREDIENT,
-        payload: { ingredient: ingredient, uuid: uuid()}
+        payload: { ...ingredient, uuid: uuid()}
     }
 }
 

@@ -8,6 +8,7 @@ import {
     SEND_INGREDIENTS_REQUEST
 } from "../actions/burger-ingredients";
 import {IIngredient, IIngredientResponse} from "../../../utils/types";
+import {AppDispatch, RootState} from "../types";
 
 export interface IIncreaseIngredientCounter {
     readonly type: typeof INCREASE_INGREDIENT_COUNTER;
@@ -45,7 +46,7 @@ export function changeRequestStatus(): IChangeRequestStatus {
     };
 }
 
-export function loadIngredients(data: IIngredient[]): ILoadIngredients {
+export function loadIngredients(data: IIngredientResponse): ILoadIngredients {
     return {
         type: LOAD_INGREDIENTS_SUCCESS,
         payload: data,
@@ -81,7 +82,7 @@ export function increaseIngredientCounter(id: string, quantity: number): IIncrea
 }
 
 export function fetchIngredients(url: string): Promise<void> {
-    return async (dispatch, getState) => {
+    return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus());
 
         ApiClient.getIngredients(url)

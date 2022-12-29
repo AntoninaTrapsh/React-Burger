@@ -45,7 +45,6 @@ export interface IIngredientsList extends IIngredient {
 export interface IConstructorIngredient extends IIngredient{
     uuid: string;
     index: number;
-
 }
 
 export type TIngredientTypes = keyof IIngredientTabs

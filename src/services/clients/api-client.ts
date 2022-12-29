@@ -2,10 +2,10 @@ import {addTokensToStorage, getTokenFromStorage} from "../../utils/localStorageH
 import {
     IAuthResponse,
     IDefaultFormValues,
-    IIngredient, IOrderDetails,
+    IOrderDetails,
     IRefreshData,
     IResponseMessage,
-    IRequestOptions
+    IRequestOptions, IIngredientResponse
 } from "../../utils/types";
 
 class ApiClient {
@@ -103,8 +103,8 @@ class ApiClient {
         }
     }
 
-    async getIngredients(url: string): Promise<IIngredient[]> {
-        return await this._request<IIngredient[]>(`${this.BASE_URL}${url}`);
+    async getIngredients(url: string): Promise<IIngredientResponse> {
+        return await this._request<IIngredientResponse>(`${this.BASE_URL}${url}`);
     }
 
     async sendOrderDetails(url: string, ingredients: Array<string>): Promise<IOrderDetails> {
