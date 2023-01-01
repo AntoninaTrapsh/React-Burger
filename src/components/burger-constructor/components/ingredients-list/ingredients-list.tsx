@@ -30,7 +30,7 @@ const IngredientsList: FC = () => {
             dispatch(addBunsToConstructor(ingredient));
             dispatch(increaseIngredientCounter(ingredient._id, 2));
         } else {
-            dispatch(addIngredientToConstructor(ingredient))
+            dispatch(addIngredientToConstructor(ingredient));
             dispatch(increaseIngredientCounter(ingredient._id, 1));
         }
     }

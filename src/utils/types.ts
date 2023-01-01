@@ -44,7 +44,7 @@ export interface IIngredientsList extends IIngredient {
     quantity: number;
 }
 
-export interface IConstructorIngredient extends IIngredient{
+export interface IConstructorIngredient extends IIngredientsList {
     uuid: string;
     index: number;
 }
