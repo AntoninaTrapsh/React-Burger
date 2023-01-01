@@ -5,13 +5,13 @@ import {
     IOrderDetails,
     IRefreshData,
     IResponseMessage,
-    IRequestOptions, IIngredientResponse
+    IIngredientResponse
 } from "../../utils/types";
 
 class ApiClient {
     BASE_URL: string = "https://norma.nomoreparties.space/api";
 
-    async _request<T>(url: string, options?: IRequestOptions): Promise<T> {
+    async _request<T>(url: string, options?: RequestInit): Promise<T> {
         return fetch(url, options).then(res => this.checkResponse<T>(res))
     }
 
@@ -81,7 +81,7 @@ class ApiClient {
         });
     }
 
-    async fetchWithRefresh<T>(url: string, options: IRequestOptions): Promise<T> {
+    async fetchWithRefresh<T>(url: string, options: RequestInit): Promise<T> {
         try {
             return await this._request<T>(`${this.BASE_URL}${url}`, options);
         } catch (err) {
@@ -108,15 +108,17 @@ class ApiClient {
     }
 
     async sendOrderDetails(url: string, ingredients: Array<string>): Promise<IOrderDetails> {
-        const token = getTokenFromStorage("accessToken");
-        return await this._request<IOrderDetails>(`${this.BASE_URL}${url}`, {
-            method: "POST",
+        const token = getTokenFromStorage("accessToken") || '';
+
+        const options: RequestInit = {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                authorization: token
             },
-            body: JSON.stringify({ingredients}),
-            authorization: token,
-        }) ;
+        }
+
+        return await this._request<IOrderDetails>(`${this.BASE_URL}${url}`, options) ;
     }
 
     async checkResponse<T>(response: Response): Promise<T> {

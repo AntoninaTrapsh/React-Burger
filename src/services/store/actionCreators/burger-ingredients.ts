@@ -81,7 +81,7 @@ export function increaseIngredientCounter(id: string, quantity: number): IIncrea
     };
 }
 
-export function fetchIngredients(url: string): Promise<void> {
+export function fetchIngredients(url: string) {
     return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus());
 

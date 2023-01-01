@@ -1,8 +1,10 @@
 import * as H from "history";
 
-export interface IRequestOptions extends RequestInit{
-    authorization?: string | null;
-}
+// export interface IRequestOptions extends RequestInit {
+//     headers: {
+//         authorization?: string | null;
+//     }
+// }
 
 export interface IUserInfo {
     name: string,
@@ -104,6 +106,7 @@ export interface IAuthResponse extends IRefreshData {
     user: {
         email: string,
         name: string,
+        password?: string
     },
 }
 

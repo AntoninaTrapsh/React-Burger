@@ -28,14 +28,13 @@ import {addTokensToStorage, getTokenFromStorage, removeTokensFromStorage} from "
 import {
     IAuthResponse,
     IDefaultFormValues,
-    IRequestOptions,
     IUserData, IUserInfo,
 } from "../../../utils/types";
 import {AppDispatch, RootState} from "../types";
 
 export interface IRegister {
     readonly type: typeof REGISTRATION_SUCCESS;
-    readonly payload: IUserInfo;
+    readonly payload: IAuthResponse;
 }
 
 export interface IGetRegistrationError {
@@ -61,7 +60,7 @@ export interface IGetLoginError {
 
 export interface ILogin {
     readonly type: typeof LOGIN_SUCCESS;
-    readonly payload: IUserData;
+    readonly payload: IAuthResponse;
 }
 
 export interface ICatchResetPasswordOnFirstStepError {
@@ -167,7 +166,7 @@ export function getRegistrationError(): IGetRegistrationError {
     }
 }
 
-export function fetchUserRegistration(userData) {
+export function fetchUserRegistration(userData: IDefaultFormValues) {
     return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.REGISTER));
 
@@ -194,7 +193,7 @@ export function getLoginError(): IGetLoginError {
     }
 }
 
-export function fetchUserLogin(url: string, userData) {
+export function fetchUserLogin(url: string, userData: IDefaultFormValues) {
     return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(FORM_TYPES.SIGN_IN));
 
@@ -305,7 +304,7 @@ export function isUserChecked(payload: boolean): IIsUserChecked {
 export function getUserInfo(data: IUserData): IGetUserInfo {
     return {
         type: GET_USER_SUCCESS,
-        payload: data.user,
+        payload: data,
     }
 }
 
@@ -313,9 +312,9 @@ export function fetchUserInfo() {
     return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(PROFILE_ACTIONS.GET_USER_INFO));
 
-        const token = getTokenFromStorage("accessToken")
+        const token = getTokenFromStorage("accessToken") || '';
 
-        const options: IRequestOptions = {
+        const options: RequestInit = {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -323,7 +322,7 @@ export function fetchUserInfo() {
             },
         }
 
-        AuthClient.fetchWithRefresh("/auth/user", options)
+        AuthClient.fetchWithRefresh<IUserData>("/auth/user", options)
             .then((data) => {
                 dispatch(getUserInfo(data));
             })
@@ -340,20 +339,20 @@ export function updateUserInfoError(): IUpdateUserInfoError {
     }
 }
 
-export function updateUserInfo(data): IUpdateUserInfo {
+export function updateUserInfo(data: IUserData): IUpdateUserInfo {
     return {
         type: USER_UPDATING_SUCCESS,
-        payload: data.user,
+        payload: data,
     }
 }
 
-export function changeUserInfo(data) {
+export function changeUserInfo(data: IUserInfo) {
     return async (dispatch: AppDispatch, getState: RootState) => {
         dispatch(changeRequestStatus(PROFILE_ACTIONS.CHANGE_USER_INFO));
 
-        const token = getTokenFromStorage("accessToken")
+        const token = getTokenFromStorage("accessToken") || '';
 
-        const options = {
+        const options: RequestInit = {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -362,7 +361,7 @@ export function changeUserInfo(data) {
             body: JSON.stringify(data),
         }
 
-        AuthClient.fetchWithRefresh("/auth/user", options)
+        AuthClient.fetchWithRefresh<IUserData>("/auth/user", options)
             .then((data) => {
                 dispatch(updateUserInfo(data));
             })

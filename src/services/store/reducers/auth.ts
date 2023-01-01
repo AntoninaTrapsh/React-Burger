@@ -99,7 +99,8 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthIn
             }
         }
         case REGISTRATION_SUCCESS: {
-            const { name, email, password } = action.payload;
+            const password = action.payload.user.password ?  action.payload.user.password : '';
+            const { name, email } = action.payload.user;
             return {
                 ...state,
                 registrationError: false,
@@ -127,7 +128,8 @@ export const authReducer = (state = initialState, action: TAuthActions): TAuthIn
             }
         }
         case LOGIN_SUCCESS: {
-            const { name, email, password } = action.payload.user;
+            const password = action.payload.user.password ?  action.payload.user.password : '';
+            const { name, email } = action.payload.user;
             return {
                 ...state,
                 loginError: false,
