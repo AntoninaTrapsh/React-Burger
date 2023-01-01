@@ -1,4 +1,7 @@
-export const selectIngredientsList = (store) => store.burgerConstructor.ingredients;
+export const selectIngredientsList = (store) => {
+    console.log(store.burgerConstructor.ingredients);
+    return store.burgerConstructor.ingredients;
+}
 export const selectBuns = (store) => store.burgerConstructor.buns;
 export const selectTotalPrice = (store) => {
     const bunsTotalPrice = store.burgerConstructor.buns ? store.burgerConstructor.buns.price * 2 : 0;

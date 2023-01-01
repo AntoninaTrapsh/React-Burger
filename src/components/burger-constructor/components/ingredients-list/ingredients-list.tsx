@@ -30,6 +30,7 @@ const IngredientsList: FC = () => {
             dispatch(addBunsToConstructor(ingredient));
             dispatch(increaseIngredientCounter(ingredient._id, 2));
         } else {
+            console.log('handleOnDrop', ingredients);
             dispatch(addIngredientToConstructor(ingredient));
             dispatch(increaseIngredientCounter(ingredient._id, 1));
         }
