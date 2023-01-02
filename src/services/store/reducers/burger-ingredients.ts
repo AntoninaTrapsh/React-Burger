@@ -53,7 +53,7 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
         case INCREASE_INGREDIENT_COUNTER: {
             let ingredients = null;
             if (Array.isArray(state.ingredients)) {
-                let ingredients = [...state.ingredients];
+                ingredients = [...state.ingredients];
                 const ingredientIndex = state.ingredients.findIndex((ingredient) => {
                     return ingredient._id === action.payload.id;
                 });
@@ -85,7 +85,7 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
         case RESET_PREVIOUS_BUNS: {
             let ingredients = null;
             if (Array.isArray(state.ingredients)) {
-                const ingredients = state.ingredients;
+                ingredients = state.ingredients;
                 const bunIndex = state.ingredients.findIndex((ingredient) => {
                     return ingredient.type === "bun" && ingredient.quantity !== 0;
                 })
